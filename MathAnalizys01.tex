@@ -1,0 +1,142 @@
+\ifdefined\niveldos\else
+\documentclass[12pt,letterpaper]{report}
+ 
+%Russian-specific packages
+%--------------------------------------
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage[mathscr]{euscript}
+\usepackage{mathrsfs}
+\usepackage{amsmath,amsthm,amssymb,latexsym,amsfonts}
+\usepackage{showkeys}
+\usepackage{pythonhighlight}
+\usepackage{mdframed}
+\usepackage{lipsum}
+\usepackage{soul}
+\usepackage{amsmath,amssymb}
+\usepackage{parskip}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{stackengine} 
+\usepackage{tocloft}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{thmtools}
+
+\usepackage{amsthm}
+\newtheorem{theorem}{Теорема}
+\newtheorem{lemma}[theorem]{Лемма}
+\newtheorem{conj}[theorem]{Определение}
+
+
+\definecolor{linkcolor}{HTML}{47528f} % цвет ссылок
+\definecolor{urlcolor}{HTML}{47528f} % цвет гиперссылок
+\hypersetup{pdfstartview=FitH,  linkcolor=linkcolor,urlcolor=urlcolor, colorlinks=true}
+\newcommand{\RomanNumeralCaps}[1]
+  {\MakeUppercase{\romannumeral #1}}
+\usepackage{titlesec}
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\listtheoremname}{Определения и теоремы}
+\renewcommand\qedsymbol{$\blacksquare$}
+\newcommand\oast{\stackMath\mathbin{\stackinset{c}{0ex}{c}{0ex}{\ast}{\bigcirc}}}
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{%
+   \par\pushQED{\qed}\normalfont%
+   \topsep6\p@\@plus6\p@\relax
+   \trivlist\item[\hskip\labelsep\bfseries#1\@addpunct{.}]%
+   \ignorespaces
+}{%
+   \popQED\endtrivlist\@endpefalse
+}
+\makeatother
+%--------------------------------------
+\DeclareMathOperator{\Mr}{M_{\mathbb{R}}}
+\addtolength{\oddsidemargin}{-.875in}
+	\addtolength{\evensidemargin}{-.875in}
+	\addtolength{\textwidth}{1.75in}
+
+	\addtolength{\topmargin}{-.875in}
+	\addtolength{\textheight}{1.75in}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                %
+%                                %
+%              Title             %
+%                                %
+%                                %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Конспект лекций по математическому анализу}
+\author{Храбров Александр Игоревич}
+\date{Первый курс, первый семестр 2020}
+\begin{document}
+\fi
+\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                %
+%                                %
+%        Table of content        %
+%                                %
+%                                %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tableofcontents
+%\listoftheorems[ignore={lemma},show={conj, theorem}]
+% To show Table of contents with
+% definitions and lemmas
+%----------------------------------------
+% \listoftheorems[ignoreall,show={lemma}]
+% \listoftheorems[ignoreall,show={conj}]
+\newpage
+\chapter{Введение}
+\section{Множества}
+\begin{conj} Множество - набор уникальных элементов \end{conj}
+
+Множества - большие буквы $A, B,\dots$ \\
+Элементы множеств - маленькие буквы $a, b,\dots$ \\
+$x \in A - x$ пренадлежит $A$ \\
+$x \notin A - x$ не пренадлежит $A$ \\
+$\mathbb{N} = \{1, 2, 3, \dots\} \\
+\mathbb{Z, Q} = \{{{m}\over{n}} : m \in \mathbb{Z}, n \in\mathbb{N}\} \\
+\mathbb{R}$ - вещественные числа \\
+$\mathbb{R}$ - комплексные числа \\
+\subsection{Упорядоченная пара}
+
+\subsection{Декартово произведение}
+
+\newpage
+\begin{theorem} Правила Де Моргана \end{theorem}
+    \begin{itemize}
+        \item[] $A \; \setminus \; (\bigcup\limits_{\alpha \in I} B_{\alpha}) 
+        = \bigcap\limits_{\alpha \in I}(A \setminus B_{\alpha})$
+        \item[] $A \; \setminus \; (\bigcap\limits_{\alpha \in I} B_{\alpha}) 
+        = \bigcup\limits_{\alpha \in I}(A \setminus B_{\alpha})$
+    \end{itemize}
+\begin{proof}
+    Докажем для первой формулы. Вторая доказывается аналогично. \\
+    $x \in A \; \setminus \; (\bigcup\limits_{\alpha \in I} B_{\alpha}) 
+    \Longleftrightarrow \begin{cases}
+        x \in A \\
+        x \notin \bigcup\limits_{\alpha \in I} B_{\alpha}
+    \end{cases}
+    \Longleftrightarrow \begin{cases}
+        x \in A \\
+        x \notin B_{\alpha} \; \; $при всех$ \; \alpha
+    \end{cases}
+    \Longleftrightarrow x \in A \; \setminus \; B_{\alpha}$ при всех $\alpha
+    \Longleftrightarrow x \in \bigcap\limits_{\alpha \in I}(A \setminus B_{\alpha})$ 
+\end{proof}
+\begin{theorem} Операции над множествами \end{theorem}
+\begin{itemize}
+    \item $A \cup B = \{x: x \in A $ или $ x \in B\}$
+    \item $A \cap B = \{x: x \in A, x  \in B\}$
+    \item $A \; \setminus \; B = \{x: x \in A, x  \notin B\}$
+    \item $A \bigtriangleup B = (A \; \setminus \; B) \cup (B \; \setminus \; A)$
+\end{itemize}
+Замечание: $\bigtriangleup, \cup, \cap$ - комммутативны, ассоциативны
+\begin{conj} 
+    Декартово произведение множеств 
+    $A \times B = \{\langle a, b \rangle : a \in A; b \in B \}$ 
+\end{conj}
+
+\ifdefined\niveldos\else
+\end{document} 
+\fi

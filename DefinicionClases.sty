@@ -1,0 +1,57 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{DefinicionClases}[2018/03/08 paquete ayuda]
+
+\RequirePackage{ifthen}
+\RequirePackage{forloop}
+\RequirePackage{array}
+\RequirePackage{arrayjob} % para usar los array
+
+\RequirePackage{environ,xcolor}
+\RequirePackage{etoolbox}% http://ctan.org/pkg/etoolbox
+\RequirePackage{wrapfig} %preámbulo
+\RequirePackage{nccmath}
+\RequirePackage{multicol}
+\RequirePackage{float}
+\RequirePackage{graphicx} % para incluir figura 
+\RequirePackage{verbatim} % comentarios
+\RequirePackage{times} 
+\RequirePackage{fancyhdr}
+\RequirePackage{amssymb, amsmath, amsbsy} % simbolitos
+\RequirePackage[utf8]{inputenc}
+
+\RequirePackage{siunitx}
+
+\setlength{\parindent}{0cm}
+
+%\setlength{\parindent}{default}
+
+%\RequirePackage{xparse}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% define formato de hoja
+
+\setlength\voffset{-1in}
+\setlength\topmargin{0cm}
+\setlength\headheight{3cm}
+\setlength\headsep{1cm}
+\setlength\textwidth{18.1cm}
+\setlength\footskip{3cm}
+\setlength\hoffset{-0.7in}
+\setlength\oddsidemargin{1cm}
+\setlength\evensidemargin{1cm}
+\setlength\textheight{19.5cm}
+%3
+% definicion de encabezadoypiedepagina
+
+\newcommand{\encabezado}[3]{%
+\pagestyle{fancy}
+\rhead{	#1\\#2\\ }
+\chead{ \LARGE #3}
+\cfoot{\thepage}
+}
+
+
+\encabezado{Козырев Андрей}{СП Б10}{}
+
+
+
+\endinput
