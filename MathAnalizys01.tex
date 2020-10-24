@@ -26,6 +26,7 @@
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Теорема}
+\newtheorem*{theorem-non}{Теорема}
 \newtheorem{lemma}[theorem]{Лемма}
 \newtheorem{conj}[theorem]{Определение}
 
@@ -121,7 +122,8 @@
 %                                %
 %                                %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\title{Конспект лекций по математическому анализу}
+\title{Конспект лекций по математическому анализу 
+\thanks{Атворы: \href{https://github.com/maxmartynov08}{maxmartynov08}, \href{https://github.com/K-dizzled}{K-dizzled}, \href{https://github.com/SmnTin}{SmnTin}, \href{https://github.com/muldrik}{muldrik}}}
 \author{Храбров Александр Игоревич}
 \date{Первый курс, первый семестр 2020}
 \begin{document}
@@ -135,12 +137,12 @@
 %                                %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \tableofcontents
-%\listoftheorems[ignore={lemma},show={conj, theorem}]
+%\listoftheorem-nons[ignore={lemma},show={conj, theorem-non}]
 % To show Table of contents with
 % definitions and lemmas
 %----------------------------------------
-% \listoftheorems[ignoreall,show={lemma}]
-% \listoftheorems[ignoreall,show={conj}]
+% \listoftheorem-nons[ignoreall,show={lemma}]
+% \listoftheorem-nons[ignoreall,show={conj}]
 \newpage
 \chapter{Введение}
 \section{Множества}
@@ -154,7 +156,7 @@ $\mathbb{N} = \{1, 2, 3, \dots\} \\
 \mathbb{Z, Q} = \{{{m}\over{n}} : m \in \mathbb{Z}, n \in\mathbb{N}\} \\
 \mathbb{R}$ - вещественные числа \\
 $\mathbb{R}$ - комплексные числа \\
-\begin{theorem} Правила Де Моргана \end{theorem}
+\begin{theorem-non} Правила Де Моргана \end{theorem-non}
     \begin{itemize}
         \item[] $A \; \setminus \; (\bigcup\limits_{\alpha \in I} B_{\alpha}) 
         = \bigcap\limits_{\alpha \in I}(A \setminus B_{\alpha})$
@@ -176,7 +178,7 @@ $\mathbb{R}$ - комплексные числа \\
     \Longleftrightarrow x \in A \; \setminus \; B_{\alpha}$ при всех $\alpha \in I
     \Longleftrightarrow x \in \bigcap\limits_{\alpha \in I}(A \setminus B_{\alpha})$ 
 \end{proof} \newpage
-\begin{theorem} Операции над множествами \end{theorem}
+\begin{theorem-non} Операции над множествами \end{theorem-non}
 \begin{itemize}
     \item $A \cup B = \{x: x \in A $ или $ x \in B\}$
     \item $A \cap B = \{x: x \in A, x  \in B\}$
@@ -188,7 +190,7 @@ $\mathbb{R}$ - комплексные числа \\
     Декартово произведение множеств 
     $A \times B = \{\langle a, b \rangle : a \in A; b \in B \}$ 
 \end{conj}
-\begin{theorem} \end{theorem}
+\begin{theorem-non} \end{theorem-non}
     \begin{itemize}
         \item[] $A \cap \bigcup\limits_{\alpha \in I} B_{\alpha} =
         \bigcup\limits_{\alpha \in I}(A \cap B_{\alpha}) $
@@ -204,7 +206,7 @@ $\mathbb{R}$ - комплексные числа \\
         \end{cases} \Longleftrightarrow \begin{cases}
             x \in A \\
             x \in B_{\alpha}$ для некоторых $\alpha \in I
-        \end{cases} \Longleftrightarrow 
+        \end{cases}\vspace{0.5cm} \Longleftrightarrow 
         x \in A \cap B_{\alpha}$ для некоторых $\alpha \in I 
         \Longleftrightarrow 
         x \in \bigcup\limits_{\alpha \in I}(A \cap B_{\alpha})$
@@ -281,7 +283,7 @@ $\delta_{R-1} = \rho_{R} \\
 \subsection*{Пример}
 \begin{itemize}
     \item $x \equiv y \; (mod \; m)$ — отношение эквивалентности
-    \item $X$ - множество$, 2^x$ — множество всех его подмножеств
+    \item $X$ - множество$, 2^X$ — множество всех его подмножеств
     \item $\forall x, y \in 2^x : \langle x, y \rangle \in R, $ если $ x \subsetneq y$ — отношение строгого частичного порядка
     \item Лексикографический порядок на множестве пар натуральных чисел — отношение нестрогого полного порядка
 \end{itemize}
@@ -294,6 +296,90 @@ $\delta_{R-1} = \rho_{R} \\
     \item сюръективно, если $\rho_f = B$
     \item биективно, если $f$ инъективно и сюръективно
 \end{itemize}
+\section{Аксиомы вещественных чисел}
+\begin{conj}
+    Вещественные числа - алгебраическая структура, над которой определены 
+    операции сложения ``+'' и умножения ``$\cdot$'' $(\mathbb{R} * \mathbb{R} \rightarrow \mathbb{R})$
+\end{conj}
+\newpage
+\begin{conj}
+    Аксиомы вещественных чисел:
+\end{conj}
+\begin{itemize}
+    \item[$A_1$] Ассоциативность сложения \\
+     $x + (y + z) = (x + y) + z$
+    \item[$A_2$] Коммутативность сложения \\
+     $x + y = y + x$
+    \item[$A_3$] Существование нуля \\
+     $\exists 0 \in \mathbb{R} : \forall x \in \mathbb{R} \; x + 0 = x$
+    \item[$A_4$] Существование обратного элемента по сложению \\
+     $\forall x \in \mathbb{R} \; \exists (-x) \in \mathbb{R} : x + (-x) = 0$
+    \item[$M_1$] Ассоциативность умножения \\
+     $x(y \cdot z) = (x \cdot y)z$
+    \item[$M_2$] Коммутативность умножения \\
+     $xy = yx$
+    \item[$M_3$] Существование единицы \\
+     $\exists 1 \in \mathbb{R} : \forall x \in \mathbb{R} \; x \cdot 1 = x$
+    \item[$M_4$] Существование обратного элемента по умножению \\
+     $\forall x \in \mathbb{R} \; \exists x^{-1} \in \mathbb{R} : x \cdot x^{-1} = 1$
+    \item[$M_A$] Дистрибутивность \\
+     $(x + y) \cdot z = x \cdot z + y \cdot z$ 
+\end{itemize}
+\underline{Замечание} - Вышеперечисленные аксиомы бразуют поле \vspace{0.5cm} \\
+\textbf{Бинарное отношение} ``$\leqslant$'' \\
+Аксиомы порядка, задающие отношение порядка на множестве вещественных чисел:
+\begin{itemize}
+    \item[$O_1$] $x \leqslant x \quad \forall x$
+    \item[$O_2$] $x \leqslant y $  и  $ y \leqslant x \Longrightarrow x = y$ 
+    \item[$O_3$] $x \leqslant y $  и  $ y \leqslant z \Longrightarrow x \leqslant z$ 
+    \item[$O_4$] $\forall x, y \in \mathbb{R} : x \leqslant y $ или $ y \leqslant x$
+    \item[$O_4$] $x \leqslant y \Longrightarrow x + z \leqslant y + z \quad \forall z$ 
+    \item[$O_4$] $0 \leqslant x $ и $ 0 \leqslant y \Longrightarrow 0 \leqslant xy$  
+\end{itemize}
+\begin{theorem-non}
+    Аксиома полноты
+\end{theorem-non}
+$A, B \subset \mathbb{R} : A \neq \varnothing, B \neq \varnothing, \forall a \in A \; \forall b \in B \; a \leqslant b$ \\
+Тогда $\exists c \in \mathbb{R} : a \leqslant c \leqslant b \; \forall a \in A \; \forall b \in B$
+\begin{theorem-non}
+    Принцип Архимеда
+\end{theorem-non}
+Согласно принципу Архимеда: $\forall x \in \mathbb{R}$ и $\forall y_{>0} \in \mathbb{R} \; \exists n \in \mathbb{N} : x < ny$
+\begin{proof}  
+    \quad \\ $A = \{a \in \mathbb{R} : \exists n \in \mathbb{N} : a < ny\}, A \neq \varnothing$ т.к. $0 \in A$ \\
+    $B = \mathbb{R} \; \setminus \; A$ \\
+    Пусть $A \neq \mathbb{R}$, тогда $B \neq \varnothing$ Покажем, что $a \leqslant b$, если $a \in A, b \in B$ \\
+    Пойдем от противного. Если $b < a < ny \Longrightarrow b < ny \Longrightarrow b \in A$ - противоречие \\
+    Таким образом, по аксиоме полноты $\exists c \in \mathbb{R} : a \leqslant c \leqslant b \quad \forall a \in A, \forall b \in B$ \\
+    Предположим, что $c \in A$. Тогда $c < ny$ для некоторого $n \in \mathbb{N} \Longrightarrow c + y < (n + 1)y \Longrightarrow \\ 
+    c + y \in A \Longrightarrow c + y \leqslant c \Longrightarrow y \leqslant 0$. Это противоречит условию. \\
+    Пусть $c \in B$. Так как $y > 0, c - y < c$. Так как $B$ - дополненние $A$ и $c - y \neq c, \; c - y \in A
+    \Longrightarrow c - y < ny \Longrightarrow c < (n + 1)y \Longrightarrow c \in A$. Снова пришли к противоречию. \\
+    Значит $c \notin A, c \notin B \Longrightarrow c$ не существует $\Longrightarrow B = \varnothing \Longrightarrow A = \mathbb{R}$ 
+\end{proof}
+\textbf{\textit{Следствие:}}
+    \begin{itemize}
+        \item[1.] $\forall \varepsilon_{> 0} \; \exists n \in \mathbb{N}: {{1}\over{n}} < \varepsilon$
+        \begin{proof}
+           \quad \\ $x = 1, y = \varepsilon \Longrightarrow \exists n \in N: 1 < n\varepsilon$
+        \end{proof} 
+        \item[2.] Если $x, y \in \mathbb{R}, x < y$, то $\exists r \in \mathbb{Q}: x < r < y$ 
+        \begin{proof}
+            \quad \\ Пусть $x < 0, y > 0$. Тогда $\exists r = 0 \in \mathbb{Q}: x < r < y$ \\
+            Пусть $x \geqslant 0, y > 0, \varepsilon = x - y$. Тогда $\exists n \in \mathbb{N}: {{1}\over{n}} < \varepsilon$ \\
+            По принципу Архимеда найдется такое число $m$, что ${{m-1}\over{n}} \leqslant x < {{m}\over{n}}$ \vspace{0.2cm} \\
+            Предположим, что ${{m-1}\over{n}} \leqslant x < y \leqslant {{m}\over{n}}$. Тогда мы получим, что ${{1}\over{n}} \geqslant y - x = \varepsilon$.
+            Пришли к противоречию\\
+            Следовательно, $\exists m \in \mathbb{N} : x < {{m}\over{n}} < y$ \\
+            Случай $y \leqslant 0$ аналогичен предыдущему
+        \end{proof} 
+        \item[3.] Если $x, y \in \mathbb{R}, x < y$, то существует иррациональное число $r: x < r < y$ 
+        \begin{proof}
+            \quad \\ $x - \sqrt{2} < y - \sqrt{2} \Longrightarrow \exists R \in (x - \sqrt{2}, y - \sqrt{2}) \Longrightarrow
+            x < R + \sqrt{2} < y \; $(Предыдущий пункт)$ \; \Longrightarrow \\ r$ - иррациональное
+        \end{proof} 
+        \item[4.] Если $x \geqslant 1$, то $\exists n \in \mathbb{N}: x - 1 < n \leqslant x$ 
+    \end{itemize}
 \ifdefined\niveldos\else
 \end{document} 
 \fi
