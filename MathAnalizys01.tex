@@ -22,13 +22,17 @@
 \usepackage{tocloft}
 \usepackage{xcolor}
 \usepackage{hyperref}
+\usepackage{tikz}
 \usepackage{thmtools}
+
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Теорема}
 \newtheorem*{theorem-non}{Теорема}
 \newtheorem{lemma}[theorem]{Лемма}
 \newtheorem{conj}[theorem]{Определение}
+\declaretheorem[numbered=no]{definition}
+
 
 % Definindo novas cores
 \definecolor{verde}{rgb}{0.25,0.5,0.35}
@@ -86,6 +90,13 @@
     escapeinside={\%*}{*)},         % if you want to add a comment within your code
     morekeywords={*,...}          % if you want to add more keywords to the set
 }}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\follow}{\textbf{\textit{Следствие:}}}
+\newcommand{\notice}{\underline{\textit{Замечание }}}
 
 \definecolor{linkcolor}{HTML}{47528f} % цвет ссылок
 \definecolor{urlcolor}{HTML}{47528f} % цвет гиперссылок
@@ -155,7 +166,7 @@ $x \notin A - x$ не пренадлежит $A$ \\
 $\mathbb{N} = \{1, 2, 3, \dots\} \\
 \mathbb{Z, Q} = \{{{m}\over{n}} : m \in \mathbb{Z}, n \in\mathbb{N}\} \\
 \mathbb{R}$ - вещественные числа \\
-$\mathbb{R}$ - комплексные числа \\
+$\mathbb{C}$ - комплексные числа \\
 \begin{theorem-non} Правила Де Моргана \end{theorem-non}
     \begin{itemize}
         \item[] $A \; \setminus \; (\bigcup\limits_{\alpha \in I} B_{\alpha}) 
@@ -185,7 +196,7 @@ $\mathbb{R}$ - комплексные числа \\
     \item $A \; \setminus \; B = \{x: x \in A, x  \notin B\}$
     \item $A \bigtriangleup B = (A \; \setminus \; B) \cup (B \; \setminus \; A)$
 \end{itemize}
-Замечание: $\bigtriangleup, \cup, \cap$ - комммутативны, ассоциативны
+\notice - $\bigtriangleup, \cup, \cap$ - комммутативны, ассоциативны
 \begin{conj} 
     Декартово произведение множеств 
     $A \times B = \{\langle a, b \rangle : a \in A; b \in B \}$ 
@@ -325,7 +336,7 @@ $\delta_{R^{-1}} = \rho_{R} \\
     \item[$M_A$] Дистрибутивность \\
      $(x + y) \cdot z = x \cdot z + y \cdot z$ 
 \end{itemize}
-\underline{Замечание} - Вышеперечисленные аксиомы бразуют поле \vspace{0.5cm} \\
+\nocite - Вышеперечисленные аксиомы бразуют поле \vspace{0.5cm} \\
 \textbf{Бинарное отношение} ``$\leqslant$'' \\
 Аксиомы порядка, задающие отношение порядка на множестве вещественных чисел:
 \begin{itemize}
@@ -359,27 +370,164 @@ $A, B \subset \mathbb{R} : A \neq \varnothing, B \neq \varnothing, \forall a \in
 \end{proof}
 \textbf{\textit{Следствие:}}
     \begin{itemize}
-        \item[1.] $\forall \varepsilon_{> 0} \; \exists n \in \mathbb{N}: {{1}\over{n}} < \varepsilon$
+        \item[] $\forall \varepsilon_{> 0} \; \exists n \in \mathbb{N}: {{1}\over{n}} < \varepsilon$
         \begin{proof}
            \quad \\ $x = 1, y = \varepsilon \Longrightarrow \exists n \in N: 1 < n\varepsilon$
         \end{proof} 
-        \item[2.] Если $x, y \in \mathbb{R}, x < y$, то $\exists r \in \mathbb{Q}: x < r < y$ 
-        \begin{proof}
-            \quad \\ Пусть $x < 0, y > 0$. Тогда $\exists r = 0 \in \mathbb{Q}: x < r < y$ \\
-            Пусть $x \geqslant 0, y > 0, \varepsilon = x - y$. Тогда $\exists n \in \mathbb{N}: {{1}\over{n}} < \varepsilon$ \\
-            По принципу Архимеда найдется такое число $m$, что ${{m-1}\over{n}} \leqslant x < {{m}\over{n}}$ \vspace{0.2cm} \\
-            Предположим, что ${{m-1}\over{n}} \leqslant x < y \leqslant {{m}\over{n}}$. Тогда мы получим, что ${{1}\over{n}} \geqslant y - x = \varepsilon$.
-            Пришли к противоречию\\
-            Следовательно, $\exists m \in \mathbb{N} : x < {{m}\over{n}} < y$ \\
-            Случай $y \leqslant 0$ аналогичен предыдущему
-        \end{proof} 
-        \item[3.] Если $x, y \in \mathbb{R}, x < y$, то существует иррациональное число $r: x < r < y$ 
-        \begin{proof}
-            \quad \\ $x - \sqrt{2} < y - \sqrt{2} \Longrightarrow \exists R \in (x - \sqrt{2}, y - \sqrt{2}) \Longrightarrow
-            x < R + \sqrt{2} < y \; $(Предыдущий пункт)$ \; \Longrightarrow \\ r$ - иррациональное
-        \end{proof} 
-        \item[4.] Если $x \geqslant 1$, то $\exists n \in \mathbb{N}: x - 1 < n \leqslant x$ 
     \end{itemize}
+\section{Принцип математической индукции}
+\begin{conj}
+    Принцип математической индукции
+\end{conj}
+$P_n$ -последовательность утверждений 
+\begin{enumerate}
+    \item $P_1$ - верно
+    \item $\forall n \in \mathbb{N}$ из $P_n$ следует $P_{n+1}$
+\end{enumerate}
+Тогда $P_n$ верно при всех $n \in \mathbb{N}$
+\begin{theorem-non}
+    В конечном множестве вещественных чисел есть наибольший и наименбший элемент
+\end{theorem-non}
+\begin{proof}
+    \quad \\
+    Докажем для максимума. Для минимума рассуждения аналогичны \\
+    Будем доказывать утверждение по индукции \\
+    Для $n = 1$ - очевидно \\
+    Переход $X_n \longrightarrow x_{n+1}$ \\
+    Рассмотрим произвольное множество из $n$ элементов $X_n = \{x_1, x_2, x_3, \dots x_n\}$, где максимальным элементом 
+    является $x_i$. Пусть в наше множество был добавлен элемент $X_{n+1}$. В таком случае, если $X_{n+1}$ > $X_{i}$, то новый максимум равен
+    $X_{n+1}$, иначе - максимумом по-прежнему является $X_{i}$. Таким образом, в любом конечном множестве вещественных чисел существует минимальный
+    элемент.     
+\end{proof}
+\newpage
+\textbf{\textit{Следствия:}}
+\begin{enumerate}
+    \item Во всяком непустом множестве натуральных чисел есть наименьший элемент  
+    \begin{proof}
+        \quad \\
+        Пусть $A$ - множество натуральных чисел, не содержащее наименьшего элемента.
+        Докажем по индукции, что для любого $n \in \mathbb{N}$ мы имеем $\mathbb{N}_n \cap A = \varnothing$ \\
+        $\N_n = \{k \in \N | k \leqslant \N \}$ \\
+        Для $n = 1$ утверждение очевидно. \\
+        Переход $n \longrightarrow n+1$ \\
+        Предположим для $\mathbb{N}_n \cap A = \varnothing$ \\
+        Тогда если для $\mathbb{N}_{n+1} \cap A \neq \varnothing$, то наименьший элемент множества $A$ - это $n+1$ \\
+        Значит $\mathbb{N}_{n+1} \cap A = \varnothing$
+   \end{proof}
+   \item Во всяком конечном непустом множестве натуральных чисел есть наибольший элемент
+   \begin{proof}
+        \quad \\
+        Из натуральных чисел строим целые. Множество чисел $A \subseteq \Z$ называется огианиченным сверху и имеет наибольший элемент
+        если $\exists c > a, \forall a \in A, c \in \Z$
+    \end{proof}
+\end{enumerate}
+\subsection{Рациональные и иррациональные числа в интервале}
+\begin{enumerate}
+    \item Если $x, y \in \mathbb{R}, x < y$, то $\exists r \in \mathbb{Q}: x < r < y$ 
+    \begin{proof}
+        \quad \\ Пусть $x < 0, y > 0$. Тогда $\exists r = 0 \in \mathbb{Q}: x < r < y$ \\
+        Пусть $x \geqslant 0, y > 0, \varepsilon = x - y$. Тогда $\exists n \in \mathbb{N}: {{1}\over{n}} < \varepsilon$ \\
+        По принципу Архимеда найдется такое число $m$, что ${{m-1}\over{n}} \leqslant x < {{m}\over{n}}$ \vspace{0.2cm} \\
+        Предположим, что ${{m-1}\over{n}} \leqslant x < y \leqslant {{m}\over{n}}$. Тогда мы получим, что ${{1}\over{n}} \geqslant y - x = \varepsilon$.
+        Пришли к противоречию\\
+        Следовательно, $\exists m \in \mathbb{N} : x < {{m}\over{n}} < y$ \\
+        Случай $y \leqslant 0$ аналогичен предыдущему
+    \end{proof} 
+    \item Если $x, y \in \mathbb{R}, x < y$, то существует иррациональное число $r: x < r < y$ 
+    \begin{proof}
+        \quad \\ $x - \sqrt{2} < y - \sqrt{2} \Longrightarrow \exists R \in (x - \sqrt{2}, y - \sqrt{2}) \Longrightarrow
+        x < R + \sqrt{2} < y \; $(Предыдущий пункт)$ \; \Longrightarrow \\ r$ - иррациональное
+    \end{proof} 
+    \item Если $x \geqslant 1$, то $\exists n \in \mathbb{N}: x - 1 < n \leqslant x$ 
+\end{enumerate}
+\section{Супремум и инфимум}
+\begin{conj}
+    \quad \\
+    \begin{itemize}
+        \item[] $x$ - верхняя граница множества $A$, если $\forall a \in A: a \leqslant x$
+        \item[] $y$ - верхняя граница множества $A$, если $\forall a \in A: y \leqslant a$ 
+        \item[] Множество ограничено снизу, если существует какая-нибудь нижняя граница
+        \item[] Множество ограничено сверху, если существует какая-нибудь верхняя граница
+    \end{itemize}
+\end{conj}
+\begin{conj}
+    \quad \\
+    Пусть $A$ - ограниченное сверху множество, тогда $sup A$ - наименьшая из его верхних границ
+\end{conj}
+\begin{conj}
+    \quad \\
+    Пусть $A$ - ограниченное снизу множество, тогда $inf A$ - наибольшая из его нижних границ
+\end{conj}
+\begin{theorem-non}
+    \quad \\
+    \begin{enumerate}
+        \item Если $A \subset \R, A \neq \varnothing $ и $ A $ ограничено снизу, то существует единсвтенный $inf A$
+        \item Если $A \subset \R, A \neq \varnothing $ и $ A $ ограничено сверху, то существует единсвтенный $sup A$
+    \end{enumerate}
+\end{theorem-non}
+\begin{proof}
+    \quad \\
+    Докажем (2) \\
+    Пусть $B$ - множество всех верхних границ множества $A$, т.е. $\forall a \in A, b \in B: a \leqslant b$ \\
+    Тогда по аксиоме полноты всегда найдется такой $c: a \leqslant c \leqslant b$ \\
+    $c - sup A$ по определению \\
+    Докажем, что $c$ - единсвтенный \\
+    Пусть $\exists c_1, c_2 - sup A$ \\
+    Тогда если $c_1 < c_2$, то $c_2 \neq sup A$ \\
+    Если $c_1 > c_2$,то $c_1 \neq sup A$ \\
+    Следовательно, $c_1 = c_2 = sup A \Longrightarrow sup A$ - единсвтенный  
+\end{proof}
+\follow
+\begin{enumerate}
+    \item $B \subset A, B \neq \varnothing $ и $ A $ ограничено снизу. Тогда $inf B \geqslant inf A$
+    \item $B \subset A, B \neq \varnothing $ и $ A $ ограничено сверху. Тогда $sup B \leqslant sup A$
+\end{enumerate}
+\begin{proof}
+    \quad \\
+    Докажем (1) \\
+    Пусть $a = inf A$. Тогда $a$ - нижняя граница $A \Longrightarrow \forall x \in
+    A : a \leqslant x \Longrightarrow \forall x \in B : a \leqslant x \Longrightarrow \\
+    a$ - нижняя граница $B \Longrightarrow a \leqslant inf B$  
+\end{proof}
+\notice - Теорема неверна без аксиомы полноты \\
+\begin{itemize}
+    \item[] $A =\{x \in \Q : x^2 < 2\} \Longrightarrow$ в множестве рациональных чисел у $A$ нет супремума
+\end{itemize}
+\begin{theorem}
+    \quad \\
+    \begin{enumerate}
+        \item $a = inf A \Longleftrightarrow 
+        \begin{cases}
+            a \leqslant x \quad \forall x \in A \\
+            \forall \varepsilon > 0 \quad \exists x \in A : x < a + \varepsilon
+        \end{cases}$ 
+        \item $b = sup A \Longleftrightarrow 
+        \begin{cases}
+            b \geqslant x \quad \forall x \in A \\
+            \forall \varepsilon > 0 \quad \exists x \in A : x > b - \varepsilon
+        \end{cases}$ 
+    \end{enumerate}
+\end{theorem}
+\notice
+\begin{itemize}
+    \item Если $A$ неограничено сверху, то $sup A = +\infty$
+    \item Если $A$ неограничено снизу, то $inf A = -\infty$
+\end{itemize}
+\section{Теорема о вложенных отрезках}
+\begin{theorem}
+    \quad \\
+    Если $[a_1, b_1] \supset [a_2, b_2] \supset [a_3, b_3] \supset \dots$ \\
+    То $\exists c\in \R : c \in [a_n, b_n] \forall n \in \N$
+\end{theorem}
+\begin{tikzpicture}
+    \draw (-.5,0)--(5.5,0);
+    \draw[color=black] (0, 0) node {\bfseries[} node[below=9pt]{$a_1$};
+    \draw[color=black] (5, 0) node {\bfseries]} node[below=9pt]{$b_1$};
+    \draw[color=black] (2, 0) node {\bfseries[} node[below=9pt]{$a_2$};
+    \draw[color=black] (4, 0) node {\bfseries]} node[below=9pt]{$b_2$};
+    \draw[color=black] (2.5, 0) node {\bfseries[} node[below=9pt]{$a_3$};
+    \draw[color=black] (3.5, 0) node {\bfseries]} node[below=9pt]{$b_3$};
+\end{tikzpicture}
 \ifdefined\niveldos\else
 \end{document} 
 \fi
