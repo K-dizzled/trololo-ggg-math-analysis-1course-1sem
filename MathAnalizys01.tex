@@ -659,7 +659,23 @@ $P_n$ -последовательность утверждений
             \draw[dotted] (0,1) coordinate (A) -- (1,0) coordinate (C)
             (1,0) -- (2,1);
             \fill[red] ((1,1) circle (2pt);
-        \end{tikzpicture} \quad $B_r(a) \cap B_R$
+        \end{tikzpicture} \quad $B_r(a)$
+    \end{enumerate}
+    \subsection*{Свойства}
+    \begin{enumerate}
+        \item $B_r(a) \cap B_R(a) = B_{min\{r, R\}}(a)$
+        \item Если $x \neq y$, то найдется $r > 0$, такой, что 
+        $\overline{Br}(x) \cap \overline{Br}(y) \neq \varnothing$
+        \begin{proof}
+            \quad \\
+            $r := {{\rho(x, y)}\over{3}}$. Пойдем от противного \\
+            Пусть $c \in \overline{Br}(x) \cap \overline{Br}(y) \Longrightarrow
+            \begin{cases}
+                \rho(x, c) \leqslant r \\
+                \rho(y, c) \leqslant r
+            \end{cases} \Longrightarrow \rho(x, y) \leqslant \rho(x, c) + \rho(y, c) 
+            \leqslant 2r = {{2}\over{3}}\rho(x, y)$ - противоречие
+        \end{proof}
     \end{enumerate}
 \ifdefined\niveldos\else
 \end{document} 
