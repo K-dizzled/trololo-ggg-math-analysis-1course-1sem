@@ -18,15 +18,29 @@
 \usepackage{parskip}
 \usepackage{graphicx}
 \usepackage{mathtools}
-\usepackage{stackengine} 
+\usepackage[usestackEOL]{stackengine} 
 \usepackage{tocloft}
 \usepackage{xcolor}
 \usepackage{hyperref}
 \usepackage{tikz}
 \usepackage{thmtools}
-
-
 \usepackage{amsthm}
+\usepackage{mathtools}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}%
+
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+%
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
 \newtheorem{theorem}{Теорема}
 \newtheorem*{theorem-non}{Теорема}
 \newtheorem{lemma}[theorem]{Лемма}
@@ -125,7 +139,30 @@
 	\addtolength{\textwidth}{1.75in}
 
 	\addtolength{\topmargin}{-.875in}
-	\addtolength{\textheight}{1.75in}
+    \addtolength{\textheight}{1.75in}
+%--------------------------------------
+\def\calloutsym{%
+  \ensurestackMath{%
+  \scalebox{1.7}{\color{red}\stackunder[0pt]{\bigcirc}{\downarrow}}}%
+}
+\def\calloutsymup{%
+  \ensurestackMath{%
+  \scalebox{1.7}{\color{red}\stackon[0pt]{\bigcirc}{\uparrow}}}%
+}
+\newcommand\callouttext[1]{%
+  \def\stacktype{S}\renewcommand\useanchorwidth{T}\stackText%
+  \stackunder{\calloutsym}{\scriptsize\Longstack{#1}}\stackMath%
+}
+\newcommand\callout[3][2.5pt]{%
+  \def\stacktype{L}\stackMath\stackunder[#1]{#2}{\callouttext{#3}}%
+}
+\newcommand\callouttextup[1]{%
+  \def\stacktype{S}\renewcommand\useanchorwidth{T}\stackText%
+  \stackon{\calloutsymup}{\scriptsize\Longstack{#1}}\stackMath%
+}
+\newcommand\calloutup[3][1.5pt]{%
+  \def\stacktype{L}\stackMath\stackunder[#1]{#2}{\callouttextup{#3}}%
+}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                %
 %                                %
@@ -493,7 +530,7 @@ $P_n$ -последовательность утверждений
 \begin{itemize}
     \item[] $A =\{x \in \Q : x^2 < 2\} \Longrightarrow$ в множестве рациональных чисел у $A$ нет супремума
 \end{itemize}
-\begin{theorem}
+\begin{theorem-non}
     \quad \\
     \begin{enumerate}
         \item $a = inf A \Longleftrightarrow 
@@ -507,27 +544,123 @@ $P_n$ -последовательность утверждений
             \forall \varepsilon > 0 \quad \exists x \in A : x > b - \varepsilon
         \end{cases}$ 
     \end{enumerate}
-\end{theorem}
+\end{theorem-non}
 \notice
 \begin{itemize}
     \item Если $A$ неограничено сверху, то $sup A = +\infty$
     \item Если $A$ неограничено снизу, то $inf A = -\infty$
 \end{itemize}
 \section{Теорема о вложенных отрезках}
-\begin{theorem}
+\begin{theorem-non}
     \quad \\
     Если $[a_1, b_1] \supset [a_2, b_2] \supset [a_3, b_3] \supset \dots$ \\
     То $\exists c\in \R : c \in [a_n, b_n] \forall n \in \N$
-\end{theorem}
+\end{theorem-non}
 \begin{tikzpicture}
     \draw (-.5,0)--(5.5,0);
-    \draw[color=black] (0, 0) node {\bfseries[} node[below=9pt]{$a_1$};
-    \draw[color=black] (5, 0) node {\bfseries]} node[below=9pt]{$b_1$};
-    \draw[color=black] (2, 0) node {\bfseries[} node[below=9pt]{$a_2$};
-    \draw[color=black] (4, 0) node {\bfseries]} node[below=9pt]{$b_2$};
-    \draw[color=black] (2.5, 0) node {\bfseries[} node[below=9pt]{$a_3$};
-    \draw[color=black] (3.5, 0) node {\bfseries]} node[below=9pt]{$b_3$};
+    \draw[color=black] (0, 0) node {\bfseries[} node[below=9pt]{$a_{n}$};
+    \draw[color=black] (5, 0) node {\bfseries]} node[below=9pt]{$b_{n}$};
+    \draw[color=black] (1.5, 0) node {\bfseries[} node[below=9pt]{$a_{n+1}$};
+    \draw[color=black] (4, 0) node {\bfseries]} node[below=9pt]{$b_{n+1}$};
 \end{tikzpicture}
+\begin{proof}
+    \quad \\
+    $A = \{a_1, a_2, a_3, \dots\} \\
+    b = \{b_1, b_2, b_3, \dots\} \\
+    a_i \leqslant b_j, \forall i,j \in \N \\
+    \forall i \leqslant j : a_i \leqslant a_j \leqslant b_j \leqslant b_i, \forall i \geqslant j : a_i \geqslant a_j \geqslant b_j \geqslant b_i$ \\
+    По аксиоме полноты $\forall i, j \in \N \; \exists c \in \R: a_i \leqslant c \leqslant b_j \Longrightarrow \forall i \in \N : a_i \leqslant c \leqslant b_i$ \\
+\end{proof}
+\notice
+\begin{enumerate}
+    \item Теорема неверна для полуинтервалов \\
+    Пример: $\bigcap\limits_{n = 1}^{\infty}(0; {{1}\over{n}}] = \varnothing$
+    \item Теорема неверна для лучей \\
+    Пример: $\bigcap\limits_{n = 1}^{\infty}(n; +\infty) = \varnothing$
+    \item Теорема неверна без аксиомы полноты \\
+    Пример: число $\pi$ \\
+    $[3;\; 4] \supset [3,1;\; 3,2] \supset [3,14;\; 3,15] \supset \dots$ \\
+    Пересечение не содержит рациональных чисел
+\end{enumerate}
+\chapter{Последовательности вещественных чисел}
+\section{Метрические пространства и подпространства}
+    \begin{conj}
+        $X$ - множество $\rho : X \times X \longrightarrow [0; + \infty)$ - метрика(расстояние)
+        если: 
+        \begin{enumerate}
+            \item $\rho(x, x) = 0 \quad \forall x \in X$
+            \item если $\rho(x, y) = 0$, то $x = y$
+            \item $\rho(x, y) = \rho(y, x) \quad \forall x, y \in X$
+            \item $\rho(x, y) + \rho(y, z) \geqslant \rho(x, z) \quad \forall x, y, z \in X$
+        \end{enumerate}
+    \end{conj}
+\subsection*{Примеры}
+\begin{enumerate}
+    \item Дискретная метрика
+        \begin{itemize}
+            \item[] $\rho (x, x) = 0$
+            \item[] $\rho (x, y) = 1$, если $x \neq y$
+        \end{itemize}
+    \item $\R \quad \rho (x, y) = (x - y)$
+    \item $\R^2 \quad$ обычное расстрояние
+    \item Манхэттенская метрика 
+    \begin{itemize}
+        \item[] $(x', y') = A'$
+        \item[] $(x, y) = A$
+        \item[] $\rho (A, A') = \abs{x - x'} + \abs{y - y'}$  
+    \end{itemize}
+    \newpage
+    \item Французская железнодорожная метрика \\
+    \begin{center}
+        \begin{tikzpicture}
+            \node (p) {P} node (a) at (-2,1) {A} node (b) at (2,2) {B} node (c) at (1,1) {A}; 
+            \draw (p) -- (a); \draw[red,thick] (p) -- (c); \draw[red,thick] (c) -- (b);
+        \end{tikzpicture}
+        Если $P, A$ и $B$ на луче, то $\rho(AB) = AB$ \\
+        \quad \quad \quad Если нет, то $\rho(A, B) = \rho(AP) + \rho(B, P)$
+    \end{center}
+    \item Расстояние на сфере
+\end{enumerate}
+\begin{conj}
+    Метрическое пространство $(X, \rho), X$ - множество, $\rho$ - метрика на нем
+\end{conj}
+\begin{conj}
+    Подпространство метрического пространства. \\
+    $(X, \rho)$ - метрическое пространство, $Y \subset X$ \\
+    $(Y, \rho \vert_{Y \times Y})$ - подпространство метрического пространства
+    $(X, \rho)$, где $Y$ - подмножество $X$, а $\rho \vert_{Y \times Y}$ - сужение $\rho$ на $Y \times Y$
+\end{conj}
+\begin{conj} 
+    Открытый шар \vspace*{0.5cm} \\
+    $B\callout{r}{радиус}(\calloutup{a}{центр шара}) := {x \in X: \rho(x, a) < r}; \quad r > 0$
+\end{conj}
+\begin{conj} 
+    Замкнутый шар \vspace*{0.5cm} \\
+    $\overline{B_r}(a) := {x \in X: \rho(x, a) \leqslant r}; \quad r \geqslant 0$ \\
+    $B_r(a) \subset \overline{B_r}(a)$
+\end{conj}
+\begin{itemize}
+    \item \underline{Окрестность} точки $a$ - открытый шар $Br(a)$
+\end{itemize}
+    \subsection*{Примеры} 
+    \begin{enumerate}
+        \item Дискретная метрика на $X$
+        \begin{itemize}
+            \item[] $B_{1/2}(a) = {a}$
+            \item[] $B = (a) = X$ 
+        \end{itemize}
+        \item $\rho(x, y) = |x - y| \quad B_r(a) = (a - r, a + r)$
+        \item Манхэттенская метрика
+    
+        \begin{tikzpicture}
+            \draw[help lines] (0,0) grid (2, 2);
+            \draw[dotted] (0,1) coordinate (A) -- (1,2) coordinate (B)
+            (1,2) -- (2,1);
+            \draw[dotted] (0,1) coordinate (A) -- (1,0) coordinate (C)
+            (1,0) -- (2,1);
+            \fill[red] ((1,1) circle (2pt);
+        \end{tikzpicture} \quad $B_r(a) \cap B_R$
+    \end{enumerate}
 \ifdefined\niveldos\else
 \end{document} 
 \fi
