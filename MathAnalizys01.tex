@@ -86,6 +86,20 @@
     morekeywords={*,...}          % if you want to add more keywords to the set
 }}
 
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}%
+
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+%
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
 \definecolor{linkcolor}{HTML}{47528f} % цвет ссылок
 \definecolor{urlcolor}{HTML}{47528f} % цвет гиперссылок
 \hypersetup{pdfstartview=FitH,  linkcolor=linkcolor,urlcolor=urlcolor, colorlinks=true}
@@ -142,91 +156,405 @@
 % \listoftheorems[ignoreall,show={lemma}]
 % \listoftheorems[ignoreall,show={conj}]
 \newpage
-\chapter{Введение}
-\section{Множества}
-\begin{conj} Множество - набор уникальных элементов \end{conj}
 
-Множества - большие буквы $A, B,\dots$ \\
-Элементы множеств - маленькие буквы $a, b,\dots$ \\
-$x \in A - x$ пренадлежит $A$ \\
-$x \notin A - x$ не пренадлежит $A$ \\
-$\mathbb{N} = \{1, 2, 3, \dots\} \\
-\mathbb{Z, Q} = \{{{m}\over{n}} : m \in \mathbb{Z}, n \in\mathbb{N}\} \\
-\mathbb{R}$ - вещественные числа \\
-$\mathbb{R}$ - комплексные числа \\
-\begin{theorem} Правила Де Моргана \end{theorem}
-    \begin{itemize}
-        \item[] $A \; \setminus \; (\bigcup\limits_{\alpha \in I} B_{\alpha}) 
-        = \bigcap\limits_{\alpha \in I}(A \setminus B_{\alpha})$
+\section{Теорема Штольца (для неопределённости $\frac \infty \infty$)}
 
-        \item[] $A \; \setminus \; (\bigcap\limits_{\alpha \in I} B_{\alpha}) 
-        = \bigcup\limits_{\alpha \in I}(A \setminus B_{\alpha})$
-    \end{itemize}
+\begin{theorem} Штольца № 1 \end{theorem}
+    Пусть $(y_n)$ строго возрастает и $\lim y_n = +\infty$. 
+    Тогда если $\lim \frac{x_n - x_{n - 1}}{y_n - y_{n - 1}} = l \in
+    \overline{\mathbb{R}}$, то $\lim \frac{x_n}{y_n} = l$.
 \begin{proof}
-    Докажем для первой формулы. Вторая доказывается аналогично. \\
-    $x \in A \; \setminus \; (\bigcup\limits_{\alpha \in I} B_{\alpha}) 
-    \Longleftrightarrow \begin{cases}
-        x \in A \\
-        x \notin \bigcup\limits_{\alpha \in I} B_{\alpha}
-    \end{cases}
-    \Longleftrightarrow \begin{cases}
-        x \in A \\
-        x \notin B_{\alpha} \; \; $при всех$ \; \alpha
-    \end{cases} 
-    \Longleftrightarrow x \in A \; \setminus \; B_{\alpha}$ при всех $\alpha \in I
-    \Longleftrightarrow x \in \bigcap\limits_{\alpha \in I}(A \setminus B_{\alpha})$ 
-\end{proof} \newpage
-\begin{theorem} Операции над множествами \end{theorem}
-\begin{itemize}
-    \item $A \cup B = \{x: x \in A $ или $ x \in B\}$
-    \item $A \cap B = \{x: x \in A, x  \in B\}$
-    \item $A \; \setminus \; B = \{x: x \in A, x  \notin B\}$
-    \item $A \bigtriangleup B = (A \; \setminus \; B) \cup (B \; \setminus \; A)$
-\end{itemize}
-Замечание: $\bigtriangleup, \cup, \cap$ - комммутативны, ассоциативны
-\begin{conj} 
-    Декартово произведение множеств 
-    $A \times B = \{\langle a, b \rangle : a \in A; b \in B \}$ 
-\end{conj}
-\begin{theorem} \end{theorem}
-    \begin{itemize}
-        \item[] $A \cap \bigcup\limits_{\alpha \in I} B_{\alpha} =
-        \bigcup\limits_{\alpha \in I}(A \cap B_{\alpha}) $
+    \textbf{Ключевой случай $l = 0$:}
 
-        \item[] $A \cup \bigcap\limits_{\alpha \in I} B_{\alpha} =
-        \bigcap\limits_{\alpha \in I}(A \cup B_{\alpha}) $
-    \end{itemize}
+    Пусть \[\varepsilon_n := 
+    \frac{x_n - x_{n - 1}}{y_n - y_{n - 1}} \rightarrow 0\]
+
+    Зафиксируем $\varepsilon > 0$ и найдём $m$, т.ч. $
+    \abs{\varepsilon_n} < \varepsilon$ при $n \geq m$.
+
+    \[x_n - x_m = (x_n - x_{n - 1}) + (x_{n - 1} - x_{n - 2})
+    + ... + (x_{m + 1} - x_m) = \sum_{k=m+1}^n \varepsilon_k
+    \cdot (y_k - y_{k - 1})\]
+    \[\abs{x_n - x_m} \leq \sum_{k=m+1}^n \abs{\varepsilon_k}
+    \cdot (y_k - y_{k - 1}) < \sum_{k=m+1}^n \varepsilon
+    \cdot (y_k - y_{k - 1}) = \varepsilon \cdot \sum_{k=m+1}^n 
+    (y_k - y_{k - 1}) = \varepsilon \cdot (y_n - y_m) <
+    \varepsilon y_n\]
+
+    Можно считать, что $y_m > 0$ (по теореме о стабилизации знака).
+
+    Заметим, что $\abs{x_m}$ фиксировано, а $y_n \rightarrow +\infty$
+    $\Rightarrow$ $\lim \frac{\abs{x_m}}{y_n} = 0$ и
+    $\frac{\abs{x_m}}{y_n} < \varepsilon$, начиная с некоторого номера.
+
+    \[\abs{x_n} \leq \abs{x_m} + \abs{x_n - x_m} < 
+    \abs{x_m} + \varepsilon y_n \Rightarrow \abs{\frac{x_n}{y_n}} <
+    \frac{\abs{x_m}}{y_n} + \varepsilon < 2 \varepsilon\]
+    начиная с некоторого номера $\Rightarrow \lim \abs{\frac{x_n}{y_n}} = 0 = l$.
+
+    \textbf{Случай $l \in \mathbb{R}$:}
+    \[\widetilde{x_n} := x_n - l \cdot y_n, \widetilde{x_n} -
+    \widetilde{x_{n-1}} = x_n - x_{n-1} - l \cdot (y_n - y_{n-1})\]
+    \[\frac{\widetilde{x_n} - \widetilde{x_{n-1}}}
+    {y_n - y_{n - 1}} = \frac{x_n - x_{n - 1}}{y_n - y_{n - 1}}  - l
+    \rightarrow 0 \xRightarrow[]{l = 0} \frac{\widetilde{x_n}}{y_n}
+    \rightarrow 0 \Rightarrow \frac{\widetilde{x_n}}{y_n} =
+    \frac{x_n - l \cdot y_n}{y_n} = \frac{x_n}{y_n} - l
+    \rightarrow 0 \Rightarrow \frac{x_n}{y_n} \rightarrow l\]
+
+    \textbf{Случай $l = +\infty$:}
+
+    \[\frac{x_n - x_{n - 1}}{y_n - y_{n - 1}} \rightarrow +\infty
+    \Rightarrow \frac{x_n - x_{n - 1}}{y_n - y_{n - 1}} > 1\] 
+    начиная с некоторого номера \\
+    $\Rightarrow x_n - x_{n - 1} > y_n - y_{n - 1} > 0 \Rightarrow
+    x_n$ строго возрастает с нек. номера $m \Rightarrow$\\
+    $\Rightarrow x_n - x_m > y_n - y_m \Rightarrow
+    x_n > y_n + (x_m - y_m) \rightarrow +\infty \Rightarrow
+    x_n \rightarrow +\infty$
+
+    Рассмотрим
+    \[\frac{y_n - y_{n - 1}}{x_n - x_{n - 1}} \rightarrow 0
+    \xRightarrow[]{l = 0} \frac{y_n}{x_n} \rightarrow 0 \Rightarrow
+    \frac{x_n}{y_n} \rightarrow +\infty\] (а не $\infty$, т.к. 
+    $x_n > 0, y_n > 0$ с нек. номера)
+
+    \textbf{Случай $l = -\infty$}
+
+    Пусть $\widetilde{x_n} := -x_n$.
+    \[\frac{x_n - x_{n-1}}{y_n - y_{n - 1}} \rightarrow -\infty
+    \Rightarrow \frac{\widetilde{x_n} - \widetilde{x_{n-1}}}
+    {y_n - y_{n - 1}} = -\frac{x_n - x_{n-1}}{y_n - y{n - 1}}
+    \rightarrow +\infty \Rightarrow -\frac{x_n}{y_n} =
+    \frac{\widetilde{x_n}}{y_n} \rightarrow +\infty
+    \Rightarrow \frac{x_n}{y_n} \rightarrow -\infty\] 
+
+\end{proof}
+
+\textbf{Следствие.}
+\[\text{Если } \lim a_n = a \in \overline{\mathbb{R}}
+\text{, то } \lim \frac{a_1 + a_2 + ... + a_n}{n} = a\] 
 \begin{proof}
-        $x \in A \cap \bigcup\limits_{\alpha \in I} B_{\alpha}
-        \Longleftrightarrow \begin{cases}
-            x \in A \\
-            x \in \bigcup\limits_{\alpha \in I} B_{\alpha}
-        \end{cases} \Longleftrightarrow \begin{cases}
-            x \in A \\
-            x \in B_{\alpha}$ для некоторых $\alpha \in I
-        \end{cases} \Longleftrightarrow 
-        x \in A \cap B_{\alpha}$ для некоторых $\alpha \in I 
-        \Longleftrightarrow 
-        x \in \bigcup\limits_{\alpha \in I}(A \cap B_{\alpha})$
-    \end{proof}
-\begin{conj} 
-    Упорядоченная пара $ \langle a, b \rangle $ - пара  ``пронумерованных'' элементов
+    \[x_n := \sum_{k=1}^n a_k, \quad y_n := n \nearrow +\infty\]
+    \[\lim \frac{x_n - x_{n-1}}{y_n - y_{n-1}} = \lim{a_n}{n - (n - 1)}
+    = \lim a_n = a \Rightarrow \lim \frac{a_1 + a_2 + ... + a_n}{n} = a\]
+\end{proof}
+
+Пример. Найти предел:
+\[m \in \mathbb{N}, \quad \frac{1}{n^{m + 1}} \cdot \sum_{k=1}^{n} k^m\]
+
+\[x_n := \sum_{k=1}^{n} k^m, \quad y_n := n^{m + 1} \nearrow +\infty\]
+\begin{gather*}
+    \lim \frac{y_n - y_{n - 1}}{x_n - x_{n - 1}} =
+    \lim \frac{n^{m + 1} - (n - 1)^{m + 1}}{n^m} =
+    \lim \frac{n^{m+1} - (n^{m+1} + \sum_{k = 1}^{m + 1} 
+    (C_{m+1}^k (-1)^k n^{m+1-k})}{n^m}) = \\
+    = \lim \sum_{k = 1}^{m + 1} 
+    ((-1)^{k+1} \cdot \frac{C_{m+1}^k}{n^{k - 1}}) =
+    \lim C_{m + 1}^1 + \lim \sum_{k = 2}^{m + 1} 
+    ((-1)^{k+1} \cdot \frac{C_{m+1}^k}{n^{k - 1}}) =
+    (m + 1) + 0 = m + 1
+\end{gather*}
+\[\lim\frac{x_n - x_{n - 1}}{y_n - y_{n-1}} = \frac1{m + 1}
+\Rightarrow \lim\frac{x_n}{y_n} = \frac1{m + 1}\]
+
+\section{Теорема Штольца (для неопределённости $\frac 0 0$)}
+
+\begin{theorem}Штольца № 2\end{theorem}
+\[0<y_n<y_{n-1} \text{ и } \lim x_n = \lim y_n = 0
+\text{ Тогда если }\lim\frac{x_n - x_{n-1}}{y_n - y_{n-1}} = l \in
+\overline{\mathbb{R}}\text{, то }\lim \frac{x_n}{y_n} = l\]
+
+\begin{proof}
+    \textbf{Случай $l = 0$:}
+
+    Пусть \[\varepsilon_n := 
+    \frac{x_n - x_{n - 1}}{y_n - y_{n - 1}} \rightarrow 0\]
+
+    Зафиксируем $\varepsilon > 0$ и найдём $m$, т.ч. $
+    \abs{\varepsilon_n} < \varepsilon$ при $n \geq m$.
+    \[x_n - x_m = \sum_{k=m+1}^n(x_k - x_{k-1}) =
+    \sum_{k=m+1}^n \varepsilon_k (y_k - y_{k-1}) \Rightarrow
+    \abs{x_n - x_m} \leq\] \[\leq \sum_{k=m+1}^n -\abs{\varepsilon_k}
+    (y_k - y_{k-1}) < \varepsilon \sum_{k=m+1}^n (y_k - y_{k-1}) =
+    \varepsilon (y_m - y_n)\]
+    \[(x_n - x_m) < \varepsilon (y_m - y_n)\]
+    \[\text{Устремим } n \text{ к } +\infty \Rightarrow
+    \abs{x_n - x_m} \rightarrow \abs{-x_m} = x_m, \quad
+    \varepsilon (y_m - y_n) \rightarrow \varepsilon y_m \Rightarrow\]
+    \[\Rightarrow \text{по пред. переходу в нер., при }
+    m \geq \text{нек. } N \quad \abs{x_m} < \varepsilon y_m
+    \Rightarrow \abs{\frac{x_m}{y_m}} < \varepsilon
+    \Rightarrow \lim \frac{x_m}{y_m} = 0\]
+
+    \textbf{Случай $l \in \overline{\mathbb{R}}$:}
+    Так же, как в теореме Штольца № 1
+    \[\widetilde{x_n} := x_n - l \cdot y_n, \widetilde{x_n} -
+    \widetilde{x_{n-1}} = x_n - x_{n-1} - l \cdot (y_n - y_{n-1})\]
+    \[\frac{\widetilde{x_n} - \widetilde{x_{n-1}}}
+    {y_n - y_{n - 1}} = \frac{x_n - x_{n - 1}}{y_n - y_{n - 1}}  - l
+    \rightarrow 0 \xRightarrow[]{l = 0} \frac{\widetilde{x_n}}{y_n}
+    \rightarrow 0 \Rightarrow \frac{\widetilde{x_n}}{y_n} =
+    \frac{x_n - l \cdot y_n}{y_n} = \frac{x_n}{y_n} - l
+    \rightarrow 0 \Rightarrow \frac{x_n}{y_n} \rightarrow l\]
+
+    \textbf{Случай $l = +\infty$:}
+    \[\frac{x_n - x_{n - 1}}{y_n - y_{n - 1}} \rightarrow +\infty
+    \Rightarrow \frac{x_{n - 1} - x_n}{y_{n - 1} - y_{n}} =
+    \frac{x_n - x_{n - 1}}{y_n - y_{n - 1}} > 1 \text{ начиная
+    с некоторого номера} \Rightarrow\] \[\Rightarrow
+    x_{n - 1} - x_n > y_{n - 1} - y_n > 0 \Rightarrow x_n
+    \text{ строго убывает} \Rightarrow \lim \frac{y_n - y_{n - 1}}
+    {x_n - x_{n - 1}} = 0 \xRightarrow[]{l = 0} \lim \frac{y_n}{x_n} = 0
+    \Rightarrow \] \[\Rightarrow \frac{x_n}{y_n} = +\infty\]
+
+    \textbf{Случай $l = -\infty$:}
+    Так же, как в теореме Штольца № 1
+
+    Пусть $\widetilde{x_n} := -x_n$.
+    \[\frac{x_n - x_{n-1}}{y_n - y_{n - 1}} \rightarrow -\infty
+    \Rightarrow \frac{\widetilde{x_n} - \widetilde{x_{n-1}}}
+    {y_n - y_{n - 1}} = -\frac{x_n - x_{n-1}}{y_n - y{n - 1}}
+    \rightarrow +\infty \Rightarrow -\frac{x_n}{y_n} =
+    \frac{\widetilde{x_n}}{y_n} \rightarrow +\infty
+    \Rightarrow \frac{x_n}{y_n} \rightarrow -\infty\] 
+
+\end{proof}
+
+\section{Подпоследовательности (определение и простейшие свойства).
+Теорема о стягивающихся отрезках)}
+
+\begin{conj}
+Последовательность $(x_n)$, $n_1 < n_2 < n_3 < ...$ Тогда
+$(x_{n_k})$ - подпоследовательность.
 \end{conj}
-    $  \langle a, b \rangle $ = $  \langle c, d \rangle \rotatebox[origin=c]{150}{$\Longleftrightarrow$}$ 
-\begin{scriptsize}
-\estiloJava
-\begin{lstlisting}[caption={}, label=]
-    ((a == c) && (b == d))
-\end{lstlisting}
-\end{scriptsize}
-\section{Отношения}
+\textbf{Замечание.} $n_k \geq k$ (по индукции)
 
+\textbf{Свойства:}
+\begin{enumerate}
+    \item Если последовательность имеет предел, то подпоследовательность
+    имеет тот же предел.
+    \item Пусть две подпоследовательности в объединении дают исходную
+    последовательность. Если подпоследовательности имеют одинаковый
+    предел, то исходная последовательность имеет тот же предел.
+\end{enumerate}
 
+\begin{theorem}О стягивающихся отрезках.\end{theorem}
+\[\text{Пусть }[a_1; b_1] \supset [a_2; b_2] \supset [a_3; b_3] 
+\supset ... \text{ и } \lim (b_n - a_n) = 0\]
+Тогда существует единственная точка $c$, принадлежащая всем отрезкам
+и $\lim a_n = \lim b_n = c$.
+\[\text{Т.е. } \bigcap_{n = 1}^{+\infty} [a_n; b_n] = {c}\]
 
+\begin{proof}
+    По теореме о вложенных отрезках $\bigcap_{n = 1}^{+\infty} [a_n; b_n]
+    \neq \varnothing$.
+    \[\text{Пусть } c,d \in \bigcap_{n = 1}^{+\infty} [a_n; b_n]
+    \Rightarrow c, d \in [a_n; b_n] \forall n; \text{ НУО, } d \geq c\]
+    \[0 \leq d - c \leq b_n - a_n \rightarrow 0 \Rightarrow c = d
+    \text{, иначе } \exists n : b_n - a_n < \varepsilon = d - c\]
+    \[0 \leq c - a_n \leq b_n - a_n \rightarrow 0
+    \xRightarrow[]{\text{2 мил.}}
+    c - a_n \rightarrow 0 \Rightarrow \lim a_n = c\]
+    \[0 \leq b_n - c \leq b_n - a_n \rightarrow 0
+    \xRightarrow[]{\text{2 мил.}}
+    b_n - c \rightarrow 0 \Rightarrow \lim b_n = c\]
+\end{proof}
 
+\section{Теорема Больцано-Вейерштрасса в $\mathbb{R}$}
+\begin{theorem}
+    Из любой ограниченной последовательности можно выделить
+    сходящуюся подпоследовательность.
+\end{theorem}
+\begin{proof}
+${x_n}$ ограничено $\Rightarrow x_n \in [a; b]$
 
+В каком-то из отрезков $[a; \frac{a + b}{2}]$ и $[\frac{a + b}{2}; b]$
+содержится бесконечное число членов послед.\\
+Назовём этот отрезок $[a_1; b_1]$.
 
+В каком-то из отрезков $[a_1; \frac{a_1 + b_1}{2}]$ и 
+$[\frac{a_1 + b_1}{2}; b_1]$
+содержится бесконечное число членов послед.\\
+Назовём этот отрезок $[a_2; b_2]$.
+
+В каком-то из отрезков $[a_2; \frac{a_2 + b_2}{2}]$ и 
+$[\frac{a_2 + b_2}{2}; b_2]$
+содержится бесконечное число членов послед.\\
+Назовём этот отрезок $[a_3; b_3]$.
+\[...\]
+\[[a; b] \supset [a_1; b_1] \supset [a_2; b_2] \supset
+[a_3; b_3] \supset ...\]
+\[b_n - a_n = \frac{b - a}{2^n} \rightarrow 0\]
+
+Тогда по теореме о стягивающихся отрезках $\lim a_n = \lim b_n = c$
+
+Выберем подпоследовательность. Берём $[a_1; b_1]$, в нём есть
+какой-то член последовательности, назовём его $x_{n_1}$.
+
+В $[a_2; b_2]$ содержится бесконечное число членов последовательности
+$\Rightarrow$ есть член последовательности с номером, большим $n_1$.
+Обозначим его $x_{n_2}$, тогда $n_2 > n_1$.
+\[...\]
+$x_{n_k} \in [a_k; b_k], n_1 < n_2 < n_3 < ...$, значит построили
+подпоследовательность.
+
+\[a_k \rightarrow c, \,\, b_k \rightarrow c \quad a_k \leq x_{n_k} \leq b_k
+\xRightarrow[]{\text{2 мил.}} \lim x_{n_k} = c \]
+\end{proof}
+
+\section{Аналог теоремы Больцано–Вейерштрасса для неограниченной 
+последовательности. Частичные пределы. Теорема о характеристике 
+частичных пределов.}
+
+\begin{theorem}\end{theorem}
+\begin{enumerate}
+    \item Неограниченная монотонная последовательность стремится
+    к $+\infty$ или к $-\infty$.
+    \item Из любой неограниченной последовательности можно выделить
+    подпоследовательность, стремящуюся к $+\infty$ или к $-\infty$.
+\end{enumerate}
+\begin{proof}.
+\begin{enumerate}
+    \item Пусть $(x_n)$ возрастает. $(x_n)$ неограничена $\Rightarrow$
+    никакое $u$ не является верхней границей $\Rightarrow \exists m : x_m
+    x_m > u \Rightarrow u < x_m \leq x_{m + 1} \leq x_{m + 2} \leq \dots
+    \Rightarrow x_n > u$, начиная с некоторого номера $\Rightarrow
+    \lim x_n = +\infty$
+
+    \item Пусть $(x_n)$ неограничена сверху.
+    
+    $1$ не является верхней границей $\Rightarrow \exists x_{n_1} > 1$;\\
+    $\max\{2, x_1, x_2, \dots, x_{n_1}\}$ не является верхней границей
+    $\Rightarrow \exists x_{n_2} > \max\{\dots\} \Rightarrow x_{n_2} > 2,\\
+    n_2 > n_1$;\\
+    $\max\{3, x_1, x_2, \dots, x_{n_2}\}$ не является верхней границей
+    $\Rightarrow \exists x_{n_3} > \max\{\dots\} \Rightarrow x_{n_3} > 3,\\
+    n_3 > n_2$;\\
+    и т.д.
+
+    Итого, $x_{n_k} > k$ и $n_1 < n_2 < \dots \Rightarrow (x_{n_k})$
+    -- подпоследовательность $(x_n)$ и $\lim x_{n_k} = +\infty$ по
+    предельному переходу в неравенстве.
+\end{enumerate}
+\end{proof}
+
+\begin{conj}
+$a$ -- частичный предел последовательности $(x_n)$, если найдётся
+подпоследовательность $x_{n_k} \rightarrow a$.
+\end{conj}
+\begin{theorem}
+$a$ -- частичный предел последовательности $\Leftrightarrow$
+в любой окрестности точки $a$ найдётся бесконечное число членов
+последовательности.
+\end{theorem}
+\begin{proof} $ $
+
+    ''$\Longrightarrow$'':
+
+    Если $a = \lim x_{n_k}$ и $U_a$ -- окрестность точки $a$, то
+    все $x_{n_k}$ кроме конечного числа лежат в $U_a \Rightarrow$
+    в $U_a$ лежит бесконечное число членов последовательности $(x_n)$.
+
+    ''$\Longleftarrow$'':
+
+    Будем строить подпоследовательность, имеющую предел $a$.
+
+    В $B_{1}(a)$ найдётся бесконечное число членов последовательности,
+    возьмём какой-то и назовём его $x_{n_1}$.\\
+    В $B_{1/2}(a)$ найдётся бесконечное число членов
+    последовательности, значит найдётся член $(x_n)$ с индексом, большим
+    $n_1$, назовём его $x_{n_2}$.\\
+    В $B_{1/3}(a)$ найдётся бесконечное число членов
+    последовательности, значит найдётся член $(x_n)$ с индексом, большим
+    $n_2$, назовём его $x_{n_3}$.\\
+    $\dots$
+
+    $n_1 < n_2 < n_3 < \dots$\\
+    $x_{n_k} \in B_{1/k}(a) \Rightarrow \rho(x_{n_k}, a) < \frac1k
+    \Rightarrow \rho(x_{n_k}, a) \rightarrow 0 \Rightarrow
+    \lim x_{n_k} = a$
+
+\end{proof}
+
+\section{Фундаментальные последовательности. Свойства. Критерий Коши.}
+
+\begin{conj}
+Фундаментальная последовательность (сходящаяся в себе,
+последовательность Коши)
+\end{conj}
+Пусть $(X, \rho)$ -- метрическое пространство. $x_n \in X$.
+$x_n$ -- фундаментальная последовательность, если $\forall
+\varepsilon > 0 \,\, \exists N : \forall n, m \geq N \,\,
+\rho(x_n, x_m) < \varepsilon$
+
+\textbf{Свойства:}
+\begin{enumerate}
+    \item Сходящаяся последовательность фундаментальна.
+    
+    \textbf{Доказательство:}\\
+    Пусть $\lim x_n := a$. Зафиксируем $\varepsilon > 0$.
+    Тогда $\exists N :\\ \forall n \geq N \,\,\, \rho(x_n, a) < 
+    \frac{1}{2} \varepsilon$\\ 
+    $\forall m \geq N \,\,\, \rho(x_m, a) < \frac{1}{2} \varepsilon$\\
+    $\Rightarrow \rho(x_n, x_m) \leq \rho(x_n, a) + \rho(x_m, a) <
+    \varepsilon$
+
+    \item Фундаментальная последовательность ограничена
+    
+    \textbf{Доказательство:}\\
+    Берём $\varepsilon = 1$. Тогда $\exists N : \forall n, m \geq N \,\,
+    \rho(x_n, x_m) < 1 \Rightarrow$\\
+    $\Rightarrow \forall n \geq N \,\, \rho(x_n, x_N) < 1
+    \Leftrightarrow x_n \in B_1(x_N)$\\
+    $R := \max\{\rho(x_1, x_N), \rho(x_2, x_N), \dots, 
+    \rho(x_{N-1}, x_N)\} \Rightarrow \forall n \,\, x_n \in B_R(x_N)$
+
+    \item Если у фундаментальной последовательности есть сходящаяся
+    подпоследовательность, то фундаментальная последовательность
+    имеет тот же предел.
+
+    \textbf{Доказательство:}\\
+    Пусть $\lim x_{n_k} = a$. Зафиксируем $\varepsilon > 0$.\\
+    $\exists K : \forall k \geq K \quad \rho(x_k, a) <
+    \frac{1}{2} \varepsilon$\\
+    $\exists N : \forall n, m \geq N \quad \rho(x_n, x_m) <
+    \frac{1}{2} \varepsilon$\\
+    Возьмём $N \geq 0$ и подберём такое $k$, что $k \geq N$\\
+    и $n_k \geq N$ (например, $k \geq \max{N, K}$ подходит)\\
+    Тогда $\rho(x_n, x_{n_k}) < \frac{1}{2} \varepsilon$
+    (т.к. $n_k \geq N$)\\
+    И тогда $\rho(x_{n_k}, a) < \frac{1}{2} \varepsilon$
+    (т.к. $k \geq K$)\\
+    $\Rightarrow \rho(x_n, a) \leq \rho(x_n, x_{n_k}) +
+    \rho(x_{n_k}, a) < \varepsilon \Rightarrow \lim x_n = a$
+\end{enumerate}
+
+\begin{theorem}Критерий Коши\end{theorem}
+Числовая последовательность имеет предел $\Leftrightarrow$
+она фундаментальна.
+
+\begin{proof} $ $
+
+''$\Longrightarrow$'':\\
+По свойству 1.
+
+''$\Longleftarrow$'':\\
+фундаментальность $\xRightarrow[]{\text{св-во 2}}$
+ограниченность $\xRightarrow[]
+{\text{Больцано–Вейерштрасса}}$\\
+$\begin{rcases*}
+    \Rightarrow \text{сущ. сходящаяся подпосл.}\\
+    \quad\quad\text{фундаментальность}
+\end{rcases*}$
+$\xRightarrow[]{\text{св-во 3}}$ существует конечный предел.
+
+\end{proof}
+
+\section{Теорема Больцано–Вейерштрасса в $\mathbb{R}^d$.
+Полнота $\mathbb{R}^d$ }
 
 \ifdefined\niveldos\else
+
 \end{document} 
 \fi
