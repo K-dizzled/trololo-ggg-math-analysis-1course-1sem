@@ -471,7 +471,7 @@ $P_n$ -последовательность утверждений
     \end{proof} 
     \item Если $x, y \in \mathbb{R}, x < y$, то существует иррациональное число $r: x < r < y$ 
     \begin{proof}
-        \quad \\ $x - \sqrt{2} < y - \sqrt{2} \Longrightarrow \exists R \in (x - \sqrt{2}, y - \sqrt{2}) \Longrightarrow
+        \quad \\ $x - \sqrt{2} < y - \sqrt{2} \Longrightarrow \exists R_{\in \Q} \in (x - \sqrt{2}, y - \sqrt{2}) \Longrightarrow
         x < R + \sqrt{2} < y \; $(Предыдущий пункт)$ \; \Longrightarrow \\ r$ - иррациональное
     \end{proof} 
     \item Если $x \geqslant 1$, то $\exists n \in \mathbb{N}: x - 1 < n \leqslant x$ 
@@ -481,7 +481,7 @@ $P_n$ -последовательность утверждений
     \quad \\
     \begin{itemize}
         \item[] $x$ - верхняя граница множества $A$, если $\forall a \in A: a \leqslant x$
-        \item[] $y$ - верхняя граница множества $A$, если $\forall a \in A: y \leqslant a$ 
+        \item[] $y$ - нижняя граница множества $A$, если $\forall a \in A: y \leqslant a$ 
         \item[] Множество ограничено снизу, если существует какая-нибудь нижняя граница
         \item[] Множество ограничено сверху, если существует какая-нибудь верхняя граница
     \end{itemize}
@@ -497,8 +497,8 @@ $P_n$ -последовательность утверждений
 \begin{theorem-non}
     \quad \\
     \begin{enumerate}
-        \item Если $A \subset \R, A \neq \varnothing $ и $ A $ ограничено снизу, то существует единсвтенный $inf A$
-        \item Если $A \subset \R, A \neq \varnothing $ и $ A $ ограничено сверху, то существует единсвтенный $sup A$
+        \item Если $A \subset \R, A \neq \varnothing $ и $ A $ ограничено снизу, то существует единственный $inf A$
+        \item Если $A \subset \R, A \neq \varnothing $ и $ A $ ограничено сверху, то существует единственный $sup A$
     \end{enumerate}
 \end{theorem-non}
 \begin{proof}
@@ -565,7 +565,7 @@ $P_n$ -последовательность утверждений
 \begin{proof}
     \quad \\
     $A = \{a_1, a_2, a_3, \dots\} \\
-    b = \{b_1, b_2, b_3, \dots\} \\
+    B = \{b_1, b_2, b_3, \dots\} \\
     a_i \leqslant b_j, \forall i,j \in \N \\
     \forall i \leqslant j : a_i \leqslant a_j \leqslant b_j \leqslant b_i, \forall i \geqslant j : a_i \geqslant a_j \geqslant b_j \geqslant b_i$ \\
     По аксиоме полноты $\forall i, j \in \N \; \exists c \in \R: a_i \leqslant c \leqslant b_j \Longrightarrow \forall i \in \N : a_i \leqslant c \leqslant b_i$ \\
@@ -600,7 +600,7 @@ $P_n$ -последовательность утверждений
             \item[] $\rho (x, x) = 0$
             \item[] $\rho (x, y) = 1$, если $x \neq y$
         \end{itemize}
-    \item $\R \quad \rho (x, y) = (x - y)$
+    \item $\R \quad \rho (x, y) = \abs{x - y}$
     \item $\R^2 \quad$ обычное расстрояние
     \item Манхэттенская метрика 
     \begin{itemize}
@@ -646,7 +646,7 @@ $P_n$ -последовательность утверждений
         \item Дискретная метрика на $X$
         \begin{itemize}
             \item[] $B_{1/2}(a) = {a}$
-            \item[] $B = (a) = X$ 
+            \item[] $B_2(a) = X$ 
         \end{itemize}
         \item $\rho(x, y) = |x - y| \quad B_r(a) = (a - r, a + r)$
         \item Манхэттенская метрика
@@ -664,7 +664,7 @@ $P_n$ -последовательность утверждений
     \begin{enumerate}
         \item $B_r(a) \cap B_R(a) = B_{min\{r, R\}}(a)$
         \item Если $x \neq y$, то найдется $r > 0$, такой, что 
-        $\overline{Br}(x) \cap \overline{Br}(y) \neq \varnothing$
+        $\overline{Br}(x) \cap \overline{Br}(y) = \varnothing$
         \begin{proof}
             \quad \\
             $r := {{\rho(x, y)}\over{3}}$. Пойдем от противного \\
@@ -751,11 +751,11 @@ $B_1^Y(0) = \{x \in [0; \;2) : \abs{x - 0} < 1\} = [0; \; 1)$
             Пусть $a \in Int A \Longrightarrow B_r(a) \subset A$ для 
             некоторого $r_{>0} \Longrightarrow a$ - внутренняя точка $B$
         \end{proof}
-        \item $Int(A \cap B) = Int A \cap B$
+        \item $Int(A \cap B) = Int A \cap Int B$
         \begin{proof}
             \quad \\
             ``$\subset$'' : $A \cap B \subset A \Longrightarrow Int(A \cap B) \subset Int A$. Это следует из предыдущего пункта. Аналогично для $B$\\ 
-            ``$\supset$'' : Пусть $c \in Int A \cap B \Longrightarrow 
+            ``$\supset$'' : Пусть $c \in Int A \cap Int B \Longrightarrow 
             \begin{cases}
                 c$ - внутренняя точка $A \\
                 c$ - внутренняя точка $B 
@@ -830,7 +830,7 @@ $B_1^Y(0) = \{x \in [0; \;2) : \abs{x - 0} < 1\} = [0; \; 1)$
     $x \in X \setminus Cl A \Longleftrightarrow x \notin Cl A \Longleftrightarrow x \notin F_{\circ}$, где $F_{\circ} \supset A \\
     \Longleftrightarrow 
     \begin{cases}
-        x \in X \setminus F_{\circ} =: G $ - открытое$ \\
+        x \in X \setminus F_{\circ} =: G_{\circ} $ - открытое$ \\
         G_{\circ} \subset X \setminus A
     \end{cases} \Longleftrightarrow x \in Int(X \setminus A)$ 
 \end{proof}
@@ -874,7 +874,7 @@ $Int A = X \setminus Cl(X \setminus A)$
     в $X \setminus A \Longleftrightarrow$ для любого $r > 0: B_r(x) \cap A \neq \varnothing$ 
 \end{proof}
 \follow 
-\quad Если $U$ - открытое и $\mathcal{U} \cap A = \varnothing$, то $\mathcal{U} \cap Cl A = \varnothing$
+\quad Если $\mathcal{U}$ - открытое и $\mathcal{U} \cap A = \varnothing$, то $\mathcal{U} \cap Cl A = \varnothing$
 \ifdefined\niveldos\else
 \begin{proof}
     Пусть $x \in \mathcal{U} \cap Cl A \Longrightarrow x \in \mathcal{U}$ - открытое $\exists r > 0 \quad B_r(x) \subset \mathcal{U}\\
