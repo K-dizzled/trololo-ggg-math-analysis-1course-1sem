@@ -1731,7 +1731,7 @@ $Int A = X \setminus Cl(X \setminus A)$
 
     \section{Теорема Штольца (для неопределённости $\frac \infty \infty$)}
 
-    \begin{theorem} Штольца № 1 \end{theorem}
+    \begin{theorem-non} Штольца № 1 \end{theorem-non}
         Пусть $(y_n)$ строго возрастает и $\lim y_n = +\infty$. 
         Тогда если $\lim \frac{x_n - x_{n - 1}}{y_n - y_{n - 1}} = l \in
         \overline{\mathbb{R}}$, то $\lim \frac{x_n}{y_n} = l$.
@@ -1832,7 +1832,7 @@ $Int A = X \setminus Cl(X \setminus A)$
     
     \section{Теорема Штольца (для неопределённости $\frac 0 0$)}
     
-    \begin{theorem}Штольца № 2\end{theorem}
+    \begin{theorem-non}Штольца № 2\end{theorem-non}
     \[0<y_n<y_{n-1} \text{ и } \lim x_n = \lim y_n = 0
     \text{ Тогда если }\lim\frac{x_n - x_{n-1}}{y_n - y_{n-1}} = l \in
     \overline{\mathbb{R}}\text{, то }\lim \frac{x_n}{y_n} = l\]
@@ -1911,7 +1911,7 @@ $Int A = X \setminus Cl(X \setminus A)$
         предел, то исходная последовательность имеет тот же предел.
     \end{enumerate}
     
-    \begin{theorem}О стягивающихся отрезках.\end{theorem}
+    \begin{theorem-non}О стягивающихся отрезках.\end{theorem-non}
     \[\text{Пусть }[a_1; b_1] \supset [a_2; b_2] \supset [a_3; b_3] 
     \supset ... \text{ и } \lim (b_n - a_n) = 0\]
     Тогда существует единственная точка $c$, принадлежащая всем отрезкам
@@ -1934,10 +1934,10 @@ $Int A = X \setminus Cl(X \setminus A)$
     \end{proof}
     
     \section{Теорема Больцано-Вейерштрасса в $\mathbb{R}$}
-    \begin{theorem}
+    \begin{theorem-non}
         Из любой ограниченной последовательности можно выделить
         сходящуюся подпоследовательность.
-    \end{theorem}
+    \end{theorem-non}
     \begin{proof}
     ${x_n}$ ограничено $\Rightarrow x_n \in [a; b]$
     
@@ -1979,7 +1979,7 @@ $Int A = X \setminus Cl(X \setminus A)$
     последовательности. Частичные пределы. Теорема о характеристике 
     частичных пределов.}
     
-    \begin{theorem}\end{theorem}
+    \begin{theorem-non}\end{theorem-non}
     \begin{enumerate}
         \item Неограниченная монотонная последовательность стремится
         к $+\infty$ или к $-\infty$.
@@ -2015,11 +2015,11 @@ $Int A = X \setminus Cl(X \setminus A)$
     $a$ -- частичный предел последовательности $(x_n)$, если найдётся
     подпоследовательность $x_{n_k} \rightarrow a$.
     \end{conj}
-    \begin{theorem}
+    \begin{theorem-non}
     $a$ -- частичный предел последовательности $\Leftrightarrow$
     в любой окрестности точки $a$ найдётся бесконечное число членов
     последовательности.
-    \end{theorem}
+    \end{theorem-non}
     \begin{proof} $ $
     
         ''$\Longrightarrow$'':
@@ -2102,7 +2102,7 @@ $Int A = X \setminus Cl(X \setminus A)$
         \rho(x_{n_k}, a) < \varepsilon \Rightarrow \lim x_n = a$
     \end{enumerate}
     
-    \begin{theorem}Критерий Коши\end{theorem}
+    \begin{theorem-non}Критерий Коши\end{theorem-non}
     Числовая последовательность имеет предел $\Leftrightarrow$
     она фундаментальна.
     
@@ -2133,9 +2133,9 @@ $Int A = X \setminus Cl(X \setminus A)$
     $X$ - полное, если любая фундаментальная последовательность
     в нём имеет предел.
     
-    \begin{theorem}
+    \begin{theorem-non}
         $\mathbb{R}^d$ - полное пространство.
-    \end{theorem}
+    \end{theorem-non}
     \begin{proof} $ $
     
         Возьмём фундаментальную последовательность $(x_n)$.
@@ -2159,9 +2159,9 @@ $Int A = X \setminus Cl(X \setminus A)$
     
     \end{proof}
     
-    \begin{theorem}
+    \begin{theorem-non}
     Больцано–Вейерштрасса в $\mathbb{R}^d$.
-    \end{theorem}
+    \end{theorem-non}
     \begin{proof}
     Пусть векторная последовательность
     $x_n = (x_n^{(1)}, x_n^{(2)}, \dots, x_n^{(d)})$ ограничена.
@@ -2206,10 +2206,10 @@ $Int A = X \setminus Cl(X \setminus A)$
     $z_n := \sup_{k \geq n} x_k = \sup\{x_n, x_{n+1}, x_{n+2}, \dots\}$
     $\quad z_n \geq z_{n+1}$
     
-    \begin{theorem}
+    \begin{theorem-non}
         $\underline{\lim}$ и $\overline{\lim}$ существуют в 
         $\overline{\mathbb{R}}$ и $\underline{\lim} \leq \overline{\lim}$
-    \end{theorem}
+    \end{theorem-non}
     \begin{proof} $ $
     
     Про $\underline{\lim}$: $y_n \leq y_{n+1} \Rightarrow (y_n)$ --
@@ -2226,7 +2226,7 @@ $Int A = X \setminus Cl(X \setminus A)$
     переходу в неравенстве $\underline{\lim} \leq \overline{\lim}$.
     \end{proof}
     
-    \begin{theorem}\end{theorem}
+    \begin{theorem-non}\end{theorem-non}
     \begin{enumerate}
         \item $\overline{\lim}$ -- наибольший частичный предел
         \item $\underline{\lim}$ -- наименьший частичный предел
@@ -2304,7 +2304,7 @@ $Int A = X \setminus Cl(X \setminus A)$
     \section{Характеристика верхних и нижних пределов с помощью 
     $N$ и $\varepsilon$. Сохранение неравенств.}
     
-    \begin{theorem}\end{theorem}
+    \begin{theorem-non}\end{theorem-non}
     \begin{enumerate}
         \item $a = \underline{\lim}\, x_n \in \mathbb{R} \Leftrightarrow
         \begin{cases}
@@ -2382,7 +2382,7 @@ $Int A = X \setminus Cl(X \setminus A)$
     
     \end{proof}
     
-    \begin{theorem}\end{theorem}
+    \begin{theorem-non}\end{theorem-non}
     Если $x_n \leq y_n$, то 
     $\underline{\lim}\, x_n \leq \underline{\lim}\, y_n$ и  
     $\overline{\lim}\, x_n \leq \overline{\lim}\, y_n$
@@ -2411,9 +2411,9 @@ $Int A = X \setminus Cl(X \setminus A)$
     Ряд сходится, если $\exists \lim S_n \in \mathbb{R}$\\
     В противном случае ряд расходится.
     
-    \begin{theorem}
+    \begin{theorem-non}
     Необходимое условие сходимости
-    \end{theorem}
+    \end{theorem-non}
     Если $\sum_{n = 1}^{+\infty} x_n$ сходится, то $\lim x_n = 0$.
     
     \begin{proof}
