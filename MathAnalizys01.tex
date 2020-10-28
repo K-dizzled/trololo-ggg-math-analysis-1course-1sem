@@ -23,6 +23,7 @@
 \usepackage{xcolor}
 \usepackage{hyperref}
 \usepackage{thmtools}
+\usepackage{tikz}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Теорема}
@@ -99,6 +100,9 @@
 \let\oldnorm\norm
 \def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
 \makeatother
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
 
 \definecolor{linkcolor}{HTML}{47528f} % цвет ссылок
 \definecolor{urlcolor}{HTML}{47528f} % цвет гиперссылок
@@ -553,6 +557,344 @@ $\xRightarrow[]{\text{св-во 3}}$ существует конечный пр�
 
 \section{Теорема Больцано–Вейерштрасса в $\mathbb{R}^d$.
 Полнота $\mathbb{R}^d$ }
+
+\begin{conj}
+Полнота метрического простраства
+\end{conj}
+Пусть $(X, \rho)$ -- метрическое пространство.
+$X$ - полное, если любая фундаментальная последовательность
+в нём имеет предел.
+
+\begin{theorem}
+    $\mathbb{R}^d$ - полное пространство.
+\end{theorem}
+\begin{proof} $ $
+
+    Возьмём фундаментальную последовательность $(x_n)$.
+    $x_n = (x_n^{(1)}, x_n^{(2)}, \dots, x_n^{(d)})$
+
+    \[\forall \varepsilon > 0 \,\, \exists N :
+    \forall n, m \geq N \,\, \rho(x_n, x_m) <
+    \varepsilon \Rightarrow\]
+    \[\Rightarrow \abs{x_n^{(k)} -
+    x_m^{(k)}} \leq \sqrt{(x_n^{(1)} -
+    x_m^{(1)})^2 + (x_n^{(2)} - x_m^{(2)})^2 +
+    \dots + (x_n^{(d)} - x_m^{(d)})^2} < \varepsilon
+    \Rightarrow\] \[ \Rightarrow
+    \text{числовая послед. } x_n^{(k)}
+    \text{ фундаментальна } \Rightarrow \text
+    {у неё есть конечный предел}\] \[\lim x_n^{(k)}
+    = a_k \Rightarrow \lim x_n = a, \quad a = 
+    (a_1, a_2, \dots, a_d) \]
+    Т.к. в $\mathbb{R}^d$ покоординатная и
+    сходимость по метрике -- одно и то же.
+
+\end{proof}
+
+\begin{theorem}
+Больцано–Вейерштрасса в $\mathbb{R}^d$.
+\end{theorem}
+\begin{proof}
+Пусть векторная последовательность
+$x_n = (x_n^{(1)}, x_n^{(2)}, \dots, x_n^{(d)})$ ограничена.
+Это равносильно тому, что все её координатные последовательности
+ограничены.
+
+Выделим из первой координатной последовательности сходящуюся
+подпоследовательность $(x_{n_{1, k}}^{(1)})$. Тогда получим
+подпоследовательность $(x_{n_{1, k}})$, первая координатная
+последовательность которой сходится, а остальные ограничены.
+
+Тогда в ней можно выделить такую подпоследовательность
+$(x_{n_{2, k}})$ так, чтобы вторая координатная последовательность
+сходилась.
+
+Повторим так ещё $d - 2$ раз и получим то, что в векторной 
+подпоследовательности $(x_{n_{k}})$, где $n_k = n_{d, k}$, 
+любая координатная последовательность сходится $\Rightarrow$
+$(x_{n_{k}})$ тоже сходится, т.к. в $\mathbb{R}^d$ покоординатная и
+сходимость по метрике -- одно и то же.
+
+\end{proof}
+
+
+\section{Верхний и нижний пределы. Определение и
+теорема существования. Связь между частичными пределами и  
+верхним и нижним пределами.}
+
+\begin{conj}
+Нижний и верхний пределы
+\end{conj}
+$x_n$ - числовая последовательность.
+
+$\underline{\lim} x_n := \liminf x_n := \lim \inf_{k \geq n} x_k$ -- 
+нижний предел.
+
+$\overline{\lim} x_n := \limsup x_n := \lim \sup_{k \geq n} x_k$ -- 
+верхний предел.
+
+$y_n := \inf_{k \geq n} x_k = \inf\{x_n, x_{n+1}, x_{n+2}, \dots\}$
+$\quad y_n \leq y_{n+1}$\\
+$z_n := \sup_{k \geq n} x_k = \sup\{x_n, x_{n+1}, x_{n+2}, \dots\}$
+$\quad z_n \geq z_{n+1}$
+
+\begin{theorem}
+    $\underline{\lim}$ и $\overline{\lim}$ существуют в 
+    $\overline{\mathbb{R}}$ и $\underline{\lim} \leq \overline{\lim}$
+\end{theorem}
+\begin{proof} $ $
+
+Про $\underline{\lim}$: $y_n \leq y_{n+1} \Rightarrow (y_n)$ --
+возрастающая последовательность $\Rightarrow$ у неё есть предел в
+$\overline{\mathbb{R}}$.
+
+Про $\overline{\lim}$: $z_n \geq z_{n+1} \Rightarrow (z_n)$ --
+убывающая последовательность $\Rightarrow$ у неё есть предел в
+$\overline{\mathbb{R}}$.
+
+Про неравенство $\underline{\lim} \leq \overline{\lim}$:
+$y_n \leq z_n$, $y_n \rightarrow \underline{\lim}$,
+$z_n \rightarrow \overline{\lim} \Rightarrow$ по предельному
+переходу в неравенстве $\underline{\lim} \leq \overline{\lim}$.
+\end{proof}
+
+\begin{theorem}\end{theorem}
+\begin{enumerate}
+    \item $\overline{\lim}$ -- наибольший частичный предел
+    \item $\underline{\lim}$ -- наименьший частичный предел
+    \item $\exists \lim \in \overline{\mathbb{R}} \Leftrightarrow
+    \overline{\lim} = \underline{\lim}$ и в этом случае 
+    $\lim = \overline{\lim} = \underline{\lim}$ 
+\end{enumerate}
+\begin{proof} $ $
+
+    \begin{enumerate}
+        \item $a := \overline{\lim} \, x_n$
+        
+        Рассмотрим \textbf{случай} $a \in \mathbb{R}$
+
+        Докажем, что $a$ -- частичный предел.
+
+        $a = \lim z_n$, $z_n = \sup_{k \geq n} x_k$, $z_n \searrow a$
+
+        Будем строить некоторую подпоследовательность $(x_{n_k})$.\\
+        Найдётся $n_k \geq n_{k-1} : x_{n_k} > a - \frac{1}{k}$.
+        Пусть не нашлось $\Rightarrow x_n \leq a - \frac{1}{k} \forall
+        n \geq n_{k-1} \Rightarrow \sup \{x_{n_{k-1}}, x_{n_{k-1} + 1},
+        \dots \} \leq a - \frac{1}{k} \Rightarrow a \leq z_{n_{k - 1}} 
+        \leq a - \frac{1}{k}$. Противоречие
+
+        $a - \frac{1}{k} \rightarrow a$, $z_{n_k} \rightarrow a$,
+        $a - \frac{1}{k} < x_{n_k} \leq z_{n_k} \xRightarrow[]
+        {\text{2 мил.}} x_{n_k} \rightarrow a$
+
+        Докажем, что $a$ -- наибольший частичный предел.
+
+        Пусть $b$ - частичный предел $\Rightarrow b = \lim x_{n_k}$.
+        Но $x_{n_k} \rightarrow b$, $z_{n_k} \rightarrow a \Rightarrow$
+        по предельному переходу $b \leq a$. 
+
+        Рассмотрим \textbf{случай} $a = -\infty$.
+
+        Тогда $z_n \rightarrow -\infty$, но $z_n = 
+        \sup\{x_n, x_{n+1},\dots\} \geq x_n \Rightarrow x_n
+        \rightarrow -\infty$.
+
+        Рассмотрим \textbf{случай} $a = +\infty$.
+
+        Тогда $z_n = +\infty \Rightarrow \sup {x_1, x_2, \dots} =
+        +\infty \Rightarrow x_n$ не ограничена сверху $\Rightarrow$
+        в ней найдётся подпоследовательность, стремящаяся к $+\infty$.
+
+        \item Доказывается аналогично
+        
+        \item 
+        ''$\Longrightarrow$'':
+        
+        Если $a = \lim x_n$, то все подпоследовательности стремятся
+        к $a \Rightarrow$ все частичные пределы равны $a \Rightarrow
+        \overline{\lim} x_n = \underline{\lim} x_n = \lim x_n = a$.
+
+        ''$\Longleftarrow$'':
+
+        $y_n \rightarrow a$, $z_n \rightarrow a$, $y_n \leq x_n \leq z_n$
+        $\xRightarrow[]{\text{2 мил.}} x_n \rightarrow a \Rightarrow
+        \lim x_n = \overline{\lim}\, x_n = \underline{\lim}\, x_n = a$
+    \end{enumerate}
+\end{proof}
+
+\textbf{Замечание.} Арифметики для верхних и нижних пределов нет.
+
+Пример.
+\[x_n = (-1)^n, \quad y_n = (-1)^{n + 1} \Rightarrow
+\underline{\lim}\, x_n = \underline{\lim}\, y_n = -1\]
+\[x_n + y_n = 0 \Rightarrow \underline{\lim}\, (x_n + y_n) = 
+\underline{\lim}\, (x_n + y_n) = 0\]
+\[\underline{\lim}\, x_n + \underline{\lim}\, y_n = -2 < 0 =
+\underline{\lim}\, (x_n + y_n)\]
+
+\section{Характеристика верхних и нижних пределов с помощью 
+$N$ и $\varepsilon$. Сохранение неравенств.}
+
+\begin{theorem}\end{theorem}
+\begin{enumerate}
+    \item $a = \underline{\lim}\, x_n \in \mathbb{R} \Leftrightarrow
+    \begin{cases}
+        \forall \varepsilon > 0 \,\, \exists N : \forall n \geq N
+        \,\, x_n > a - \varepsilon\\
+        \forall \varepsilon > 0 \,\, \forall N \,\, \exists n \geq N
+        : x_n < a + \varepsilon\\
+    \end{cases}$
+    \item $b = \overline{\lim}\, x_n \in \mathbb{R} \Leftrightarrow
+    \begin{cases}
+        \forall \varepsilon > 0 \,\, \exists N : \forall n \geq N
+        \,\, x_n < b + \varepsilon \quad \circled{1}\\
+        \forall \varepsilon > 0 \,\, \forall N \,\, \exists n \geq N
+        : x_n > b - \varepsilon \quad \circled{2}\\
+    \end{cases}$
+\end{enumerate}
+\begin{proof} $ $
+
+    2. Докажем \circled{1} $\Leftrightarrow \forall \varepsilon > 0\,\, 
+    \exists N : z_N < b + \varepsilon$
+
+    ''$\Longrightarrow$'':
+    \[\forall \varepsilon > 0 \,\, \exists N : \forall n \geq N
+    \,\, x_n < b + \varepsilon \Rightarrow
+    \forall \varepsilon > 0 \,\, \exists N : \forall n \geq N
+    \,\, x_n < b + \frac{\varepsilon}{2} \Rightarrow\] \[\Rightarrow
+    z_N = \sup \{x_N, x_{N + 1}, \dots\} \leq b + \frac{\varepsilon}{2}
+    < b + \varepsilon \Rightarrow \forall \varepsilon > 0\,\, 
+    \exists N : z_N < b + \varepsilon\]
+
+    ''$\Longleftarrow$'':
+    \[\text{Зафиксируем } \varepsilon > 0
+    \Rightarrow \exists N : z_N < b + \varepsilon \Leftrightarrow
+    \sup\{x_N, x_{N + 1}, \dots\} < b + \varepsilon \Rightarrow
+    x_n < b + \varepsilon \,\, \forall n \geq N\]
+
+    Докажем \circled{2} $\Leftrightarrow \forall \varepsilon > 0 \,\,
+    \forall N \,\, z_N > b - \varepsilon$
+
+    ''$\Longrightarrow$'':
+    \[\forall \varepsilon > 0 \,\, \forall N \,\, \exists n \geq N
+    : x_n > b - \varepsilon \text{ при этом } z_N = \sup\{
+    x_N, x_{N+1}, x_{N+2}, \dots\} \Rightarrow \forall
+    \varepsilon > 0 \,\, \forall N \,\, z_N > b - \varepsilon\]
+
+    ''$\Longleftarrow$'':
+    \[\text{Зафиксируем } \varepsilon > 0 \text{ и } N \Rightarrow
+    z_N > b - \varepsilon \Leftrightarrow \sup\{ x_N, x_{N+1}, \dots\}
+    > b - \varepsilon \Rightarrow \exists n \geq N : x_n > b -
+    \varepsilon,\] \[\text{иначе } \forall n \geq N : x_n \leq b -
+    \varepsilon \text{ и тогда } \sup\{ x_N, x_{N+1}, \dots\} \leq
+    b - \varepsilon \Leftrightarrow z_N \leq b - \varepsilon\]
+
+    \circled{1} + \circled{2} $\Leftrightarrow
+    \begin{cases}
+        \forall \varepsilon > 0\,\, 
+        \exists N : z_N < b + \varepsilon\\
+        \forall \varepsilon > 0 \,\,
+        \forall N \,\, z_N > b - \varepsilon\\
+    \end{cases}$
+    $\Leftrightarrow$ т.к. $z_n \searrow$
+    $\begin{cases}
+        \forall \varepsilon > 0\,\, 
+        \exists N : \forall n \geq N \,\, z_n < b + \varepsilon\\
+        \forall \varepsilon > 0 \,\,
+        \forall N \,\, z_N > b - \varepsilon\\
+    \end{cases}$
+
+    Это и есть определение предела $\Rightarrow b = 
+    \overline{\lim}\, x_n$
+
+    В обратную сторону, первая строка следует из определения предела,
+    вторая строка следует из того, что $(z_n) \searrow$. Более того,
+    $(z_n) \searrow$, $\lim z_n = b \Rightarrow z_n \geq b$
+
+\end{proof}
+
+\begin{theorem}\end{theorem}
+Если $x_n \leq y_n$, то 
+$\underline{\lim}\, x_n \leq \underline{\lim}\, y_n$ и  
+$\overline{\lim}\, x_n \leq \overline{\lim}\, y_n$
+
+\begin{proof} $ $
+
+$x_n \leq y_n \Rightarrow \inf\{x_n, x_{n + 1}, ...\} \leq
+\inf\{y_n, y_{n + 1}, ...\} \Rightarrow$ по пред. переходу 
+$\underline{\lim}\, x_n \leq \underline{\lim}\, y_n$
+
+Аналогично для $\overline{\lim}\, x_n \leq \overline{\lim}\, y_n$.
+\end{proof}
+
+\section{Сходимость рядов. Необходимое условие сходимости рядов. Примеры.}
+
+\begin{conj}Ряд\end{conj}
+$x_n \in \mathbb{R}, \quad \sum_{n=1}^{+\infty} x_n$ -- ряд.
+
+\begin{conj}Частичная сумма ряда\end{conj}
+$S_n := \sum_{k=1}^{n} x_k$
+
+\begin{conj}Сумма ряда\end{conj}
+Cумма ряда -- $\lim S_n$, если он существует.
+
+\begin{conj}Сходимость ряда\end{conj}
+Ряд сходится, если $\exists \lim S_n \in \mathbb{R}$\\
+В противном случае ряд расходится.
+
+\begin{theorem}
+Необходимое условие сходимости
+\end{theorem}
+Если $\sum_{n = 1}^{+\infty} x_n$ сходится, то $\lim x_n = 0$.
+
+\begin{proof}
+    Если ряд сходится, то $S := \lim S_n \in \mathbb{R}$. Тогда
+    $x_n = S_n - S_{n - 1} \Rightarrow \lim x_n = \lim S_n - 
+    \lim S_{n - 1} = S - S = 0$
+\end{proof}
+
+\textbf{Примеры:}
+\begin{enumerate}
+    \item Геометрическая прогрессия $1 + q + q^2 + \dots$
+    $\sum_{n = 0}^{+\infty} q^n$
+
+    При $\abs{q} < 1$ $S_n = 1 + q + q^2 + \dots + q^{n - 1} =
+    \frac{1 - q^n}{1 - q} \rightarrow \frac{1}{1 - q}$
+
+    При $\abs{q} > 1$ ряд расходящийся, т.к. не выполнено
+    необходимое условие.
+
+    \item $1 - 1 + 1 - 1 + 1 - 1 + \dots$
+    
+    $S_{2n} = 0, \,\, S_{2n + 1} = 1 \Rightarrow$ предела нет.
+
+    \item Гармонический ряд $1 + \frac{1}{2} + \frac{1}{3} + \dots$
+    $\sum_{n = 1}^{+\infty} \frac{1}{n}$
+
+    $H_n := \sum_{k = 1}{n} \frac{1}{k}$ -- гармонические числа.
+    $H_n$ монотонно возрастает.
+    \[H_{2^n} = 1 + \frac{1}{2} + \underbrace{\left(\frac{1}{3} + 
+    \frac{1}{4}\right)}_{> 2 \cdot \frac{1}{4} = \frac{1}{2}} +
+    \underbrace{\left(\frac{1}{5} + \frac{1}{6} + \frac{1}{7} + 
+    \frac{1}{8}\right)}_{> 4 \cdot \frac{1}{8} = \frac{1}{2}} +
+    \dots + \underbrace{\left(\frac{1}{2^{n - 1} + 1} + 
+    \frac{1}{2^{n-1} + 2} + \dots + \frac{1}{2^n} \right)}_
+    {> 2^{n-1} \cdot \frac{1}{2^n} = \frac{1}{2}} >\]
+    \[> 1 + \underbrace{\frac{1}{2} + \frac{1}{2} + ... + \frac{1}{2}}_
+    {n \text{ шт.}} = 1 + \frac{n}{2} \Rightarrow \text{ частичные
+    суммы сколь угодно большие } \Rightarrow \lim H_n = +\infty\]
+
+    Гармонический ряд -- расходящийся ряд, члены которого стремятся к $0$.
+
+    \item \[\frac{1}{1 \cdot 2} + \frac{1}{2 \cdot 3} + \frac{1}{3 \cdot 4}
+    + \dots \quad\quad\sum_{n=1}^{+\infty} \frac{1}{n\cdot(n+1)}\]
+    \[\frac{1}{k\cdot(k+1)} = \frac{1}{k} - \frac{1}{k + 1} \Rightarrow
+    S_n = \frac{1}{1 \cdot 2} + \frac{1}{2 \cdot 3} + \frac{1}{3 \cdot 4}
+    + \dots + \frac{1}{n\cdot(n+1)} = 1 - \frac{1}{n+1} \rightarrow 1\]
+
+
+\end{enumerate}
 
 \ifdefined\niveldos\else
 
