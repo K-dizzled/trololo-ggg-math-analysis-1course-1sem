@@ -1,0 +1,545 @@
+\ifdefined\niveldos\else
+\documentclass[12pt,letterpaper]{report}
+ 
+%Russian-specific packages
+%--------------------------------------
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage[mathscr]{euscript}
+\usepackage{mathrsfs}
+\usepackage{amsmath,amsthm,amssymb,latexsym,amsfonts}
+\usepackage{showkeys}
+\usepackage{pythonhighlight}
+\usepackage{mdframed}
+\usepackage{lipsum}
+\usepackage{soul}
+\usepackage{amsmath,amssymb}
+\usepackage{parskip}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{stackengine} 
+\usepackage{tocloft}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{thmtools}
+
+\usepackage{amsthm}
+\newtheorem{theorem}{Теорема}
+\newtheorem{lemma}[theorem]{Лемма}
+\newtheorem{conj}[theorem]{Определение}
+
+
+% Definindo novas cores
+\definecolor{verde}{rgb}{0.25,0.5,0.35}
+\definecolor{jpurple}{rgb}{0.5,0,0.35}
+\definecolor{darkgreen}{rgb}{0.0, 0.2, 0.13}
+%\definecolor{oldmauve}{rgb}{0.4, 0.19, 0.28}
+% Configurando layout para mostrar codigos Java
+\usepackage{listings}
+
+\definecolor{linkcolor}{HTML}{47528f} % цвет ссылок
+\definecolor{urlcolor}{HTML}{47528f} % цвет гиперссылок
+\hypersetup{pdfstartview=FitH,  linkcolor=linkcolor,urlcolor=urlcolor, colorlinks=true}
+\newcommand{\RomanNumeralCaps}[1]
+  {\MakeUppercase{\romannumeral #1}}
+\usepackage{titlesec}
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\listtheoremname}{Определения и теоремы}
+\renewcommand\qedsymbol{$\blacksquare$}
+\newcommand\oast{\stackMath\mathbin{\stackinset{c}{0ex}{c}{0ex}{\ast}{\bigcirc}}}
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{%
+   \par\pushQED{\qed}\normalfont%
+   \topsep6\p@\@plus6\p@\relax
+   \trivlist\item[\hskip\labelsep\bfseries#1\@addpunct{.}]%
+   \ignorespaces
+}{%
+   \popQED\endtrivlist\@endpefalse
+}
+\makeatother
+%--------------------------------------
+\DeclareMathOperator{\Mr}{M_{\mathbb{R}}}
+\addtolength{\oddsidemargin}{-.875in}
+	\addtolength{\evensidemargin}{-.875in}
+	\addtolength{\textwidth}{1.75in}
+
+	\addtolength{\topmargin}{-.875in}
+	\addtolength{\textheight}{1.75in}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                %
+%                                %
+%              Title             %
+%                                %
+%                                %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Конспект лекций по математическому анализу}
+\author{Храбров Александр Игоревич}
+\date{Первый курс, первый семестр 2020}
+\begin{document}
+\fi
+\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                %
+%                                %
+%        Table of content        %
+%                                %
+%                                %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tableofcontents
+%\listoftheorems[ignore={lemma},show={conj, theorem}]
+% To show Table of contents with
+% definitions and lemmas
+%----------------------------------------
+% \listoftheorems[ignoreall,show={lemma}]
+% \listoftheorems[ignoreall,show={conj}]
+\newpage
+\chapter{Введение}
+
+\section{Арифметические свойства пределов последовательности}
+$X$ - нормированное пространство \\
+$x_n,\; y_n \in X \quad \lambda_n \in \mathbb{R}$ \\
+$\lim x_n = x_0 \quad \lim y_n = y_0 \quad \lim \lambda_n = \lambda_0$ 
+\begin{theorem} Арифметические свойства пределов в нормированном пространстве \end{theorem}
+\begin{enumerate}
+    \item $lim (x_n + y_n) = x_0 + y_0$
+    \begin{proof}
+            \begin{gather*}
+                ||x_n + y_n - (x_0 + y_0) || = || (x_n - x_0) + (y_n - y_0)|| \leqslant ||x_n - x_0|| + ||y_n - y_0|| \\
+                \lim x_n = x_0 \Rightarrow \forall \varepsilon > 0 \quad \exists N_1 : \forall n \geqslant N_1 \quad ||x_n - x_0|| < \frac{\varepsilon}{2} \\
+                \lim y_n = y_0 \Rightarrow \forall \varepsilon > 0 \quad \exists N_2 : \forall n \geqslant N_2 \quad ||y_n - y_0|| < \frac{\varepsilon}{2} 
+            \end{gather*}
+            Тогда при $n \geqslant max\{N_1, N_2\} \quad ||x_n + y_n - (x_0 + y_0)|| \leqslant ||x_n - x_0|| + ||y_n - y_0|| < \varepsilon$
+    \end{proof}
+    \item $\lim (x_n - y_n) = x_0 - y_0$
+    \begin{proof}
+            Аналогично первому пункту.
+    \end{proof}
+    \item $\lim \lambda_nx_n = \lambda_0x_0$
+    \begin{proof}
+            \begin{gather*}
+            || \lambda_nx_n - \lambda_0x_0 || = ||(\lambda_nx_n - \lambda_nx_0) + (\lambda_nx_0 - \lambda_0x_0)|| \leqslant \\
+            \leqslant ||\lambda_nx_n - \lambda_nx_0|| + ||\lambda_nx_0 - \lambda_0x_0|| = |\lambda_n|*||x_n - x_0|| + |\lambda_n - \lambda_0|*||x_0||
+            \end{gather*} 
+            Так как у $\lambda_n$ есть предел, она ограничена, то есть $|\lambda_n| \leqslant M$. \\
+            Итого получаем:
+            \[ || \lambda_nx_n - \lambda_0x_0 || \leqslant M*||x_n - x_0|| + ||x_0||*|\lambda_n - \lambda_0|| \]
+            \begin{gather*}
+                \lim x_n = x_0 \Rightarrow \forall \varepsilon > 0 \quad \exists N_1 : \forall n \geqslant N_1 \quad ||x_n - x_0|| < \frac{\varepsilon}{2M} \\
+                \lim \lambda_n = \lambda_0 \Rightarrow \forall \varepsilon > 0 \quad \exists N_2 : \forall n \geqslant N_2 \quad |\lambda_n - \lambda_0| < \frac{\varepsilon}{2||x_0||+1}
+            \end{gather*}
+            При $n \geqslant max\{N_1, N_2\}$
+            \[|| \lambda_nx_n - \lambda_0x_0 || \leqslant M*||x_n - x_0|| + ||x_0||*|\lambda_n - \lambda_0|| < M * \frac{\varepsilon}{2M} + ||x_0|| * \frac{\varepsilon}{2||x_0||+1} < \varepsilon\]
+    \end{proof}
+    \item $\lim ||x_n|| = ||x_0||$
+    \begin{proof}
+            \[ ||x_n|| - ||x_0|| = ||(x_n - x_0) + x_0|| - ||x_0|| \leqslant ||x_n - x_0|| + ||x_0|| - ||x_0|| = ||x_n - x_0|| \to 0 \]
+    \end{proof}
+    \item Если в $X$ есть скалярное произведение, то $\lim<x_n, y_n> = <x_0, y_0>$
+    \begin{proof}
+        \begin{gather*}
+            <x_n, y_n> - <x_0, y_0> = <x_n, y_n> - <x_n, y_0> + <x_n, y_0> - <x_0, y_0> =  \\
+            = <x_n, y_n - y_0> + <x_n - x_0, y_0> \\
+            | <x_n, y_n> - <x_0, y_0> | \leqslant | <x_n, y_n - y_0> | + | <x_n - x_0, y_0> | \leqslant \\
+            \leqslant ||x_n||*||y_n-y_0||+||x_n-x_0||*||y_0||
+        \end{gather*}
+        Так как у $x_n$ есть предел, она ограничена, то есть $||x_n|| \leqslant M$. \\
+        Итого получаем:
+        \begin{gather*}
+            | <x_n, y_n> - <x_0, y_0> | \leqslant M*\underbrace{||y_n - y_0||}_{\to 0}+||y_0||*\underbrace{||x_n - x_0||}_{\to 0}
+        \end{gather*}
+    \end{proof}
+\end{enumerate}
+\begin{theorem} Арифметические свойства пределов числовых последовательностей \end{theorem}
+$x_n,\; y_n \in \mathbb{R} \quad \lim x_n = x_0 \quad \lim y_n = y_0$
+\begin{enumerate}
+    \item $\lim (x_n \pm y_n) = x_0 \pm y_0$
+    \item $\lim (x_ny_n) = x_0y_0$
+    \item $\lim |x_n| = |x_0|$
+    \item Если $y_0 \neq 0$ и $y_n \neq 0\;\; \forall n$, то $\lim \frac{x_n}{y_n} = \frac{x_0}{y_0}$
+    \begin{proof}
+        Докажем, что $\lim\frac{1}{y_n} = \frac{1}{y_0}$:
+        \[ | \frac{1}{y_n} - \frac{1}{y_0} | = \frac{|y_n - y_0|}{|y_n||y_0|} \]
+        Так кая $y_0 = \lim y_n$, найдется такое $N_1$, что $\forall n \geqslant N_1 \quad |y_n| \in (\frac{|y_0}{2}, \frac{3|y_0|}{2}) \Rightarrow |y_n| > \frac{|y_0|}{2}$ \\
+        При $n >= N_1$ получаем, что
+        \begin{gather*}
+            \frac{|y_n - y_0|}{|y_n||y_0|} < \frac{|y_n - y_0|}{\frac{|y_0|}{2}|y_0|} \\
+            lim y_n = y_0 \Rightarrow \forall \varepsilon > 0 \quad \exists N_2 : \forall n \geqslant N_2 \quad |y_n - y_0| < \frac{\varepsilon*y_0^2}{2}
+        \end{gather*}
+        Тогда если $n \geqslant max\{N_1, N_2\}$, то $|\frac{1}{y_n} - \frac{1}{y_0}| < \varepsilon$.
+        Теперь, когда мы знаем, что $lim\frac{1}{y_n} = \frac{1}{y_0}$, доказать исходное равенство легко:
+        \[ \lim \frac{x_n}{y_n} = \lim (x_n * \frac{1}{y_n}) = \lim x_n * \lim \frac{1}{y_n} = \frac{x_0}{y_0} \]
+    \end{proof}
+\end{enumerate}
+
+\section{Покоординатная сходимость в $\mathbb{R}^d$}
+\[ x_n = <x_n^{(1)}, \dots, x_n^{(d)}> \]
+$x_n$ покоординатно сходится к $x_0$, если \\
+\begin{gather*}
+    \begin{cases}
+        \lim x_n^{(1)} = x_0^{(1)} \\
+        \dots \\
+        \lim x_n^{(d)} = x_0^{(d)}
+    \end{cases}
+\end{gather*}
+
+\begin{theorem} \end{theorem}
+$x_n$ покоординатно сходится к $x_0$ \Longleftrightarrow $x_n$ сходится к $x_0$ по норме в $\mathbb{R}^d$ 
+
+$||a|| = \sqrt{a_1^2 + \dots + a_d^2}$ - норма
+
+\begin{proof}
+    \[ ||x_n - x_0|| = \sqrt{(x_n^{(1)} - x_0^{(1)})^2 + \dots + (x_n^{(d)} - x_0^{(d)})^2} \]
+    Заметим следующее: 
+    \[ \sqrt{(x_n^{(1)} - x_0^{(1)})^2 + \dots + (x_n^{(d)} - x_0^{(d)})^2} \geqslant \sqrt{(x_n^{(k)} - x_0^{(k)})^2} = |x_n^{(k)} - x_0^{(k)}| \]
+    \[  \sqrt{(x_n^{(1)} - x_0^{(1)})^2 + \dots + (x_n^{(d)} - x_0^{(d)})^2} \leqslant |x_n^{(1)} - x_0^{(1)}| + \dots + |x_n^{(d)} - x_0^{(d)}| \]
+    Итого получаем
+    \[ |x_n^{(k)} - x_0^{(k)}| \leqslant ||x_n - x_0|| \leqslant |x_n^{(1)} - x_0^{(1)}| + \dots + |x_n^{(d)} - x_0^{(d)}| \]
+    Докажем $"\Rightarrow"$:
+    \[ \lim x_n = x_0 \Rightarrow ||x_n - x_0|| \to 0 \Rightarrow  |x_n^{(k)} - x_0^{(k)}| \to 0 \Rightarrow \lim x_n^{(k)} = x_0^{(k)} \]
+    Докажем $"\Leftarrow"$:
+    \[ \lim x_n^{(k)} = x_0^{(k)} \Rightarrow |x_n^{(k)} - x_0^{(k)}| \to 0 \Rightarrow \sum_{k = 1}^d |x_n^{(k)} - x_0^{(k)}| \to 0 \Rightarrow ||x_n - x_0|| \to 0 \Rightarrow \lim x_n = x_0  \]
+\end{proof}
+
+\section{Бесконечные пределы}
+\begin{itemize}
+    \item \underline{$x_n \in \mathbb{R} \quad \lim x_n = +\infty$}
+    
+    Вне любого луча $(u, +\infty)$ находится лишь конечное число членов.
+    
+    $\forall u\quad \exists N: \forall n \geqslant N \quad x_n > u$
+    \item \underline{$x_n \in \mathbb{R} \quad \lim x_n = -\infty$}
+    
+    Вне любого луча $(-\infty, u)$ находится лишь конечное число членов.
+    
+    $\forall u\quad \exists N: \forall n \geqslant N \quad x_n < u$
+    
+    \item \underline{$x_n \in \mathbb{R} \quad \lim x_n = \infty$}
+    
+    В любом интервале $(u, v)$ находится лишь конечное число членов.
+    
+    $\forall u\quad \exists N: \forall n \geqslant N \quad |x_n| > u$
+\end{itemize} 
+\vspace{0.7cm}
+\underline{Замечание 1}: Если $\lim x_n = +\infty$ или $\lim x_n = -\infty$, то $\lim x_n = \infty$. Обратное неверно (контрпример - $x_n = (-1)^nn$).
+
+\underline{Замечание 2}: Если $\lim x_n = \infty$, то ${x_n}$ не ограничена. Обратное неверно (контрпример - $x_n = n$(если $n$ четно) и $x_n = 0$ иначе).
+\vspace{0.3cm}
+
+\begin{theorem} Единственность предела в $\overline{\mathbb{R}}$
+\end{theorem}
+Если $\lim x_n = a \in \overline{\mathbb{R}}$ и $\lim x_n = b \in \overline{\mathbb{R}}$, то $a = b$.
+\begin{proof}
+    Пусть $a < b$. 
+    
+    Если $a,\;b \in \mathbb{R}$, то $a = b$ (должно быть доказано где-то раньше).
+    
+    Если $a \in \mathbb{R}$ и $b = +\infty$, то в $(a - 1, a + 1)$ и $(a + 1, +\infty)$ должно содержаться бесконечное число членов последовательности, но это невозможно. 
+    
+    Аналогично для случая  $a = -\infty$ и $b \in \mathbb{R}$.
+    
+    Если $a = \infty$ и $b = \infty$, то либо $a = b = +\infty$, либо $a = b = -\infty$.
+\end{proof}
+\begin{theorem} О стабилизации знака в $\overline{\mathbb{R}}$  \end{theorem}
+Если $\lim x_n = a \in \overline{\mathbb{R}}$ и $a \neq 0$, то, начиная с некоторого номера, $x_n$ и $a$ одного знака. 
+\begin{proof}
+    Не, ну это очевидно.
+\end{proof}
+\begin{theorem} О предельном переходе в неравенстве в $\overline{\mathbb{R}}$ \end{theorem}
+\begin{enumerate}
+    \item Если $\lim x_n = +\infty$ и $x_n \leqslant y_n \;\forall n$, то $\lim y_n = +\infty$.
+    \begin{proof}
+        Мы знаем что,
+        \[ \forall u\quad \exists N: \forall n \geqslant N \quad x_n > u  \]
+        Так как $x_n \leqslant y_n \;\forall n$, то нам подойдет тоже $N$:
+        \[ \forall n \geqslant N \quad y_n \geqslant x_n > u  \]
+    \end{proof}
+    \item Если $\lim y_n = -\infty$ и $x_n \leqslant y_n \;\forall n$, то $\lim x_n = -\infty$.
+    \begin{proof}
+        Аналогично первому пункту.
+    \end{proof}
+    \item Если $x_n \leqslant y_n \;\forall n$ и $\lim x_n = a \in \overline{\mathbb{R}},\; \lim y_n = b \in \overline{\mathbb{R}}$, то $a \leqslant b$
+    \begin{proof} \quad \\
+    \begin{itemize}
+        \item $a, b \in R$, доказано ранее
+        \item $a = -\infty$, то $a \leqslant b$ всегда
+        \item $a = +\infty$, то по первому пункту $b = +\infty$
+        \item $b = +\infty$, то $a \leqslant b$ всегда
+        \item $b = -\infty$, то по второму пункту $a = -\infty$
+    \end{itemize}
+    \end{proof}
+\end{enumerate}
+
+\section{Бесконечно большие и малые последовательности}
+\begin{itemize}
+    \item $x_n$ называется бесконечно большой, если $\lim x_n = \infty$
+    \item $x_n$ называется бесконечно малой, если $\lim x_n = 0$
+    \item $x_n$ называется сходящайся, если она имеет конечный предел
+\end{itemize}
+\vspace{0.7cm}
+\begin{theorem} Связь между бесконечно большими и бесконечно малыми\end{theorem}
+$x_n \neq 0\; \forall n$ \\
+$x_n$ - б.б. $\Leftrightarrow \frac{1}{x_n}$ - б.м.
+\begin{proof}
+    $x_n$ - б.б. $\Leftrightarrow \forall u > 0\quad \exists N : \forall n \geqslant N\quad |x_n| > u$ $\Leftrightarrow$ 
+    
+    $\Leftrightarrow \forall \varepsilon > 0\quad \exists N : \forall n \geqslant N\quad |x_n| > \frac{1}{\varepsilon} \Leftrightarrow \frac{1}{|x_n|} < \varepsilon \Leftrightarrow \frac{1}{x_n}$ - б.м.
+\end{proof}
+\begin{theorem} О действиях с бесконечно малыми \end{theorem}
+\begin{enumerate}
+    \item Сумма / разность б.м. это б.м.
+    \begin{proof}
+        Предел суммы / разности это сумма / разность пределов. 
+    \end{proof}
+    \item Произведение б.м. и ограниченной это б.м.
+    \begin{proof}
+        $y_n$ - ограниченная $\Rightarrow |y_n| \leqslant M$ 
+        
+        $x_n$ - б.м. $\Rightarrow \forall \varepsilon > 0\quad \exists N : \forall n \geqslant N\quad |x_n| < \frac{\varepsilon}{M}$
+        
+        $|x_ny_n| \leqslant M|x_n| < \varepsilon$
+    \end{proof}
+\end{enumerate}
+
+\section{Арифметические действия в $\overline{\mathbb{R}}$}
+\begin{theorem} Об арифметических операциях с $\infty$ \end{theorem}
+\begin{enumerate}
+    \item $x_n \to +\infty,\; y_n$ - ограниченная снизу $\Rightarrow x_n + y_n \to +\infty$
+    \begin{proof}
+        $y_n$ - ограниченная снизу $\Rightarrow y_n \geqslant a$ 
+        
+        $x_n \to +\infty \Rightarrow \forall u \quad \exists N: \forall n \geqslant N \quad x_n > u - a$ 
+        
+        $\Rightarrow x_n + y_n > u - a + a = u$
+    \end{proof}
+    \item $x_n \to -\infty,\; y_n$ - ограниченная сверху $\Rightarrow x_n + y_n \to -\infty$
+    \begin{proof}
+        Аналогично предыдущему пункту.
+    \end{proof}
+    \item $x_n \to \infty,\; y_n$ - ограниченная $\Rightarrow x_n \pm y_n \to \infty$
+    \begin{proof}
+        Аналогично первому пункту.
+    \end{proof}
+    \item $x_n \to \pm \infty,\; y_n \geqslant c > 0 \Rightarrow x_ny_n \to \pm \infty$
+    \begin{proof}
+        $x_n \to +\infty \Rightarrow \forall u \quad \exists N: \forall n \geqslant N \quad x_n>\frac{u}{c}$
+        
+        $y_n \geqslant c > 0 \Rightarrow x_ny_n \geqslant cx_n > u$
+        
+        Случай $x_n \to -\infty$ рассматривается аналогично.
+    \end{proof}
+    \item $x_n \to \pm \infty,\; y_n \leqslant c < 0 \Rightarrow x_ny_n \to \mp \infty$
+    \begin{proof}
+        Аналогично предыдущему пункту.
+    \end{proof}
+    \item $x_n \to \infty,\; |y_n| \geqslant c > 0 \Rightarrow x_ny_n \to \infty $
+    \begin{proof}
+        Аналогично четвертому пункту.
+    \end{proof}
+    \item $x_n \to a \neq 0,\; y_n \neq 0 \to 0 \Rightarrow \frac{x_n}{y_n} \to \infty$
+    \begin{proof}
+        $\lim \frac{y_n}{x_n} = 0 \Rightarrow \frac{y_n}{x_n}$ - б.м. $\Rightarrow \frac{x_n}{y_n}$ - б.б. $\Rightarrow \lim \frac{x_n}{y_n} = \infty$ 
+    \end{proof}
+    \item $x_n$ - ограниченная, $y_n \to \infty \Rightarrow \frac{x_n}{y_n} \to 0$
+    \begin{proof}
+        $y_n \to \infty \Rightarrow \frac{1}{y_n}$ - б.м. $\Rightarrow x_n * \frac{1}{y_n}$ - б.м.
+    \end{proof}
+    \item $x_n \to \infty,\; y_n \neq 0$ - ограниченная $\Rightarrow \frac{x_n}{y_n} \to \infty$
+    \begin{proof}
+        $y_n$ - ограниченная $\Rightarrow |y_n| \leqslant M$
+        
+        $x_n \to \infty \Rightarrow \forall u > 0 \quad \exists N : \forall n \geqslant N \quad |x_n| > uM \Rightarrow |\frac{x_n}{y_n}| \geqslant |\frac{x_n}{M}| > u$
+    \end{proof}
+\end{enumerate}
+\vspace{0.7cm}
+Запрещенные операции:
+\begin{itemize}
+    \item $+\infty \pm (\mp\infty)$
+    \item $-\infty \pm (\pm\infty)$
+    \item $\pm \infty * 0$
+    \item $\frac{0}{0}$
+    \item $\frac{\pm \infty}{\pm \infty}$
+\end{itemize}
+\vspace{0.3cm}
+Почему эти операции запрещенные? Разберем на примере:
+
+$\lim x_n = \lim y_n = +\infty$ \\
+$x_n - y_n$  может иметь любой предел в $\overline{\mathbb{R}}$, а может его вообще не иметь:
+\begin{itemize}
+    \item $x_n = n + a,\; y_n = n \Rightarrow x_n - y_n = a \to a$
+    \item $x_n = 2n,\; y_n = n \Rightarrow x_n - y_n = n \to +\infty$
+    \item $x_n = n + (-1)^n,\; y_n = n \Rightarrow x_n - y_n = (-1)^n$ - предела не имеет
+\end{itemize}
+
+\section{Неравенство Бернулли}
+\[ (1 + x)^n \geqslant 1 + nx \quad x > -1,\; n \in \mathbb{N} \]
+\begin{proof}
+    Индукция по $n$.
+    
+    База $n = 1: (1 + x) = 1 + x$
+    
+    Переход $n \to n + 1: (1 + x)^{n + 1} = \underbrace{(1 + x)}_{> 0}\underbrace{(1 + x)^n}_{assumption} \geqslant (1 + x)(1 + nx) = 1 + (n + 1)x + nx^2 \geqslant 1 + (n + 1)x$
+\end{proof}
+\underline{Замечание 1:} В неравенсте Бернулли почти всегда строгий знак, равенство достигается только в случаях, когда $n = 1$ или $x = 0$.
+
+\underline{Замечание 2:} $(1 + x)^p \geqslant 1 + px \quad x > -1$ верно при всех $p \geqslant 1$ и $p \leqslant 0$. Какая-то жесткая тема. Дали без доказателства.
+\vspace{0.5cm}
+
+\textbf{Следствие.} 
+\begin{enumerate}
+    \item Если $a > 1$, то $\lim a^n = +\infty$.
+    \begin{proof}
+        $a > 1 \Rightarrow a = 1 + x \quad x > -1$
+        
+        $a^n = (1 + x)^n \geqslant 1 + xn \to +\infty$
+    \end{proof}
+    \item Если $|a| < 1$, то $\lim a^n = 0$.
+    \begin{proof}
+        Считаем, что $a \neq 0$.
+        
+        $|\frac{1}{a}| > 1 \Rightarrow \lim |\frac{1}{a}|^n = +\infty \Rightarrow |\frac{1}{a}|^n$ - б.б. $\Rightarrow |a^n|$ - б.м. $\Rightarrow a^n$ - б.м.
+    \end{proof}
+\end{enumerate}
+
+\section{Определение экспоненты}
+Рассмотрим последовательность $x_n = (1 + \frac{a}{n})^n$, где $a \in \mathbb{R}$
+\begin{theorem}
+$x_n$ монотонно возрастает, начиная с $n > -a$ и ограничена сверху
+\end{theorem}
+\begin{proof} \quad \\
+    \begin{enumerate}
+    \item Монотонное возрастание (если $a < 0$, то с номера $n = -a + 1$)
+    \begin{equation*}
+        \begin{split}
+            \frac{x_n}{x_{n - 1}} &= \frac{(1 + \frac{a}{n})^n}{(1 + \frac{a}{n - 1})^{n - 1}} \\ 
+            &= \frac{\frac{(n + a)^n}{n^n}}{\frac{(n - 1 + a)^{n - 1}}{(n - 1)^{n - 1}}} \\ 
+            &= \frac{(n - 1)^{n - 1}}{n^n} * \frac{(n + a)^n}{(n - 1 + a)^{n - 1}} \\
+            &= \frac{(n - 1)^n * (n + a)^n}{n^n * (n - 1 + a)^n } * \frac{n - 1 + a}{n - 1} \\
+            &= (\frac{n^2 - n + an - a}{n^2 - n + an})^n * \frac{n - 1 + a}{n - 1} \\ 
+            &= \underbrace{(1 - \frac{a}{n(n - 1 + a)})^n}_{\geqslant 1 - \frac{na}{n(n - 1 + a)} \;by\; Bernoulli's\; inequality} * \frac{n - 1 + a}{n - 1} \\
+            &\geqslant\frac{n - 1}{n - 1 + a} * \frac{n - 1 + a}{a} = 1
+        \end{split}
+    \end{equation*}
+    \item Ограниченность сверху
+    
+    $y_n = (1 - \frac{a}{n})^n$ монотонно возрастает при $n > a$ 
+    
+    $x_ny_n = (1 + \frac{a}{n})^n * (1 - \frac{a}{n})^n = (1 - (\frac{a}{n})^2)^n \leqslant 1$
+    
+    $y_n \geqslant c > 0$, начиная с некоторого номера $\Rightarrow 1 \geqslant x_ny_n \geqslant cx_n \Rightarrow x_n \leqslant \frac{1}{c}$, начиная с некоторого номера $\Rightarrow x_n$ - ограниченная
+    \end{enumerate}
+\end{proof}
+\textbf{Следствие.} Существует конечный $\lim (1 + \frac{a}{n})^n$ 
+\begin{conj} \quad \\
+    \begin{enumerate}
+        \item $exp\,a := \lim (1 + \frac{a}{n})^n$
+        \item $e := \lim (1 + \frac{1}{n})^n \approx 2,71828$
+    \end{enumerate}
+\end{conj}
+\underline{Замечание:} Последовательность $x_n = (1 + \frac{a}{n})^n$ при $a \neq 0$ \underline{строго} монотонно возрастает c $n > -a$. В доказателсьстве пользовались неравенством Бернулли, при $a \neq 0$ в нем строгий знак.
+\vspace{0.5cm}
+
+\textbf{Следствие.} Последовательность $z_n = (1 + \frac{1}{n})^{n+1}$ строго убывает и стремиться к $e$
+\begin{proof}
+    $z_n = \underbrace{(1 + \frac{1}{n})}_{\to 1} * \underbrace{(1 + \frac{1}{n})^n}_{\to e} \to e$
+    
+    $z_n = \frac{n + 1}{n}^{n+1} = \frac{1}{(\frac{n}{n+1})^{n+1}} = \frac{1}{(1 - \frac{1}{n+1})^{n+1}}$
+    
+    Последовательность $(1 - \frac{1}{n+1})^{n+1}$ строго возрастает, следовательно, обратная к ней строго убывает. 
+\end{proof}
+
+\section{Свойства экспоненты}
+\begin{enumerate}
+    \item Для любого $a \in \mathbb{R} \quad exp\,a > 0$
+    \item $exp\,0 = 1,\; exp\,1 = e$
+    \item Если $a \leqslant b$, то $exp\,a \leqslant exp\,b$
+    \begin{proof}
+        $0 < 1 + \frac{a}{n} \leqslant 1 + \frac{b}{n}$ при $n > -a \Rightarrow \underbrace{(1 + \frac{a}{n})^n}_{\to exp\,a} \leqslant \underbrace{(1 + \frac{b}{n})^n}_{\to exp\,b}$ при $n > -a$
+    \end{proof}
+    \item $exp\,a \geqslant 1 + a$
+    \begin{proof}
+        По неравенству Бернулли:
+        
+        $\underbrace{(1 + \frac{a}{n})^n}_{\to exp\,a} \geqslant 1 + n * \frac{a}{n} = 1 + a$ при $n > -a$
+    \end{proof}
+    \item $exp\,a * exp\,(-a) \leqslant 1$
+    \begin{proof}
+        $\underbrace{(1 + \frac{a}{n})^n}_{\to exp\,a} * \underbrace{(1 - \frac{a}{n})^n}_{\to exp\,(-a)} = (1 - (\frac{a}{n})^2)^n \leqslant 1$
+    \end{proof}
+    \item $exp\,a \leqslant \frac{1}{1 - a}$ при $a < 1$
+    \begin{proof}
+        С помощью двух предыдущих пунктов
+        
+        $exp\,a \leqslant\frac{1}{exp\,(-a)} \leqslant \frac{1}{1 - a}$
+    \end{proof}
+    \item $(1 + \frac{1}{n})^n < e < (1 + \frac{1}{n})^{n + 1}$ при всех $n$
+    \begin{proof}
+        $(1 + \frac{1}{n})^n < (1 + \frac{1}{n+1})^{n+1} \leqslant \underbrace{(1 + \frac{1}{m})^{m}}_{\to e}$ при $m
+        \geqslant n + 1 \Rightarrow (1 + \frac{1}{n})^n < e$
+        
+        $(1 + \frac{1}{n})^{n + 1} > (1 + \frac{1}{n+1})^{n + 2} \geqslant \underbrace{(1 + \frac{1}{m})^{m + 1}}_{\to e}$ при $m \geqslant n + 1 \Rightarrow (1 + \frac{1}{n})^{n + 1} > e$
+    \end{proof}
+    В частности, подставив $n = 1$ и $n = 5$ получаем, что $2 < e < 3$
+\end{enumerate}
+
+\section{Формула для экспоненты суммы}
+\textbf{Лемма.}
+    Если $\lim a_n = a \in \mathbb{R}$, то $\lim (1 + \frac{a_n}{n})^n = exp\,a$    
+\begin{proof}
+    Последовательность $a_n$ ограничена $\Rightarrow a_n \leqslant M,\; a \leqslant M$ и $M > 0$
+    
+    $A := 1 + \frac{a}{n} \leqslant 1 + \frac{M}{n} \quad B:= 1 + \frac{a_n}{n} \leqslant 1 + \frac{M}{n}$
+    
+    Надо доказать, что $\lim(A^n - B^n) = 0$
+    \begin{equation*}
+        \begin{split}
+            |A^n - B^n| &= |A - B|(A^{n-1} + A^{n-2}B + \dots + B^{n-1}) \\ &\leqslant |A-B|n(1 + \frac{M}{n})^{n-1} \\
+            &\leqslant |A-B|n(1 + \frac{M}{n})^n \\ 
+            &= \frac{|a-a_n|}{n}n(1 + \frac{M}{n})^n \\
+            &= |a - a_n|(1 + \frac{M}{n})^n \leqslant \underbrace{|a-a_n|}_{\to 0}*exp\,M
+        \end{split}
+    \end{equation*}
+\end{proof}
+\begin{theorem}
+    $exp\,(a+b) = exp\,a * exp\,b$
+\end{theorem}
+\begin{proof}
+    \[ \underbrace{(1 + \frac{a}{n})^n}_{\to\,exp\,a} * \underbrace{(1 + \frac{b}{n})^n}_{\to\,exp\,b} = (1 + \frac{a+b}{n} + \frac{ab}{n^2})^n = \underbrace{(1 + \frac{a + b + \frac{ab}{n}}{n})^n}_{a + b + \frac{ab}{n} := a_n \to\,a + b} = \underbrace{(1 + \frac{a_n}{n})^n}_{\to\,exp\,(a+b)} \]
+\end{proof}
+
+\section{Сравнение скорости возрастания последовательностей}
+\begin{theorem}
+    Пусть $x_n > 0$ и $\lim \frac{x_{n+1}}{x_n} < 1$. Тогда $x_n \to\,0$
+\end{theorem}
+\begin{proof} \quad \\\\
+    $l := \lim \frac{x_{n+1}}{x_n}$. Начиная с некоторого номера $m \;\; \frac{x_{n+1}}{x_n} < \frac{1 + l}{2} =: q < 1$
+    
+    При $n \geqslant m$ 
+    \[ 0 < x_n < \frac{x_n}{x_{n-1}} * \frac{x_{n-1}}{x_{n-2}} * \frac{x_{n-2}}{x_{n-3}} * \dots * \frac{x_{m+1}}{x_m} * x_m < q^{n-m}x_m = q^n * \frac{x_m}{q^m} \]
+    \[ 0 < x_n < q^n * \frac{x_m}{q^m} \to 0 \Rightarrow x_n \to 0  \]
+\end{proof}
+\textbf{Следствие.}
+\begin{enumerate}
+    \item $\lim \frac{n^k}{a^n} = 0$ при $a > 1$ (показательная функция растет быстрее полиномиальной)
+    \begin{proof}
+        $x_n = \frac{n^k}{a^n}$
+        \[ \frac{x_{n+1}}{x_n} =
+        \frac{(n+1)^ka^n}{a^{n+1}n^k} = 
+         (\frac{n+1}{n})^k * \frac{a^n}{a^{n+1}} = \frac{1}{a} * (1 + \frac{1}{n})^k \to \frac{1}{a} < 1 \Rightarrow x_n \to 0\]
+    \end{proof}
+    \item $\lim \frac{a^n}{n!} = 0$ (факториал растет быстрее показательной)
+    \begin{proof}
+        $x_n = \frac{a^n}{n!}$
+        \[ \frac{x_{n+1}}{x_n} =  \frac{a^{n+1}n!}{(n+1)!a^n}
+        = a\frac{n!}{(n+1)!} = \frac{a}{n+1} \to 0 < 1 \Rightarrow x_n \to 0 \]
+    \end{proof}
+    \item $\lim \frac{n!}{n^n} = 0$
+    \begin{proof}
+        $x_n = \frac{n!}{n^n}$
+        \[ \frac{x_{n+1}}{x_n} = \frac{(n+1)!n^n}{(n+1)^{n+1}n!} = \frac{(n+1)n^n}{(n+1)^{n+1}} = (\frac{n}{n+1})^n = \frac{1}{(\frac{n + 1}{n})^n} = \frac{1}{(1 + \frac{1}{n})^n} \to \frac{1}{e} < 1 \Rightarrow x_n \to 0 \]
+    \end{proof}
+\end{enumerate}
+
+\ifdefined\niveldos\else
+\end{document} 
+\fi
