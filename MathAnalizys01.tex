@@ -460,7 +460,7 @@ $P_n$ -последовательность утверждений
     Переход $X_n \longrightarrow x_{n+1}$ \\
     Рассмотрим произвольное множество из $n$ элементов $X_n = \{x_1, x_2, x_3, \dots x_n\}$, где максимальным элементом 
     является $x_i$. Пусть в наше множество был добавлен элемент $X_{n+1}$. В таком случае, если $X_{n+1}$ > $X_{i}$, то новый максимум равен
-    $X_{n+1}$, иначе - максимумом по-прежнему является $X_{i}$. Таким образом, в любом конечном множестве вещественных чисел существует минимальный
+    $X_{n+1}$, иначе - максимумом по-прежнему является $X_{i}$. Таким образом, в любом конечном множестве вещественных чисел существует максимальный
     элемент.     
 \end{proof}
 \newpage
@@ -666,7 +666,7 @@ $P_n$ -последовательность утверждений
     $B_r(a) \subset \overline{B_r}(a)$
 \end{conj}
 \begin{itemize}
-    \item \underline{Окрестность} точки $a$ - открытый шар $Br(a)$
+    \item \underline{Окрестность} точки $a$ - открытый шар $B_r(a)$
 \end{itemize}
     \subsection*{Примеры} 
     \begin{enumerate}
@@ -691,11 +691,11 @@ $P_n$ -последовательность утверждений
     \begin{enumerate}
         \item $B_r(a) \cap B_R(a) = B_{min\{r, R\}}(a)$
         \item Если $x \neq y$, то найдется $r > 0$, такой, что 
-        $\overline{Br}(x) \cap \overline{Br}(y) = \varnothing$
+        $\overline{B_r}(x) \cap \overline{B_r}(y) = \varnothing$
         \begin{proof}
             \quad \\
             $r := {{\rho(x, y)}\over{3}}$. Пойдем от противного \\
-            Пусть $c \in \overline{Br}(x) \cap \overline{Br}(y) \Longrightarrow
+            Пусть $c \in \overline{B_r}(x) \cap \overline{B_r}(y) \Longrightarrow
             \begin{cases}
                 \rho(x, c) \leqslant r \\
                 \rho(y, c) \leqslant r
