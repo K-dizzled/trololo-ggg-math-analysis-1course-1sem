@@ -1,0 +1,378 @@
+\documentclass[12pt]{article}
+\pagestyle{empty}
+\parindent 0px
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[russian]{babel}
+\usepackage{amsfonts, amssymb, amsmath, mathtools}
+\usepackage[left=2cm, right=2cm, top=2cm]{geometry}
+\begin{document}
+
+\begin{center}
+Вопрос 11. Предельные точки. Связь с замыканием множества.
+\end{center}
+
+1. Опр. Проколотая окрестность точки $a$ 
+
+$\overset{\circ}{\mathcal{U}_a} = B_r(a)\textbackslash \{a\}$\\
+
+2. Опр. Предельная точка множества.
+
+$a$ - предельная точка множества $A$, если любая $\overset{\circ}{\mathcal{U}_a}\cap A \neq \varnothing$\\
+
+3. Обозначение: $A'$ - множество предельных точек $A$\\
+
+Полезно для понимания: Если $U$ открытое и $U \cap A = \varnothing$, то $U\cap Cl(a) = \varnothing$. От противного, $x \in U \cap Cl(A) \Rightarrow x \in U \Rightarrow \exists r>0 : B_r(x)\in U$, $x \in Cl(A) \Rightarrow B_r(x)\cap A \neq \varnothing \Rightarrow U\cap Cl(A) \neq \varnothing$ - противоречие.\\
+
+4. Свойства
+
+1) $Cl(A) = A\cup A'$
+
+2) $A \subset B \Rightarrow A' \subset B'$
+
+3) $(A\cup B)' = A' \cup B'$
+
+4) $A$ замкнутно $\Rightarrow A\supset A'$\\
+
+Д-во 1) $x \in Cl(A) \Leftrightarrow B_r(x)\cap A \neq \varnothing \forall r>0$ (*)
+
+Пусть $x \notin A$ . Тогда (*) равносильно $B_r(x)\textbackslash \{x\} \cap A \neq \varnothing \Leftrightarrow x\in A'$\\
+
+Д-во 2) $x \in A' \Rightarrow B_r(x)\textbackslash \{x\} \cap A  \neq \varnothing \Rightarrow B_r(x)\textbackslash \{x\} \cap B \neq \varnothing \Rightarrow x \in B'$\\
+
+Д-во 3) $A \cup B \supset A \Rightarrow (A\cup B)' \supset A' \Rightarrow (A\cup B) \supset A'\cup B'$
+
+Обратное включение. Пусть $x\in (A\cup B)'$ и $x \notin B' \Rightarrow (B_r(x)\textbackslash \{x\})\cap (A\cup B) \neq \varnothing \Rightarrow (B_r(x)\textbackslash \{x\})\cap A \neq \varnothing$ ИЛИ $(B_r(x)\textbackslash \{x\})\cap B \neq \varnothing$. Второе неверно из $x\notin B'$, следовательно $x \in A'$\\
+
+Д-во 4) $A$ - замкнуто $\Rightarrow A = Cl(A) = A \cup A' \Leftrightarrow A \supset A'$
+\newpage
+
+\begin{center}
+Вопрос 12. Открытые и замкнутые множества в пространстве и подпространстве.
+\end{center}
+
+1. Теорема. $(X, d)$ -метр пространство $Y \subset X$. Тогда\\
+
+1) $A \subset Y$ открыто в $Y \Leftrightarrow$ найдется открытое множество $G \subset X$, т.ч. $A=G\cap Y$
+
+2) $A \subset Y$ замкнутое в $Y \Leftrightarrow$ найдется замкнутое множество $F \in X $, т. ч $A = F\cap Y$\\
+
+Д-во 1) $a \in A \Rightarrow \exists r_a>0 : B_{r_a}^Y(a)$ (т.е. шары в $Y$) $\subset A$. Далее \\
+
+\[G:= \underset{a\in A}{\cup} B_{r_a}^X(a) = \underset{a\in A}{\cup} \{x \in X: d(d, a)<r_a\} \Rightarrow\] $G$ - открытое (объединение любого числа открытых - открытое)
+
+Доказать: $G\cap Y = A$
+
+$G \supset A, Y \supset A \Rightarrow G\cap Y \supset A$. Докажем обратное включение.\\
+
+\[B_{r_a}^X(a)\cap Y = B_{r_a}^Y \subset A\]
+
+\[G\cap Y = \underset{a\in A}{\cup}(B_{r_a}^X(a) \cap Y) \subset A \Rightarrow G\cap Y \subset A \]. Доказали для (1) "$\Rightarrow$". Теперь докажем "$\Leftarrow$"\\
+
+$G$ - открыто в $Y$. Доказать, что $A := G\cap Y$ - открыто в $Y$
+
+$a \in A \Rightarrow a \in G$, $G$ - открыто$ \Rightarrow \exists r>0 : B_r^X(a) \subset G \Rightarrow B_r^X(a)\cap Y = B_r^Y(a) \subset G\cap Y$, то есть $A$ открыто в $Y$.\\
+
+Д-во 2) $A$ - замкнуто в $Y \Leftrightarrow Y\textbackslash A$ - открыто в $Y \Leftrightarrow \exists$ открытое $G \in X : Y\textbackslash A = G\cap Y \Leftrightarrow F := X\textbackslash G$ - замкнутое в $X$, при этом $A = Y\textbackslash (G\cap Y) = Y\cap (X\textbackslash G)$ //С первого взгляда неочевидный переход, но следует из вложенности $Y$ и $G$ в $X$) $= Y\cap F$.
+  
+\newpage
+
+\begin{center}
+Вопрос 13. Предел числовой последовательности и предел последовательности в метрическом пространтстве. Определение и основные понятия.
+\end{center}
+
+1. Предел числовой последовательности
+
+$x_1, x_2, x_3 ... \in R$. $a=\lim x_n$ если вне любого интервала, содержащего $a$, содержится лишь конечное число членов последовательности.
+
+Замечание: можно рассматривать симметричные интервалы (если есть несимметричный, для удобства его можно расширить или сузить до симметричного)\\
+
+2. Предел последовательности в метрическом пространстве
+
+$(X, d)$ - метрическое пространство, $x_1, x_2 ... \in X$. $a=\lim x_n$ если вне любого шара $B_\varepsilon (a)$ содержится лишь конечное число членов последовательности.
+
+Замечание: верно также для любого открытого множества, содержащего $a$
+
+Замечание: существование предела зависит от пространства (в $R_+ x_n = 1/n$ не имеет предела)\\
+
+Свойства:
+1) Если $a=\lim x_n$ и из $x_n$ выкинули какое-то число членок так, чтобы осталось бесконечное число членов, то у оставшейся последовательности тот же предел.\\
+
+2) Если $a=\lim x_n$ и к последовательности добавить конечное число членов, то $a$ - все еще предел.\\
+
+3) Добавление, замена или выкидывание конечного количества членом не меняет предел и его наличие (то же самое другими словами)\\
+
+4) Перестановка членов не влияет на предел последовательности\\
+
+5) Если $a=\lim x_n$ и $a=\lim y_n$, то если их перемешать, то у новой последовательности тоже предел $a$\\
+
+6) Если $a=\lim x_n$, тогда у последовательности, в которой $x_n$ встречается с конечной кратностью, тот же предел (написать один и тот же элемент много раз подряд)\\
+
+3. Опр. $a=\lim x_n$, если
+\[ \forall \varepsilon>0 \exists N : \forall n\geq N d(x_n, a)<\varepsilon\]
+
+4. Опр. $A \subset X, (X, d)$ - метрическое пространство
+
+$A$ - ограничено, если $A$ целиком содержится в каком-нибудь шаре\\
+
+5. Теорема.
+
+1) Предел единственный
+
+2) Если последовательность имеет предел, то она ограничена
+
+3) $a=\lim x_n \Leftrightarrow \lim d(x_n, a)=0$
+
+4) Если $a=\lim x_n$ и $b = \lim y_n$, то $\lim d(x_n, y_n) = d(a, b)$\\
+
+Д-во 1) Пусть $a\neq b \Rightarrow \exists B_{r_1}(a), B_{r_2}(b) : B_{r_1} \cap B_{r, 2} = \varnothing$. 
+
+Вне $B_{r_1}(a)$ конечное число членов
+
+Вне $B_{r_2}(b)$ конечное число членов
+
+Тогда в последовательности конечное число членов. Противоречие.\\
+
+Д-во 2) Возьмем $\varepsilon=1$. Тогда $\exists N: \forall n\geq N\ x_n \in B_1(a)$. Тогда $r:= \max\{d(a, x_1), d(a, x_2),..., d(a, x_N)\}+1$\\
+
+Д-во 3) $\lim d(x_n, a)=0 \Leftrightarrow \forall \varepsilon > 0 \exists N : \forall n \geq N d(x_n, a) < \varepsilon \Leftrightarrow \lim x_n = a$\\
+
+Д-во 4) $d(a, b) \leq d(a, x_n)+d(x_n, y_n)+d(y_n, b)$
+
+$d(x_n, y_n) \leq d(a, x_n)+d(a, b)+d(b, y_n) \Rightarrow$
+
+$|d(x_n, y_n)-d(a, b)|\leq d(x_n, a)+d(y_n, b)$ Справа каждая меньше $\varepsilon /2$, тогда слева стремится к нулю
+\newpage
+
+\begin{center}
+Вопрос 14. Связь между пределами и предельными точками.
+\end{center}
+
+1. Теорема. $a$ - предельная точка $A \Leftrightarrow$ найдется последовательность точек $x\neq a \in A : \lim x_n = a$. Супер очевидно из соответствующих определений, но распишу
+
+$"\Leftarrow"$ - пусть $x_n \in A$ и $\lim x_n = a$. Тогда в $B_r(a)\textbackslash \{a\}$ содержится бесконечное количество точек из $x_n$, так как $\exists N : \forall n \geq N x_n \in B_r(a)$\\
+
+$"\Rightarrow"$
+
+$r_1 = 1 \Rightarrow \exists x_1 \in B_1(a), r_2 = \min\{1/2, d(a, x_1)\}, r_3=\min\{1/3, d(a, x_2)\}...$
+
+$\forall \varepsilon>0\ \exists N: 1/N<\varepsilon \Rightarrow \forall n\geq N\ d(x_n, a) < 1/n \leq 1/N < \varepsilon$\\
+
+2. Если $x_n \in A$ и $a=\lim x_n$, то $a \in Cl(A)$
+
+Либо $a\in A$, тогда $a \in Cl(A)$, иначе $x_n \neq a$, тогда по теореме 1. $a \in A' \Rightarrow a \in Cl(A)$
+\newpage
+
+\begin{center}
+Вопрос 15. Предльный переход в неравенствах
+\end{center}
+
+1. Теорема. Предельный переход в неравенстве. $x_n, y_n \in \mathbb{R}$
+
+$x_n \leq y_n\ \forall n, a=\lim x_n, b=\lim y_n \Rightarrow a\leq b$\\
+
+Д-во. Пусть $a>b$
+
+$\varepsilon = \frac{a+b}{2}$
+
+$\exists N_1: \forall n\geq N_1\ x_n\in (a-\varepsilon, a+\varepsilon)$
+
+$\exists N_2: \forall n\geq N_2\ y_n \in (b-\varepsilon, b+\varepsilon)$
+
+$n:=\max\{N_1, N_2\}$
+
+$y_n \leq x_n$. Противоречие
+
+Замечание - неверно для строгого знака ($-1/n, 1/n$)\\
+
+Следствие 1. Если $x_n \leq b \forall n, \lim x_n = a \Rightarrow a\leq b$
+
+Д-во: $y_n:=b$, далее из теоремы 1\\
+
+Следствие 2. Если $x_n \geq a \forall n, \lim x_n = b \Rightarrow a \leq b$
+
+Д-во: $y_n:=a$, далее из теоремы 1\\
+
+Следствие 3. $x_n \in [a, b], \lim x_n = c \Rightarrow c \in [a, b]$. 
+
+Следует из предыдущих\\
+\newpage
+
+\begin{center}
+Вопрос 16. Теорема о сжатой последовательности (о двух милиционерах) и ее следствия.
+\end{center}
+
+1. Теорема о сжатой последовательности (о двух милиционерах)
+
+$x_n \leq y_n \leq z_n\ \forall n\in N, \lim x_n = \lim z_n = a \Rightarrow \lim y_n = a$\\
+
+Д-во
+\[
+\begin{drcases}
+\lim x_n = a \Rightarrow \forall \varepsilon>0\ \exists N_1: x_n\in (a-\varepsilon, a+\varepsilon)\\
+\lim z_n = a \Rightarrow \forall \varepsilon>0\  \exists N_2: z_n\in (a-\varepsilon, a+\varepsilon)
+\end{drcases}
+\Rightarrow x_n > a-\varepsilon, z_n<a+\varepsilon 
+\]
+
+При $n\geq \max\{N_1, N_2\}\ a-\varepsilon<x_n\leq y_n \leq z_n<a+\varepsilon \Rightarrow a-\varepsilon<y_n<a+\varepsilon$\\
+
+2. Следствие $|y_n|\leq z_n\ \forall n, \lim z_n = 0 \Rightarrow \lim y_n = 0$
+
+Доказательство: $x_n:=-z_n \Rightarrow x_n \leq |y_n| \leq z_n,\ x_n \to 0,\ z_n \to 0 \Rightarrow y_n \to 0$
+\newpage
+
+\begin{center}
+Вопрос 17. Монотонные последовательности. Предел монотонной последовательности.
+\end{center}
+
+1. Опр. $x_n$ монотонно возрастает(убывает), если $\forall n\ x_n\leq(\geq ) x_{n+1}$
+
+$x_n$ монотонна, если она монотонно возрастает или монотонно убывает\\
+
+2. Теорема. Если последовательность монотонно возрастает(убывает) и ограничена сверху(снизу), то она имеет предел.\\
+
+Д-во. $x_n$ такоева, что $x_1\leq x_2\leq x_3...$ и ограничена сверху. Тогда у нее есть $sup:=S$. Докажем, что $\lim x_n = S$.
+
+$\forall \varepsilon>0\ \ S-\varepsilon$ не является верхней границей $\Rightarrow \exists x_N>s-\varepsilon \Rightarrow \forall n\geq N\ S-\varepsilon < x_n < S+\varepsilon \Rightarrow$ S - предел\\
+
+Следствие. Если последовательность монотонна, то она имеет предел тогда и только тогда, когда она ограничена.
+
+$"\Leftarrow"$ По доказанной теореме
+
+$"\Rightarrow"$ Из свойств предела
+\newpage
+
+\begin{center}
+Вопрос 18. Топологическое пространство. Определение и примеры. Открытые и замкнутые множества в топологическом пространстве. Определение предела. Единственность предела.
+\end{center}
+
+1. Опр. $X$ - множество. Топология, это набор подмножеств $\Omega \subset X$, называющихся открытыми, таких что:
+
+1) $\varnothing, X$ - открытые
+  
+2) Объединение любого количество открытых - открыто
+  
+3) Пересечение конечного числа открытых - открыто\\
+  
+Примеры\\
+$\{\varnothing, X\}$\\
+$X = [0, +\infty), \Omega = (a, +\infty), a\geq 0\}$\\
+
+2. Опр. Замкнутое множество - дополнение открытого\\
+
+3. Опр. $a$ - внутренняя точка множетсва $A$, если существует открытое множество $U$, т. ч. $a \in U, U\subset A$\\
+
+4. Опр. Внутренность $Int\ A$ - объединение всех открытых множеств, содержащихся в $A$. Равносильно - множество всех внутренних точек\\
+
+5. Опр. Замыкание $Cl\ A$ - пересечение всех замкнутых множеств, содержищих $A$\\
+
+6. Опр. $a = \lim x_n$, если вне любого открытого множества, содержащего точку $a$ находится лишь конечное число членов последовательности
+
+$\forall U \ni a\ \exists N\ \forall n\geq N\ x_n \in U$\\
+
+7. Опр. Хаусдорфовость
+
+$\forall a, b \in X \ \exists U, V$ - открытые множества, такие что $a\in U,\ b\in V,\ U\cap V = \varnothing$.\\
+
+8. Если хаусдорфовость выполняется, то предел единственный. Доказательство:
+
+Если $a, b$ - пределы, то $\exists U, V : a\in U,\ b\in V,\ U\cap V = \varnothing \Rightarrow $ Вне $U$ лежит конечное количество членов, вне $V$ тоже, тогда и в $X$ конечное число членов. Противоречие
+\newpage
+
+\begin{center}
+Вопрос 19. Векторное пространство. Пространство $R^d$. Скалярное произведение. Примеры. Неравенство Коши-Буняковского.
+\end{center}
+
+1. Опр. $X$ - векторное пространство (над полем $\mathbb{R}$), если
+
+Определена операции "+": $X\times X \to X$
+
+"*": $\mathbb{R}\times X \to X$
+
+1) Сложение коммутативно и ассоциативно
+
+2) Существует $\overrightarrow{0}$
+
+3) Существует обратный элемент $x+(-x)=\overrightarrow{0}$
+
+4) $(\alpha \beta)x = \alpha(\beta x)\ \forall \alpha, \beta \in \mathbb{R}\ \ \forall x\in X$
+
+5) $(\alpha+\beta)x = \alpha x + \beta x$
+
+6) $\alpha(x+y) = \alpha x + \alpha y$\\
+
+2. $R^d = \{ \langle x_1, x_2,...,x_d\rangle  \}: x_i \in \mathbb{R}$
+
+$\langle x_1,...,x_d\rangle +\langle y_1,...,y_d\rangle =\langle x_1+y_1,..., x_d + y_d\rangle $
+
+$\alpha \langle x_1,...,x_d\rangle  = \langle \alpha x_1,..., \alpha x_d\rangle $\\
+
+3. Опр. Скалярное произведение $\langle \bullet, \bullet\rangle X\times X \to \mathbb{R}$\\
+
+1) $\langle x, x\rangle \geq 0,\ \langle x, x\rangle =0 \Leftrightarrow x=\overrightarrow{0}$
+
+2) $\langle x, y\rangle = \langle y, x\rangle$
+
+3) $\langle x+y, z\rangle = \langle x, z\rangle + \langle y, z \rangle $
+
+4) $\langle \alpha x, y\rangle = \alpha \langle x, y \rangle $\\
+
+4. Неравенство Коши-Буняковского: $\langle x, y \rangle^2 \leq \langle x, x \rangle \langle y, y \rangle$
+
+Доказательство:\\
+
+$f(t):=\langle x+ty, x+ty\rangle = \langle x, x+ty \rangle + \langle ty, x+ty \rangle =\langle x, x \rangle + t\langle x, y \rangle + t\langle y, x \rangle + t^2\langle y, y \rangle = \langle x, x \rangle + 2t\langle x, y \rangle + t^2\langle y, y \rangle \geq 0$. Это всегда неотрицательно, тогда дискриминант неположителен.
+
+\[4t^2\langle x, y \rangle^2 - 4t^2\langle x, x \rangle \langle y, y \rangle \leq 0 \Rightarrow \langle x, x \rangle^2 \leq \langle x, x \rangle \langle y, y \rangle\]
+\newpage
+
+\begin{center}
+Вопрос 20. Норма. Определение и примеры. Свойства. Норма в пространстве со скалярным произведением.
+\end{center}
+
+1. Опр. Норма $||\bullet || : X\to \mathbb{R}$\\
+
+1)$||x|| \geq 0$, $||x|| = 0 \Leftrightarrow x = \overleftarrow{0}$\\
+
+2)$||\alpha x|| = |\alpha|*||x||$\\
+
+3) $||x+y|| \leq ||x||+||y||$\\
+
+Примеры.
+
+$X = \mathbb{R},\ ||x||:=|x|$
+
+$X = \mathbb{R}^d,\ ||x||:=|x_1|+|x_2|+...+|x_d|$
+
+2. Теорема. Если $\langle \bullet, \bullet \rangle$ - скалярное произведение в $X$, то $||x||:= \sqrt{\langle x, x \rangle}$ - норма.\\
+
+$||\alpha x|| = \sqrt{\langle \alpha x, \alpha x\rangle} = \sqrt{\alpha^2 \langle x, x\rangle} = |\alpha|\sqrt{\langle x, x \rangle}$\\
+
+$||x+y||^2 = \langle x+y, x+y \rangle = \langle x,x\rangle + 2\langle x, y\rangle + \langle y, y\rangle \Rightarrow ||x||^2 + 2\langle x, y\rangle + ||y||^2 \overset{?}{\leq} ||x||^2 + 2||x||*||y|| + ||y||^2$\\
+
+$2\langle x, y \rangle \leq 2||x||*||y|| = \sqrt{\langle x, x\rangle}\sqrt{\langle y, y\rangle\ }$ - верно по неравенству Коши Буняковского\\
+
+Свойства норм.
+
+1)$||x-y||=||(x-z)+(z-y)|| \leq 	||x-z||+||z-y||$\\
+
+2) $d(x, y):=||x-y||$ - метрика\\
+
+3) $|\ ||x||-||y||\ | \leq ||x-y||$
+
+$||x|| = ||(x-y)+y|| \leq ||x-y||+||y||$
+
+$||y|| = ||(y-x)+x|| \leq ||y-x||+||x||=||x-y||+||x||$ 
+
+$||x-y||\geq ||x||-||y||$
+
+$||x-y||\geq -(||x||-||y||)$\\
+
+Теорема. $X$ - нормированное пространство. Тогда норма порождена некоторым скалярным произведением тогда и только тогда, когда
+
+$2(||x||^2+||y||^2)=||x+y||^2+||x-y||^2$ - тождество параллелограмма.
+
+Доказательства не будет
+
+\end{document}
