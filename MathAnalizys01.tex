@@ -26,6 +26,11 @@
 \usepackage{thmtools}
 \usepackage{amsthm}
 \usepackage{mathtools}
+\usepackage{pdfcomment}
+\usepackage{soul}
+\usepackage{blindtext}
+\usepackage{todonotes}
+%%
 
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}%
 \DeclarePairedDelimiter\norm{\lVert}{\rVert}%
@@ -44,7 +49,8 @@
 \newtheorem{theorem}{Теорема}
 \newtheorem*{theorem-non}{Теорема}
 \newtheorem{lemma}[theorem]{Лемма}
-\newtheorem{conj}[theorem]{Определение}
+\theoremstyle{definition}
+\newtheorem*{conj}{Определение}
 \declaretheorem[numbered=no]{definition}
 
 % Definindo novas cores
@@ -110,6 +116,9 @@
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\follow}{\textbf{\textit{Следствие:}}}
 \newcommand{\notice}{\underline{\textit{Замечание }}}
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
 
 \definecolor{linkcolor}{HTML}{47528f} % цвет ссылок
 \definecolor{urlcolor}{HTML}{47528f} % цвет гиперссылок
@@ -191,7 +200,7 @@
 % \listoftheorem-nons[ignoreall,show={lemma}]
 % \listoftheorem-nons[ignoreall,show={conj}]
 \newpage
-\chapter{Введение}
+\chapter{Первый семестр. Первая четверть}
 \section{Множества}
 \begin{conj} Множество - набор уникальных элементов \end{conj}
 
@@ -339,14 +348,14 @@ $\delta_{R^{-1}} = \rho_{R} \\
     Отображение $f: A  \longrightarrow B$ 
 \end{conj}
 \begin{itemize}
-    \item инъективно, если $f(x_1) = f(x_2) \Leftrightarrow x_1 = x_2$
+    \item инъективно, если $f(x_1) = f(x_2) \Longleftrightarrow x_1 = x_2$
     \item сюръективно, если $\rho_f = B$
     \item биективно, если $f$ инъективно и сюръективно
 \end{itemize}
 \section{Аксиомы вещественных чисел}
 \begin{conj}
     Вещественные числа - алгебраическая структура, над которой определены 
-    операции сложения ``+'' и умножения ``$\cdot$'' $(\mathbb{R} * \mathbb{R} \rightarrow \mathbb{R})$
+    операции сложения ``+'' и умножения ``$\cdot$'' $(\mathbb{R} * \mathbb{R} \Longrightarrow \mathbb{R})$
 \end{conj}
 \newpage
 \begin{conj}
@@ -581,7 +590,6 @@ $P_n$ -последовательность утверждений
     $[3;\; 4] \supset [3,1;\; 3,2] \supset [3,14;\; 3,15] \supset \dots$ \\
     Пересечение не содержит рациональных чисел
 \end{enumerate}
-\chapter{Последовательности вещественных чисел}
 \section{Метрические пространства и подпространства}
     \begin{conj}
         $X$ - множество $\rho : X \times X \longrightarrow [0; + \infty)$ - метрика(расстояние)
@@ -875,14 +883,1568 @@ $Int A = X \setminus Cl(X \setminus A)$
 \end{proof}
 \follow 
 \quad Если $\mathcal{U}$ - открытое и $\mathcal{U} \cap A = \varnothing$, то $\mathcal{U} \cap Cl A = \varnothing$
-\ifdefined\niveldos\else
 \begin{proof}
     Пусть $x \in \mathcal{U} \cap Cl A \Longrightarrow x \in \mathcal{U}$ - открытое $\exists r > 0 \quad B_r(x) \subset \mathcal{U}\\
     x \in \mathcal{U} \cap Cl A \Longrightarrow x \in Cl A \Longrightarrow B_r(x) \cap A \neq \varnothing \Longrightarrow \mathcal{U} \cap A \neq \varnothing$ - противоречие
 \end{proof}
+\section{Предельные точки. Связь с замыканием множества}
 \begin{conj}
+
     Проколотая окрестность точки $a - B_r(a) \setminus {a}$ \\
     Обозначается как $\overset{\circ}{\mathcal{U}}_a$
 \end{conj}
+    \begin{conj}
+        Предельная точка множества \\
+        $a$ - предельная точка множества $A$, если любая $\overset{\circ}{\mathcal{U}_a}\cap A \neq \varnothing$\\
+        $A'$ - множество предельных точек $A$
+    \end{conj} 
+    \begin{theorem-non}
+        Свойства:
+        \begin{enumerate}
+            \item $Cl(A) = A\cup A'$
+            \begin{proof}
+                $x \in Cl(A) \Longleftrightarrow B_r(x)\cap A \neq \varnothing \forall r>0$ (*) \\
+                Пусть $x \notin A$ . Тогда (*) равносильно $B_r(x)\setminus \{x\} \cap A \neq \varnothing \Longleftrightarrow x\in A'$
+            \end{proof}
+            \item $A \subset B \Longrightarrow A' \subset B'$
+            \begin{proof}
+                $x \in A' \Longrightarrow B_r(x)\setminus \{x\} \cap A  \neq \varnothing \Longrightarrow B_r(x)\setminus \{x\} \cap B \neq \varnothing \Longrightarrow x \in B'$
+            \end{proof}
+            \item $(A\cup B)' = A' \cup B'$
+            \begin{proof}
+                $A \cup B \supset A \Longrightarrow (A\cup B)' \supset A' \Longrightarrow (A\cup B) \supset A'\cup B'$ \\
+                Обратное включение. Пусть $x\in (A\cup B)'$ и $x \notin B' \Longrightarrow (B_r(x)\setminus \{x\})\cap (A\cup B) \neq \varnothing \Longrightarrow (B_r(x)\setminus \{x\})\cap A \neq \varnothing$ ИЛИ $(B_r(x)\setminus \{x\})\cap B \neq \varnothing$. \\
+                Второе неверно из $x\notin B'$, следовательно $x \in A'$
+            \end{proof}
+            \item $A$ замкнутно $\Longrightarrow A\supset A'$
+            \begin{proof}
+                $A$ - замкнуто $\Longrightarrow A = Cl(A) = A \cup A' \Longleftrightarrow A \supset A'$
+            \end{proof}
+        \end{enumerate}
+    \end{theorem-non}
+    
+\section{Открытые и замкнутые множества в пространстве и подпространстве}
+    
+    \begin{theorem-non}
+        $(X, d)$ -метр пространство $Y \subset X$. Тогда:
+        \begin{enumerate}
+            \item $A \subset Y$ открыто в $Y \Longleftrightarrow$ найдется открытое множество $G \subset X$, т.ч. $A=G\cap Y$
+            \begin{proof}
+                $a \in A \Longrightarrow \exists r_a>0 : B_{r_a}^Y(a)$ (т.е. шары в $Y$) $\subset A$. Далее
+                \begin{center}
+                    $G:= \underset{a\in A}{\cup} B_{r_a}^X(a) = \underset{a\in A}{\cup} \{x \in X: d(x, a)<r_a\} \Longrightarrow$
+                \end{center}
+                $G$ - открытое (объединение любого числа открытых - открытое)
+                Доказать: $G\cap Y = A$
+                $G \supset A, Y \supset A \Longrightarrow G\cap Y \supset A$. Докажем обратное включение.
+                \begin{center}
+                    $B_{r_a}^X(a)\cap Y = B_{r_a}^Y \subset A$ \vspace*{0,2cm} \\
+                    $G\cap Y = \underset{a\in A}{\cup}(B_{r_a}^X(a) \cap Y) \subset A \Longrightarrow G\cap Y \subset A$
+                \end{center}
+                Доказали "$\Longrightarrow$". Теперь докажем "$\Longleftarrow$"\\
+                $G$ - открыто в $Y$. Доказать, что $A := G\cap Y$ - открыто в $Y$
+                $a \in A \Longrightarrow a \in G$, $G$ - открыто$ \Longrightarrow \exists r>0 : B_r^X(a) \subset G \Longrightarrow B_r^X(a)\cap Y = B_r^Y(a) \subset G\cap Y$, то есть $A$ открыто в $Y$.
+            \end{proof}
+            \item $A \subset Y$ замкнутое в $Y \Longleftrightarrow$ найдется замкнутое множество $F \in X $, т. ч $A = F\cap Y$
+            \begin{proof}
+                $A$ - замкнуто в $Y \Longleftrightarrow Y\setminus A$ - открыто в $Y \Longleftrightarrow \\
+                \exists$ открытое $G \in X : Y\setminus A = G\cap Y \Longleftrightarrow \\
+                F := X\setminus G$ - замкнутое в $X$, при этом $A = Y\setminus (G\cap Y) = Y\cap (X\setminus G)$ \vspace*{0,2cm}\\
+                \framebox[1.02\width]{С первого взгляда неочевидный переход, но следует из вложенности $Y$ и $G$ в $X = Y\cap F$.} \par
+            \end{proof}
+        \end{enumerate}
+    \end{theorem-non}
+    
+\section{Предел числовой последовательности и предел последовательности в метрическом пространтстве}
+
+    \begin{conj}
+        Предел числовой последовательности \\
+        $x_1, x_2, x_3 ... \in R$. $a=\lim x_n$ если вне любого интервала, содержащего $a$, содержится лишь конечное число членов последовательности.
+    \end{conj}
+    \notice -
+    Можно рассматривать симметричные интервалы (если есть несимметричный, для удобства его можно расширить или сузить до симметричного)
+    
+    \begin{conj}
+        Предел последовательности в метрическом пространстве
+        $(X, d)$ - метрическое пространство, $x_1, x_2 ... \in X$. $a=\lim x_n$ если вне любого шара $B_\varepsilon (a)$ содержится лишь конечное число членов последовательности.
+    \end{conj}
+    
+    \notice -
+    Верно также для любого открытого множества, содержащего $a$
+    
+    \notice -
+    Cуществование предела зависит от пространства (в $R_+ x_n = 1/n$ не имеет предела)
+    
+    \begin{theorem-non}
+        Свойства:
+        \begin{enumerate}
+            \item Если $a=\lim x_n$ и из $x_n$ выкинули какое-то число членок так, чтобы осталось бесконечное число членов, то у оставшейся последовательности тот же предел
+            \item Если $a=\lim x_n$ и к последовательности добавить конечное число членов, то $a$ - все еще предел
+            \item Добавление, замена или выкидывание конечного количества членом не меняет предел и его наличие (то же самое другими словами)
+            \item Перестановка членов не влияет на предел последовательности
+            \item Если $a=\lim x_n$ и $a=\lim y_n$, то если их перемешать, то у новой последовательности тоже предел $a$
+            \item Если $a=\lim x_n$, тогда у последовательности, в которой $x_n$ встречается с конечной кратностью, тот же предел (написать один и тот же элемент много раз подряд)
+        \end{enumerate}
+    \end{theorem-non}
+    \begin{conj}
+        $a=\lim x_n$, если
+    \[ \forall \varepsilon>0 \exists N : \forall n\geq N d(x_n, a)<\varepsilon\]
+    \end{conj}
+    \begin{conj}
+        $A \subset X, (X, d)$ - метрическое пространство
+        $A$ - ограничено, если $A$ целиком содержится в каком-нибудь шаре
+    \end{conj}
+    
+    \begin{theorem-non}
+        \quad \\
+        \begin{enumerate}
+            \item Предел единственный
+            \begin{proof}
+                \quad \\
+                Пусть $a\neq b \Longrightarrow \exists B_{r_1}(a), B_{r_2}(b) : B_{r_1} \cap B_{r, 2} = \varnothing$. \\
+                Вне $B_{r_1}(a)$ конечное число членов \\
+                Вне $B_{r_2}(b)$ конечное число членов \\
+                Тогда в последовательности конечное число членов. Противоречие.
+            \end{proof}
+            \item Если последовательность имеет предел, то она ограничена
+            \begin{proof}
+                \quad \\
+                Возьмем $\varepsilon=1$. Тогда $\exists N: \forall n\geq N\ x_n \in B_1(a)$. \\
+                Тогда $r:= \max\{d(a, x_1), d(a, x_2),..., d(a, x_N)\}+1$
+            \end{proof}
+            \item $a=\lim x_n \Longleftrightarrow \lim d(x_n, a)=0$
+            \begin{proof}
+                \quad \\
+                $\lim d(x_n, a)=0 \Longleftrightarrow \forall \varepsilon > 0 \exists N : \forall n \geq N d(x_n, a) < \varepsilon \Longleftrightarrow \lim x_n = a$
+            \end{proof}
+            \item Если $a=\lim x_n$ и $b = \lim y_n$, то $\lim d(x_n, y_n) = d(a, b)$
+            \begin{proof}
+                \quad \\
+                $d(a, b) \leq d(a, x_n)+d(x_n, y_n)+d(y_n, b)$
+                $d(x_n, y_n) \leq d(a, x_n)+d(a, b)+d(b, y_n) \Longrightarrow$
+                $|d(x_n, y_n)-d(a, b)|\leq d(x_n, a)+d(y_n, b)$ \\
+                Справа каждая меньше $\varepsilon /2$, тогда слева стремится к нулю
+            \end{proof}
+        \end{enumerate}
+    \end{theorem-non}
+
+
+    \section{Связь между пределами и предельными точками}
+    
+    \begin{theorem-non}
+        $a$ - предельная точка $A \Longleftrightarrow$ найдется последовательность точек $x\neq a \in A : \lim x_n = a$. Супер очевидно из соответствующих определений, но распишу
+        \begin{proof}
+            \quad \\
+            ``$\Longleftarrow$'': \quad Пусть $x_n \in A$ и $\lim x_n = a$. \\
+            Тогда в $B_r(a)\setminus \{a\}$ содержится бесконечное количество точек из $x_n$, так как $\exists N : \forall n \geq N x_n \in B_r(a)$ \\
+            ``$\Longrightarrow$'': \quad
+            $r_1 = 1 \Longrightarrow \exists x_1 \in B_1(a), r_2 = \min\{1/2, d(a, x_1)\}, r_3=\min\{1/3, d(a, x_2)\}...$ \\
+            $\forall \varepsilon>0\ \exists N: 1/N<\varepsilon \Longrightarrow \forall n\geq N\ d(x_n, a) < 1/n \leq 1/N < \varepsilon$
+        \end{proof}
+    \end{theorem-non}
+    
+    
+    
+    \begin{theorem-non}
+        Если $x_n \in A$ и $a=\lim x_n$, то $a \in Cl(A)$
+    \end{theorem-non}
+    \begin{proof}
+        Либо $a\in A$, тогда $a \in Cl(A)$, иначе $x_n \neq a$, тогда по теореме 1. $a \in A' \Longrightarrow a \in Cl(A)$
+    \end{proof}
+
+    \section{Предльный переход в неравенствах}
+
+    
+    \begin{theorem-non}
+        Предельный переход в неравенстве. $x_n, y_n \in \mathbb{R}$ \\
+        $x_n \leq y_n\ \forall n, a=\lim x_n, b=\lim y_n \Longrightarrow a\leq b$
+    \end{theorem-non}
+        
+    \begin{proof}
+        Пусть $a>b$ \\
+        $\varepsilon = \frac{a+b}{2}$ \\
+        $\exists N_1: \forall n\geq N_1\ x_n\in (a-\varepsilon, a+\varepsilon)$ \\
+        $\exists N_2: \forall n\geq N_2\ y_n \in (b-\varepsilon, b+\varepsilon)$ \\
+        $n:=\max\{N_1, N_2\}$ \\
+        $y_n \leq x_n$. Противоречие
+    \end{proof}
+    
+    \notice - неверно для строгого знака ($-1/n, 1/n$)
+    
+    \follow \; Если $x_n \leq b \forall n, \lim x_n = a \Longrightarrow a\leq b$
+    \begin{proof}
+        $y_n:=b$, далее из теоремы 1
+    \end{proof}
+    \newpage
+    \follow \; Если $x_n \geq a \forall n, \lim x_n = b \Longrightarrow a \leq b$
+
+    \begin{proof}
+        $y_n:=a$, далее из теоремы 1
+    \end{proof}
+    
+    \follow \; $x_n \in [a, b], \lim x_n = c \Longrightarrow c \in [a, b]$. 
+    Следует из предыдущих
+    
+    \section{Теорема о двух милиционерах}
+    
+    
+    \begin{theorem-non}
+        Теорема о сжатой последовательности (о двух милиционерах) \\
+        $x_n \leq y_n \leq z_n\ \forall n\in N, \lim x_n = \lim z_n = a \Longrightarrow \lim y_n = a$
+    \end{theorem-non}
+    \begin{proof}
+        \[
+    \begin{drcases}
+    \lim x_n = a \Longrightarrow \forall \varepsilon>0\ \exists N_1: x_n\in (a-\varepsilon, a+\varepsilon)\\
+    \lim z_n = a \Longrightarrow \forall \varepsilon>0\  \exists N_2: z_n\in (a-\varepsilon, a+\varepsilon)
+    \end{drcases}
+    \Longrightarrow x_n > a-\varepsilon, z_n<a+\varepsilon 
+    \] \\
+    При $n\geq \max\{N_1, N_2\}\ a-\varepsilon<x_n\leq y_n \leq z_n<a+\varepsilon \Longrightarrow a-\varepsilon<y_n<a+\varepsilon$\\
+    \end{proof}
+    
+    \follow \; $|y_n|\leq z_n\ \forall n, \lim z_n = 0 \Longrightarrow \lim y_n = 0$
+    
+    \begin{proof}
+        $x_n:=-z_n \Longrightarrow x_n \leq |y_n| \leq z_n,\ x_n \to 0,\ z_n \to 0 \Longrightarrow y_n \to 0$
+    \end{proof}
+    
+    \section{Монотонные последовательности}
+    
+    \begin{conj}
+        \quad \\
+        \begin{itemize}
+            \item[] $x_n$ монотонно возрастает(убывает), если $\forall n\ x_n\leq(\geq ) x_{n+1}$
+            \item[] $x_n$ монотонна, если она монотонно возрастает или монотонно убывает
+        \end{itemize}
+    \end{conj}
+    
+    \begin{theorem-non}
+        Если последовательность монотонно возрастает(убывает) и ограничена сверху(снизу), то она имеет предел.
+    \end{theorem-non}
+    \begin{proof}
+        $x_n$ такова, что $x_1\leq x_2\leq x_3...$ и ограничена сверху. Тогда у нее есть $sup:=S$. Докажем, что $\lim x_n = S$. \\
+        $\forall \varepsilon>0\ \ S-\varepsilon$ не является верхней границей $\Longrightarrow \exists x_N>s-\varepsilon \Longrightarrow \forall n\geq N\ S-\varepsilon < x_n < S+\varepsilon \Longrightarrow$ S - предел
+    \end{proof}
+
+    \follow \; Если последовательность монотонна, то она имеет предел тогда и только тогда, когда она ограничена.
+
+    ``$\Longleftarrow$'' По доказанной теореме \\
+    ``$\Longrightarrow$'' Из свойств предела
+    
+    \section{Топологическое пространство}
+    
+    \begin{conj}
+        $X$ - множество. Топология, это набор подмножеств $\Omega \subset X$, называющихся открытыми, таких что: 
+        \begin{enumerate}
+            \item $\varnothing, X$ - открытые
+            \item Объединение любого количество открытых - открыто
+            \item Пересечение конечного числа открытых - открыто\\
+        \end{enumerate}
+    \end{conj}
+    
+    \subsubsection*{Примеры}
+    \begin{itemize}
+        \item[] $\{\varnothing, X\}$
+        \item[] $X = [0, +\infty), \Omega = (a, +\infty), a\geq 0\}$
+    \end{itemize}  
+
+    \begin{conj}
+        Замкнутое множество - дополнение открытого
+    \end{conj}
+    \begin{conj}
+        $a$ - внутренняя точка множетсва $A$, если существует открытое множество $U$, т. ч. $a \in U, U\subset A$
+    \end{conj}
+    \begin{conj}
+        Внутренность $Int\ A$ - объединение всех открытых множеств, содержащихся в $A$. Равносильно - множество всех внутренних точек
+    \end{conj}
+    \begin{conj}
+        Замыкание $Cl\ A$ - пересечение всех замкнутых множеств, содержищих $A$
+    \end{conj}
+    \begin{conj}
+        $a = \lim x_n$, если вне любого открытого множества, содержащего точку $a$ находится лишь конечное число членов последовательности \\
+        $\forall U \ni a\ \exists N\ \forall n\geq N\ x_n \in U$
+    \end{conj}
+    \begin{conj}
+        Хаусдорфовость \\
+        $\forall a, b \in X \ \exists U, V$ - открытые множества, такие что $a\in U,\ b\in V,\ U\cap V = \varnothing$.
+    \end{conj}
+    \begin{conj} 
+        Если хаусдорфовость выполняется, то предел единственный.
+        \begin{proof}
+            Если $a, b$ - пределы, то $\exists U, V : a\in U,\ b\in V,\ U\cap V = \varnothing \Longrightarrow $ Вне $U$ лежит конечное количество членов, вне $V$ тоже, тогда и в $X$ конечное число членов. Противоречие
+        \end{proof}
+    \end{conj}
+
+    \section{Векторное пространство. Пространство $R^d$. Скалярное произведение. Неравенство Коши-Буняковского}
+    
+    \begin{conj}
+        $X$ - векторное пространство (над полем $\mathbb{R}$), если:
+        Определена операции "+": $X\times X \to X$
+        "*": $\mathbb{R}\times X \to X$ \\
+        \begin{enumerate}
+            \item Сложение коммутативно и ассоциативно
+            \item Существует $\overrightarrow{0}$
+            \item Существует обратный элемент $x+(-x)=\overrightarrow{0}$
+            \item $(\alpha \beta)x = \alpha(\beta x)\ \forall \alpha, \beta \in \mathbb{R}\ \ \forall x\in X$
+            \item $(\alpha+\beta)x = \alpha x + \beta x$
+            \item $\alpha(x+y) = \alpha x + \alpha y$
+        \end{enumerate}
+    \end{conj}
+    \vspace*{0,5cm}
+
+    \begin{conj}
+        \quad \\
+        $R^d = \{ \langle x_1, x_2,...,x_d\rangle  \}: x_i \in \mathbb{R}$
+    
+        $\langle x_1,...,x_d\rangle +\langle y_1,...,y_d\rangle =\langle x_1+y_1,..., x_d + y_d\rangle $
+    
+        $\alpha \langle x_1,...,x_d\rangle  = \langle \alpha x_1,..., \alpha x_d\rangle $
+    \end{conj}
+    
+    \begin{conj}
+        Скалярное произведение $\langle \bullet, \bullet\rangle X\times X \to \mathbb{R}$
+    
+        \begin{enumerate}
+            \item $\langle x, x\rangle \geq 0,\ \langle x, x\rangle =0 \Longleftrightarrow x=\overrightarrow{0}$
+            \item $\langle x, y\rangle = \langle y, x\rangle$
+            \item $\langle x+y, z\rangle = \langle x, z\rangle + \langle y, z \rangle $
+            \item $\langle \alpha x, y\rangle = \alpha \langle x, y \rangle $
+        \end{enumerate}
+    \end{conj}
+    
+    \begin{conj}
+        Неравенство Коши-Буняковского: $\langle x, y \rangle^2 \leq \langle x, x \rangle \langle y, y \rangle$
+    \end{conj} 
+    
+    \begin{proof}
+    
+    $f(t):=\langle x+ty, x+ty\rangle = \langle x, x+ty \rangle + \langle ty, x+ty \rangle =\langle x, x \rangle + t\langle x, y \rangle + t\langle y, x \rangle + t^2\langle y, y \rangle = \langle x, x \rangle + 2t\langle x, y \rangle + t^2\langle y, y \rangle \geq 0$. Это всегда неотрицательно, тогда дискриминант неположителен.
+
+    \[4t^2\langle x, y \rangle^2 - 4t^2\langle x, x \rangle \langle y, y \rangle \leq 0 \Longrightarrow \langle x, x \rangle^2 \leq \langle x, x \rangle \langle y, y \rangle\]
+    \end{proof}
+
+    \section{Норма}
+    
+    \begin{conj}
+        Норма $||\bullet || : X\to \mathbb{R}$\\
+        \begin{enumerate}
+            \item $||x|| \geq 0$, $||x|| = 0 \Longleftrightarrow x = \overleftarrow{0}$
+            \item $||\alpha x|| = |\alpha|*||x||$
+            \item $||x+y|| \leq ||x||+||y||$
+        \end{enumerate}
+    \end{conj}
+    
+    \subsection*{Примеры}
+    $X = \mathbb{R},\ ||x||:=|x|$
+    
+    $X = \mathbb{R}^d,\ ||x||:=|x_1|+|x_2|+...+|x_d|$
+    \newpage
+    \begin{theorem-non}
+        Если $\langle \bullet, \bullet \rangle$ - скалярное произведение в $X$, то $||x||:= \sqrt{\langle x, x \rangle}$ - норма.\\
+        $||\alpha x|| = \sqrt{\langle \alpha x, \alpha x\rangle} = \sqrt{\alpha^2 \langle x, x\rangle} = |\alpha|\sqrt{\langle x, x \rangle}$\\
+        $||x+y||^2 = \langle x+y, x+y \rangle = \langle x,x\rangle + 2\langle x, y\rangle + \langle y, y\rangle \Longrightarrow ||x||^2 + 2\langle x, y\rangle + ||y||^2 \overset{?}{\leq} ||x||^2 + 2||x||*||y|| + ||y||^2$ \vspace*{0,001cm}\\
+        $2\langle x, y \rangle \leq 2||x||*||y|| = \sqrt{\langle x, x\rangle}\sqrt{\langle y, y\rangle\ }$ - верно по неравенству Коши Буняковского
+    \end{theorem-non}
+    
+    \begin{theorem-non}
+        Свойства норм:
+        \begin{enumerate}
+            \item $||x-y||=||(x-z)+(z-y)|| \leq ||x-z||+||z-y||$
+            \item $d(x, y):=||x-y||$ - метрика
+            \item $|\ ||x||-||y||\ | \leq ||x-y||$ \\
+            $|x|| = ||(x-y)+y|| \leq ||x-y||+||y||$ \\
+            $||y|| = ||(y-x)+x|| \leq ||y-x||+||x||=||x-y||+||x||$ \\
+            $||x-y||\geq ||x||-||y||$ \\
+            $||x-y||\geq -(||x||-||y||)$
+        \end{enumerate}
+    \end{theorem-non}
+    \begin{theorem-non}
+        $X$ - нормированное пространство. Тогда норма порождена некоторым скалярным произведением тогда и только тогда, когда
+    
+        $2(||x||^2+||y||^2)=||x+y||^2+||x-y||^2$ - тождество параллелограмма.
+    
+        Доказательства не будет. Автор принял Линал
+    \end{theorem-non}
+    \section{Арифметические свойства пределов последовательности}
+    $X$ - нормированное пространство \\
+    $x_n,\; y_n \in X \quad \lambda_n \in \mathbb{R}$ \\
+    $\lim x_n = x_0 \quad \lim y_n = y_0 \quad \lim \lambda_n = \lambda_0$ 
+    \begin{theorem-non} Арифметические свойства пределов в нормированном пространстве \end{theorem-non}
+    \begin{enumerate}
+        \item $lim (x_n + y_n) = x_0 + y_0$
+        \begin{proof}
+                \begin{gather*}
+                    ||x_n + y_n - (x_0 + y_0) || = || (x_n - x_0) + (y_n - y_0)|| \leqslant ||x_n - x_0|| + ||y_n - y_0|| \\
+                    \lim x_n = x_0 \Rightarrow \forall \varepsilon > 0 \quad \exists N_1 : \forall n \geqslant N_1 \quad ||x_n - x_0|| < \frac{\varepsilon}{2} \\
+                    \lim y_n = y_0 \Rightarrow \forall \varepsilon > 0 \quad \exists N_2 : \forall n \geqslant N_2 \quad ||y_n - y_0|| < \frac{\varepsilon}{2} 
+                \end{gather*}
+                Тогда при $n \geqslant max\{N_1, N_2\} \quad ||x_n + y_n - (x_0 + y_0)|| \leqslant ||x_n - x_0|| + ||y_n - y_0|| < \varepsilon$
+        \end{proof}
+        \item $\lim (x_n - y_n) = x_0 - y_0$
+        \begin{proof}
+                Аналогично первому пункту.
+        \end{proof}
+        \item $\lim \lambda_nx_n = \lambda_0x_0$
+        \begin{proof}
+                \begin{gather*}
+                || \lambda_nx_n - \lambda_0x_0 || = ||(\lambda_nx_n - \lambda_nx_0) + (\lambda_nx_0 - \lambda_0x_0)|| \leqslant \\
+                \leqslant ||\lambda_nx_n - \lambda_nx_0|| + ||\lambda_nx_0 - \lambda_0x_0|| = |\lambda_n|*||x_n - x_0|| + |\lambda_n - \lambda_0|*||x_0||
+                \end{gather*} 
+                Так как у $\lambda_n$ есть предел, она ограничена, то есть $|\lambda_n| \leqslant M$. \\
+                Итого получаем:
+                \[ || \lambda_nx_n - \lambda_0x_0 || \leqslant M*||x_n - x_0|| + ||x_0||*|\lambda_n - \lambda_0|| \]
+                \begin{gather*}
+                    \lim x_n = x_0 \Rightarrow \forall \varepsilon > 0 \quad \exists N_1 : \forall n \geqslant N_1 \quad ||x_n - x_0|| < \frac{\varepsilon}{2M} \\
+                    \lim \lambda_n = \lambda_0 \Rightarrow \forall \varepsilon > 0 \quad \exists N_2 : \forall n \geqslant N_2 \quad |\lambda_n - \lambda_0| < \frac{\varepsilon}{2||x_0||+1}
+                \end{gather*}
+                При $n \geqslant max\{N_1, N_2\}$
+                \[|| \lambda_nx_n - \lambda_0x_0 || \leqslant M*||x_n - x_0|| + ||x_0||*|\lambda_n - \lambda_0|| < M * \frac{\varepsilon}{2M} + ||x_0|| * \frac{\varepsilon}{2||x_0||+1} < \varepsilon\]
+        \end{proof}
+        \item $\lim ||x_n|| = ||x_0||$
+        \begin{proof}
+                \[ ||x_n|| - ||x_0|| = ||(x_n - x_0) + x_0|| - ||x_0|| \leqslant ||x_n - x_0|| + ||x_0|| - ||x_0|| = ||x_n - x_0|| \to 0 \]
+        \end{proof}
+        \item Если в $X$ есть скалярное произведение, то $\lim<x_n, y_n> = <x_0, y_0>$
+        \begin{proof}
+            \begin{gather*}
+                <x_n, y_n> - <x_0, y_0> = <x_n, y_n> - <x_n, y_0> + <x_n, y_0> - <x_0, y_0> =  \\
+                = <x_n, y_n - y_0> + <x_n - x_0, y_0> \\
+                | <x_n, y_n> - <x_0, y_0> | \leqslant | <x_n, y_n - y_0> | + | <x_n - x_0, y_0> | \leqslant \\
+                \leqslant ||x_n||*||y_n-y_0||+||x_n-x_0||*||y_0||
+            \end{gather*}
+            Так как у $x_n$ есть предел, она ограничена, то есть $||x_n|| \leqslant M$. \\
+            Итого получаем:
+            \begin{gather*}
+                | <x_n, y_n> - <x_0, y_0> | \leqslant M*\underbrace{||y_n - y_0||}_{\to 0}+||y_0||*\underbrace{||x_n - x_0||}_{\to 0}
+            \end{gather*}
+        \end{proof}
+    \end{enumerate}
+    \begin{theorem-non} Арифметические свойства пределов числовых последовательностей \end{theorem-non}
+    $x_n,\; y_n \in \mathbb{R} \quad \lim x_n = x_0 \quad \lim y_n = y_0$
+    \begin{enumerate}
+        \item $\lim (x_n \pm y_n) = x_0 \pm y_0$
+        \item $\lim (x_ny_n) = x_0y_0$
+        \item $\lim |x_n| = |x_0|$
+        \item Если $y_0 \neq 0$ и $y_n \neq 0\;\; \forall n$, то $\lim \frac{x_n}{y_n} = \frac{x_0}{y_0}$
+        \begin{proof}
+            Докажем, что $\lim\frac{1}{y_n} = \frac{1}{y_0}$:
+            \[ | \frac{1}{y_n} - \frac{1}{y_0} | = \frac{|y_n - y_0|}{|y_n||y_0|} \]
+            Так кая $y_0 = \lim y_n$, найдется такое $N_1$, что $\forall n \geqslant N_1 \quad |y_n| \in (\frac{|y_0}{2}, \frac{3|y_0|}{2}) \Rightarrow |y_n| > \frac{|y_0|}{2}$ \\
+            При $n >= N_1$ получаем, что
+            \begin{gather*}
+                \frac{|y_n - y_0|}{|y_n||y_0|} < \frac{|y_n - y_0|}{\frac{|y_0|}{2}|y_0|} \\
+                lim y_n = y_0 \Rightarrow \forall \varepsilon > 0 \quad \exists N_2 : \forall n \geqslant N_2 \quad |y_n - y_0| < \frac{\varepsilon*y_0^2}{2}
+            \end{gather*}
+            Тогда если $n \geqslant max\{N_1, N_2\}$, то $|\frac{1}{y_n} - \frac{1}{y_0}| < \varepsilon$.
+            Теперь, когда мы знаем, что $lim\frac{1}{y_n} = \frac{1}{y_0}$, доказать исходное равенство легко:
+            \[ \lim \frac{x_n}{y_n} = \lim (x_n * \frac{1}{y_n}) = \lim x_n * \lim \frac{1}{y_n} = \frac{x_0}{y_0} \]
+        \end{proof}
+    \end{enumerate}
+    
+    \section{Покоординатная сходимость в $\mathbb{R}^d$}
+    \[ x_n = <x_n^{(1)}, \dots, x_n^{(d)}> \]
+    $x_n$ покоординатно сходится к $x_0$, если \\
+    \begin{gather*}
+        \begin{cases}
+            \lim x_n^{(1)} = x_0^{(1)} \\
+            \dots \\
+            \lim x_n^{(d)} = x_0^{(d)}
+        \end{cases}
+    \end{gather*}
+    
+    \begin{theorem-non} \end{theorem-non}
+    $x_n$ покоординатно сходится к $x_0 \Longleftrightarrow x_n$ сходится к $x_0$ по норме в $\mathbb{R}^d$ 
+    
+    $||a|| = \sqrt{a_1^2 + \dots + a_d^2}$ - норма
+    
+    \begin{proof}
+        \[ ||x_n - x_0|| = \sqrt{(x_n^{(1)} - x_0^{(1)})^2 + \dots + (x_n^{(d)} - x_0^{(d)})^2} \]
+        Заметим следующее: 
+        \[ \sqrt{(x_n^{(1)} - x_0^{(1)})^2 + \dots + (x_n^{(d)} - x_0^{(d)})^2} \geqslant \sqrt{(x_n^{(k)} - x_0^{(k)})^2} = |x_n^{(k)} - x_0^{(k)}| \]
+        \[  \sqrt{(x_n^{(1)} - x_0^{(1)})^2 + \dots + (x_n^{(d)} - x_0^{(d)})^2} \leqslant |x_n^{(1)} - x_0^{(1)}| + \dots + |x_n^{(d)} - x_0^{(d)}| \]
+        Итого получаем
+        \[ |x_n^{(k)} - x_0^{(k)}| \leqslant ||x_n - x_0|| \leqslant |x_n^{(1)} - x_0^{(1)}| + \dots + |x_n^{(d)} - x_0^{(d)}| \]
+        Докажем $"\Rightarrow"$:
+        \[ \lim x_n = x_0 \Rightarrow ||x_n - x_0|| \to 0 \Rightarrow  |x_n^{(k)} - x_0^{(k)}| \to 0 \Rightarrow \lim x_n^{(k)} = x_0^{(k)} \]
+        Докажем $"\Leftarrow"$:
+        \[ \lim x_n^{(k)} = x_0^{(k)} \Rightarrow |x_n^{(k)} - x_0^{(k)}| \to 0 \Rightarrow \sum_{k = 1}^d |x_n^{(k)} - x_0^{(k)}| \to 0 \Rightarrow ||x_n - x_0|| \to 0 \Rightarrow \lim x_n = x_0  \]
+    \end{proof}
+    
+    \section{Бесконечные пределы}
+    \begin{itemize}
+        \item \underline{$x_n \in \mathbb{R} \quad \lim x_n = +\infty$}
+        
+        Вне любого луча $(u, +\infty)$ находится лишь конечное число членов.
+        
+        $\forall u\quad \exists N: \forall n \geqslant N \quad x_n > u$
+        \item \underline{$x_n \in \mathbb{R} \quad \lim x_n = -\infty$}
+        
+        Вне любого луча $(-\infty, u)$ находится лишь конечное число членов.
+        
+        $\forall u\quad \exists N: \forall n \geqslant N \quad x_n < u$
+        
+        \item \underline{$x_n \in \mathbb{R} \quad \lim x_n = \infty$}
+        
+        В любом интервале $(u, v)$ находится лишь конечное число членов.
+        
+        $\forall u\quad \exists N: \forall n \geqslant N \quad |x_n| > u$
+    \end{itemize} 
+    \vspace{0.7cm}
+    \underline{Замечание 1}: Если $\lim x_n = +\infty$ или $\lim x_n = -\infty$, то $\lim x_n = \infty$. Обратное неверно (контрпример - $x_n = (-1)^nn$).
+    
+    \underline{Замечание 2}: Если $\lim x_n = \infty$, то ${x_n}$ не ограничена. Обратное неверно (контрпример - $x_n = n$(если $n$ четно) и $x_n = 0$ иначе).
+    \vspace{0.3cm}
+    
+    \begin{theorem-non} Единственность предела в $\overline{\mathbb{R}}$
+    \end{theorem-non}
+    Если $\lim x_n = a \in \overline{\mathbb{R}}$ и $\lim x_n = b \in \overline{\mathbb{R}}$, то $a = b$.
+    \begin{proof}
+        Пусть $a < b$. 
+        
+        Если $a,\;b \in \mathbb{R}$, то $a = b$ (должно быть доказано где-то раньше).
+        
+        Если $a \in \mathbb{R}$ и $b = +\infty$, то в $(a - 1, a + 1)$ и $(a + 1, +\infty)$ должно содержаться бесконечное число членов последовательности, но это невозможно. 
+        
+        Аналогично для случая  $a = -\infty$ и $b \in \mathbb{R}$.
+        
+        Если $a = \infty$ и $b = \infty$, то либо $a = b = +\infty$, либо $a = b = -\infty$.
+    \end{proof}
+    \begin{theorem-non} О стабилизации знака в $\overline{\mathbb{R}}$  \end{theorem-non}
+    Если $\lim x_n = a \in \overline{\mathbb{R}}$ и $a \neq 0$, то, начиная с некоторого номера, $x_n$ и $a$ одного знака. 
+    \begin{proof}
+        Не, ну это очевидно.
+    \end{proof}
+    \begin{theorem-non} О предельном переходе в неравенстве в $\overline{\mathbb{R}}$ \end{theorem-non}
+    \begin{enumerate}
+        \item Если $\lim x_n = +\infty$ и $x_n \leqslant y_n \;\forall n$, то $\lim y_n = +\infty$.
+        \begin{proof}
+            Мы знаем что,
+            \[ \forall u\quad \exists N: \forall n \geqslant N \quad x_n > u  \]
+            Так как $x_n \leqslant y_n \;\forall n$, то нам подойдет тоже $N$:
+            \[ \forall n \geqslant N \quad y_n \geqslant x_n > u  \]
+        \end{proof}
+        \item Если $\lim y_n = -\infty$ и $x_n \leqslant y_n \;\forall n$, то $\lim x_n = -\infty$.
+        \begin{proof}
+            Аналогично первому пункту.
+        \end{proof}
+        \item Если $x_n \leqslant y_n \;\forall n$ и $\lim x_n = a \in \overline{\mathbb{R}},\; \lim y_n = b \in \overline{\mathbb{R}}$, то $a \leqslant b$
+        \begin{proof} \quad \\
+        \begin{itemize}
+            \item $a, b \in R$, доказано ранее
+            \item $a = -\infty$, то $a \leqslant b$ всегда
+            \item $a = +\infty$, то по первому пункту $b = +\infty$
+            \item $b = +\infty$, то $a \leqslant b$ всегда
+            \item $b = -\infty$, то по второму пункту $a = -\infty$
+        \end{itemize}
+        \end{proof}
+    \end{enumerate}
+    
+    \section{Бесконечно большие и малые последовательности}
+    \begin{itemize}
+        \item $x_n$ называется бесконечно большой, если $\lim x_n = \infty$
+        \item $x_n$ называется бесконечно малой, если $\lim x_n = 0$
+        \item $x_n$ называется сходящайся, если она имеет конечный предел
+    \end{itemize}
+    \vspace{0.7cm}
+    \begin{theorem-non} Связь между бесконечно большими и бесконечно малыми\end{theorem-non}
+    $x_n \neq 0\; \forall n$ \\
+    $x_n$ - б.б. $\Leftrightarrow \frac{1}{x_n}$ - б.м.
+    \begin{proof}
+        $x_n$ - б.б. $\Leftrightarrow \forall u > 0\quad \exists N : \forall n \geqslant N\quad |x_n| > u$ $\Leftrightarrow$ 
+        
+        $\Leftrightarrow \forall \varepsilon > 0\quad \exists N : \forall n \geqslant N\quad |x_n| > \frac{1}{\varepsilon} \Leftrightarrow \frac{1}{|x_n|} < \varepsilon \Leftrightarrow \frac{1}{x_n}$ - б.м.
+    \end{proof}
+    \begin{theorem-non} О действиях с бесконечно малыми \end{theorem-non}
+    \begin{enumerate}
+        \item Сумма / разность б.м. это б.м.
+        \begin{proof}
+            Предел суммы / разности это сумма / разность пределов. 
+        \end{proof}
+        \item Произведение б.м. и ограниченной это б.м.
+        \begin{proof}
+            $y_n$ - ограниченная $\Rightarrow |y_n| \leqslant M$ 
+            
+            $x_n$ - б.м. $\Rightarrow \forall \varepsilon > 0\quad \exists N : \forall n \geqslant N\quad |x_n| < \frac{\varepsilon}{M}$
+            
+            $|x_ny_n| \leqslant M|x_n| < \varepsilon$
+        \end{proof}
+    \end{enumerate}
+    
+    \section{Арифметические действия в $\overline{\mathbb{R}}$}
+    \begin{theorem-non} Об арифметических операциях с $\infty$ \end{theorem-non}
+    \begin{enumerate}
+        \item $x_n \to +\infty,\; y_n$ - ограниченная снизу $\Rightarrow x_n + y_n \to +\infty$
+        \begin{proof}
+            $y_n$ - ограниченная снизу $\Rightarrow y_n \geqslant a$ 
+            
+            $x_n \to +\infty \Rightarrow \forall u \quad \exists N: \forall n \geqslant N \quad x_n > u - a$ 
+            
+            $\Rightarrow x_n + y_n > u - a + a = u$
+        \end{proof}
+        \item $x_n \to -\infty,\; y_n$ - ограниченная сверху $\Rightarrow x_n + y_n \to -\infty$
+        \begin{proof}
+            Аналогично предыдущему пункту.
+        \end{proof}
+        \item $x_n \to \infty,\; y_n$ - ограниченная $\Rightarrow x_n \pm y_n \to \infty$
+        \begin{proof}
+            Аналогично первому пункту.
+        \end{proof}
+        \item $x_n \to \pm \infty,\; y_n \geqslant c > 0 \Rightarrow x_ny_n \to \pm \infty$
+        \begin{proof}
+            $x_n \to +\infty \Rightarrow \forall u \quad \exists N: \forall n \geqslant N \quad x_n>\frac{u}{c}$
+            
+            $y_n \geqslant c > 0 \Rightarrow x_ny_n \geqslant cx_n > u$
+            
+            Случай $x_n \to -\infty$ рассматривается аналогично.
+        \end{proof}
+        \item $x_n \to \pm \infty,\; y_n \leqslant c < 0 \Rightarrow x_ny_n \to \mp \infty$
+        \begin{proof}
+            Аналогично предыдущему пункту.
+        \end{proof}
+        \item $x_n \to \infty,\; |y_n| \geqslant c > 0 \Rightarrow x_ny_n \to \infty $
+        \begin{proof}
+            Аналогично четвертому пункту.
+        \end{proof}
+        \item $x_n \to a \neq 0,\; y_n \neq 0 \to 0 \Rightarrow \frac{x_n}{y_n} \to \infty$
+        \begin{proof}
+            $\lim \frac{y_n}{x_n} = 0 \Rightarrow \frac{y_n}{x_n}$ - б.м. $\Rightarrow \frac{x_n}{y_n}$ - б.б. $\Rightarrow \lim \frac{x_n}{y_n} = \infty$ 
+        \end{proof}
+        \item $x_n$ - ограниченная, $y_n \to \infty \Rightarrow \frac{x_n}{y_n} \to 0$
+        \begin{proof}
+            $y_n \to \infty \Rightarrow \frac{1}{y_n}$ - б.м. $\Rightarrow x_n * \frac{1}{y_n}$ - б.м.
+        \end{proof}
+        \item $x_n \to \infty,\; y_n \neq 0$ - ограниченная $\Rightarrow \frac{x_n}{y_n} \to \infty$
+        \begin{proof}
+            $y_n$ - ограниченная $\Rightarrow |y_n| \leqslant M$
+            
+            $x_n \to \infty \Rightarrow \forall u > 0 \quad \exists N : \forall n \geqslant N \quad |x_n| > uM \Rightarrow |\frac{x_n}{y_n}| \geqslant |\frac{x_n}{M}| > u$
+        \end{proof}
+    \end{enumerate}
+    \vspace{0.7cm}
+    Запрещенные операции:
+    \begin{itemize}
+        \item $+\infty \pm (\mp\infty)$
+        \item $-\infty \pm (\pm\infty)$
+        \item $\pm \infty * 0$
+        \item $\frac{0}{0}$
+        \item $\frac{\pm \infty}{\pm \infty}$
+    \end{itemize}
+    \vspace{0.3cm}
+    Почему эти операции запрещенные? Разберем на примере:
+    
+    $\lim x_n = \lim y_n = +\infty$ \\
+    $x_n - y_n$  может иметь любой предел в $\overline{\mathbb{R}}$, а может его вообще не иметь:
+    \begin{itemize}
+        \item $x_n = n + a,\; y_n = n \Rightarrow x_n - y_n = a \to a$
+        \item $x_n = 2n,\; y_n = n \Rightarrow x_n - y_n = n \to +\infty$
+        \item $x_n = n + (-1)^n,\; y_n = n \Rightarrow x_n - y_n = (-1)^n$ - предела не имеет
+    \end{itemize}
+    
+    \section{Неравенство Бернулли}
+    \[ (1 + x)^n \geqslant 1 + nx \quad x > -1,\; n \in \mathbb{N} \]
+    \begin{proof}
+        Индукция по $n$.
+        
+        База $n = 1: (1 + x) = 1 + x$
+        
+        Переход $n \to n + 1: (1 + x)^{n + 1} = \underbrace{(1 + x)}_{> 0}\underbrace{(1 + x)^n}_{assumption} \geqslant (1 + x)(1 + nx) = 1 + (n + 1)x + nx^2 \geqslant 1 + (n + 1)x$
+    \end{proof}
+    \underline{Замечание 1:} В неравенсте Бернулли почти всегда строгий знак, равенство достигается только в случаях, когда $n = 1$ или $x = 0$.
+    
+    \underline{Замечание 2:} $(1 + x)^p \geqslant 1 + px \quad x > -1$ верно при всех $p \geqslant 1$ и $p \leqslant 0$. Какая-то жесткая тема. Дали без доказателства.
+    \vspace{0.5cm}
+    
+    \textbf{Следствие.} 
+    \begin{enumerate}
+        \item Если $a > 1$, то $\lim a^n = +\infty$.
+        \begin{proof}
+            $a > 1 \Rightarrow a = 1 + x \quad x > -1$
+            
+            $a^n = (1 + x)^n \geqslant 1 + xn \to +\infty$
+        \end{proof}
+        \item Если $|a| < 1$, то $\lim a^n = 0$.
+        \begin{proof}
+            Считаем, что $a \neq 0$.
+            
+            $|\frac{1}{a}| > 1 \Rightarrow \lim |\frac{1}{a}|^n = +\infty \Rightarrow |\frac{1}{a}|^n$ - б.б. $\Rightarrow |a^n|$ - б.м. $\Rightarrow a^n$ - б.м.
+        \end{proof}
+    \end{enumerate}
+    
+    \section{Определение экспоненты}
+    Рассмотрим последовательность $x_n = (1 + \frac{a}{n})^n$, где $a \in \mathbb{R}$
+    \begin{theorem-non}
+    $x_n$ монотонно возрастает, начиная с $n > -a$ и ограничена сверху
+    \end{theorem-non}
+    \begin{proof} \quad \\
+        \begin{enumerate}
+        \item Монотонное возрастание (если $a < 0$, то с номера $n = -a + 1$)
+        \begin{equation*}
+            \begin{split}
+                \frac{x_n}{x_{n - 1}} &= \frac{(1 + \frac{a}{n})^n}{(1 + \frac{a}{n - 1})^{n - 1}} \\ 
+                &= \frac{\frac{(n + a)^n}{n^n}}{\frac{(n - 1 + a)^{n - 1}}{(n - 1)^{n - 1}}} \\ 
+                &= \frac{(n - 1)^{n - 1}}{n^n} * \frac{(n + a)^n}{(n - 1 + a)^{n - 1}} \\
+                &= \frac{(n - 1)^n * (n + a)^n}{n^n * (n - 1 + a)^n } * \frac{n - 1 + a}{n - 1} \\
+                &= (\frac{n^2 - n + an - a}{n^2 - n + an})^n * \frac{n - 1 + a}{n - 1} \\ 
+                &= \underbrace{(1 - \frac{a}{n(n - 1 + a)})^n}_{\geqslant 1 - \frac{na}{n(n - 1 + a)} \;by\; Bernoulli's\; inequality} * \frac{n - 1 + a}{n - 1} \\
+                &\geqslant\frac{n - 1}{n - 1 + a} * \frac{n - 1 + a}{a} = 1
+            \end{split}
+        \end{equation*}
+        \item Ограниченность сверху
+        
+        $y_n = (1 - \frac{a}{n})^n$ монотонно возрастает при $n > a$ 
+        
+        $x_ny_n = (1 + \frac{a}{n})^n * (1 - \frac{a}{n})^n = (1 - (\frac{a}{n})^2)^n \leqslant 1$
+        
+        $y_n \geqslant c > 0$, начиная с некоторого номера $\Rightarrow 1 \geqslant x_ny_n \geqslant cx_n \Rightarrow x_n \leqslant \frac{1}{c}$, начиная с некоторого номера $\Rightarrow x_n$ - ограниченная
+        \end{enumerate}
+    \end{proof}
+    \textbf{Следствие.} Существует конечный $\lim (1 + \frac{a}{n})^n$ 
+    \begin{conj} \quad \\
+        \begin{enumerate}
+            \item $exp\,a := \lim (1 + \frac{a}{n})^n$
+            \item $e := \lim (1 + \frac{1}{n})^n \approx 2,71828$
+        \end{enumerate}
+    \end{conj}
+    \underline{Замечание:} Последовательность $x_n = (1 + \frac{a}{n})^n$ при $a \neq 0$ \underline{строго} монотонно возрастает c $n > -a$. В доказателсьстве пользовались неравенством Бернулли, при $a \neq 0$ в нем строгий знак.
+    \vspace{0.5cm}
+    
+    \textbf{Следствие.} Последовательность $z_n = (1 + \frac{1}{n})^{n+1}$ строго убывает и стремиться к $e$
+    \begin{proof}
+        $z_n = \underbrace{(1 + \frac{1}{n})}_{\to 1} * \underbrace{(1 + \frac{1}{n})^n}_{\to e} \to e$
+        
+        $z_n = \frac{n + 1}{n}^{n+1} = \frac{1}{(\frac{n}{n+1})^{n+1}} = \frac{1}{(1 - \frac{1}{n+1})^{n+1}}$
+        
+        Последовательность $(1 - \frac{1}{n+1})^{n+1}$ строго возрастает, следовательно, обратная к ней строго убывает. 
+    \end{proof}
+    
+    \section{Свойства экспоненты}
+    \begin{enumerate}
+        \item Для любого $a \in \mathbb{R} \quad exp\,a > 0$
+        \item $exp\,0 = 1,\; exp\,1 = e$
+        \item Если $a \leqslant b$, то $exp\,a \leqslant exp\,b$
+        \begin{proof}
+            $0 < 1 + \frac{a}{n} \leqslant 1 + \frac{b}{n}$ при $n > -a \Rightarrow \underbrace{(1 + \frac{a}{n})^n}_{\to exp\,a} \leqslant \underbrace{(1 + \frac{b}{n})^n}_{\to exp\,b}$ при $n > -a$
+        \end{proof}
+        \item $exp\,a \geqslant 1 + a$
+        \begin{proof}
+            По неравенству Бернулли:
+            
+            $\underbrace{(1 + \frac{a}{n})^n}_{\to exp\,a} \geqslant 1 + n * \frac{a}{n} = 1 + a$ при $n > -a$
+        \end{proof}
+        \item $exp\,a * exp\,(-a) \leqslant 1$
+        \begin{proof}
+            $\underbrace{(1 + \frac{a}{n})^n}_{\to exp\,a} * \underbrace{(1 - \frac{a}{n})^n}_{\to exp\,(-a)} = (1 - (\frac{a}{n})^2)^n \leqslant 1$
+        \end{proof}
+        \item $exp\,a \leqslant \frac{1}{1 - a}$ при $a < 1$
+        \begin{proof}
+            С помощью двух предыдущих пунктов
+            
+            $exp\,a \leqslant\frac{1}{exp\,(-a)} \leqslant \frac{1}{1 - a}$
+        \end{proof}
+        \item $(1 + \frac{1}{n})^n < e < (1 + \frac{1}{n})^{n + 1}$ при всех $n$
+        \begin{proof}
+            $(1 + \frac{1}{n})^n < (1 + \frac{1}{n+1})^{n+1} \leqslant \underbrace{(1 + \frac{1}{m})^{m}}_{\to e}$ при $m
+            \geqslant n + 1 \Rightarrow (1 + \frac{1}{n})^n < e$
+            
+            $(1 + \frac{1}{n})^{n + 1} > (1 + \frac{1}{n+1})^{n + 2} \geqslant \underbrace{(1 + \frac{1}{m})^{m + 1}}_{\to e}$ при $m \geqslant n + 1 \Rightarrow (1 + \frac{1}{n})^{n + 1} > e$
+        \end{proof}
+        В частности, подставив $n = 1$ и $n = 5$ получаем, что $2 < e < 3$
+    \end{enumerate}
+    
+    \section{Формула для экспоненты суммы}
+    \textbf{Лемма.}
+        Если $\lim a_n = a \in \mathbb{R}$, то $\lim (1 + \frac{a_n}{n})^n = exp\,a$    
+    \begin{proof}
+        Последовательность $a_n$ ограничена $\Rightarrow a_n \leqslant M,\; a \leqslant M$ и $M > 0$
+        
+        $A := 1 + \frac{a}{n} \leqslant 1 + \frac{M}{n} \quad B:= 1 + \frac{a_n}{n} \leqslant 1 + \frac{M}{n}$
+        
+        Надо доказать, что $\lim(A^n - B^n) = 0$
+        \begin{equation*}
+            \begin{split}
+                |A^n - B^n| &= |A - B|(A^{n-1} + A^{n-2}B + \dots + B^{n-1}) \\ &\leqslant |A-B|n(1 + \frac{M}{n})^{n-1} \\
+                &\leqslant |A-B|n(1 + \frac{M}{n})^n \\ 
+                &= \frac{|a-a_n|}{n}n(1 + \frac{M}{n})^n \\
+                &= |a - a_n|(1 + \frac{M}{n})^n \leqslant \underbrace{|a-a_n|}_{\to 0}*exp\,M
+            \end{split}
+        \end{equation*}
+    \end{proof}
+    \begin{theorem-non}
+        $exp\,(a+b) = exp\,a * exp\,b$
+    \end{theorem-non}
+    \begin{proof}
+        \[ \underbrace{(1 + \frac{a}{n})^n}_{\to\,exp\,a} * \underbrace{(1 + \frac{b}{n})^n}_{\to\,exp\,b} = (1 + \frac{a+b}{n} + \frac{ab}{n^2})^n = \underbrace{(1 + \frac{a + b + \frac{ab}{n}}{n})^n}_{a + b + \frac{ab}{n} := a_n \to\,a + b} = \underbrace{(1 + \frac{a_n}{n})^n}_{\to\,exp\,(a+b)} \]
+    \end{proof}
+    
+    \section{Сравнение скорости возрастания последовательностей}
+    \begin{theorem-non}
+        Пусть $x_n > 0$ и $\lim \frac{x_{n+1}}{x_n} < 1$. Тогда $x_n \to\,0$
+    \end{theorem-non}
+    \begin{proof} \quad \\\\
+        $l := \lim \frac{x_{n+1}}{x_n}$. Начиная с некоторого номера $m \;\; \frac{x_{n+1}}{x_n} < \frac{1 + l}{2} =: q < 1$
+        
+        При $n \geqslant m$ 
+        \[ 0 < x_n < \frac{x_n}{x_{n-1}} * \frac{x_{n-1}}{x_{n-2}} * \frac{x_{n-2}}{x_{n-3}} * \dots * \frac{x_{m+1}}{x_m} * x_m < q^{n-m}x_m = q^n * \frac{x_m}{q^m} \]
+        \[ 0 < x_n < q^n * \frac{x_m}{q^m} \to 0 \Rightarrow x_n \to 0  \]
+    \end{proof}
+    \textbf{Следствие.}
+    \begin{enumerate}
+        \item $\lim \frac{n^k}{a^n} = 0$ при $a > 1$ (показательная функция растет быстрее полиномиальной)
+        \begin{proof}
+            $x_n = \frac{n^k}{a^n}$
+            \[ \frac{x_{n+1}}{x_n} =
+            \frac{(n+1)^ka^n}{a^{n+1}n^k} = 
+             (\frac{n+1}{n})^k * \frac{a^n}{a^{n+1}} = \frac{1}{a} * (1 + \frac{1}{n})^k \to \frac{1}{a} < 1 \Rightarrow x_n \to 0\]
+        \end{proof}
+        \item $\lim \frac{a^n}{n!} = 0$ (факториал растет быстрее показательной)
+        \begin{proof}
+            $x_n = \frac{a^n}{n!}$
+            \[ \frac{x_{n+1}}{x_n} =  \frac{a^{n+1}n!}{(n+1)!a^n}
+            = a\frac{n!}{(n+1)!} = \frac{a}{n+1} \to 0 < 1 \Rightarrow x_n \to 0 \]
+        \end{proof}
+        \item $\lim \frac{n!}{n^n} = 0$
+        \begin{proof}
+            $x_n = \frac{n!}{n^n}$
+            \[ \frac{x_{n+1}}{x_n} = \frac{(n+1)!n^n}{(n+1)^{n+1}n!} = \frac{(n+1)n^n}{(n+1)^{n+1}} = (\frac{n}{n+1})^n = \frac{1}{(\frac{n + 1}{n})^n} = \frac{1}{(1 + \frac{1}{n})^n} \to \frac{1}{e} < 1 \Rightarrow x_n \to 0 \]
+        \end{proof}
+    \end{enumerate}
+
+    \section{Теорема Штольца (для неопределённости $\frac \infty \infty$)}
+
+    \begin{theorem} Штольца № 1 \end{theorem}
+        Пусть $(y_n)$ строго возрастает и $\lim y_n = +\infty$. 
+        Тогда если $\lim \frac{x_n - x_{n - 1}}{y_n - y_{n - 1}} = l \in
+        \overline{\mathbb{R}}$, то $\lim \frac{x_n}{y_n} = l$.
+    \begin{proof}
+        \textbf{Ключевой случай $l = 0$:}
+    
+        Пусть \[\varepsilon_n := 
+        \frac{x_n - x_{n - 1}}{y_n - y_{n - 1}} \rightarrow 0\]
+    
+        Зафиксируем $\varepsilon > 0$ и найдём $m$, т.ч. $
+        \abs{\varepsilon_n} < \varepsilon$ при $n \geq m$.
+    
+        \[x_n - x_m = (x_n - x_{n - 1}) + (x_{n - 1} - x_{n - 2})
+        + ... + (x_{m + 1} - x_m) = \sum_{k=m+1}^n \varepsilon_k
+        \cdot (y_k - y_{k - 1})\]
+        \[\abs{x_n - x_m} \leq \sum_{k=m+1}^n \abs{\varepsilon_k}
+        \cdot (y_k - y_{k - 1}) < \sum_{k=m+1}^n \varepsilon
+        \cdot (y_k - y_{k - 1}) = \varepsilon \cdot \sum_{k=m+1}^n 
+        (y_k - y_{k - 1}) = \varepsilon \cdot (y_n - y_m) <
+        \varepsilon y_n\]
+    
+        Можно считать, что $y_m > 0$ (по теореме о стабилизации знака).
+    
+        Заметим, что $\abs{x_m}$ фиксировано, а $y_n \rightarrow +\infty$
+        $\Rightarrow$ $\lim \frac{\abs{x_m}}{y_n} = 0$ и
+        $\frac{\abs{x_m}}{y_n} < \varepsilon$, начиная с некоторого номера.
+    
+        \[\abs{x_n} \leq \abs{x_m} + \abs{x_n - x_m} < 
+        \abs{x_m} + \varepsilon y_n \Rightarrow \abs{\frac{x_n}{y_n}} <
+        \frac{\abs{x_m}}{y_n} + \varepsilon < 2 \varepsilon\]
+        начиная с некоторого номера $\Rightarrow \lim \abs{\frac{x_n}{y_n}} = 0 = l$.
+    
+        \textbf{Случай $l \in \mathbb{R}$:}
+        \[\widetilde{x_n} := x_n - l \cdot y_n, \widetilde{x_n} -
+        \widetilde{x_{n-1}} = x_n - x_{n-1} - l \cdot (y_n - y_{n-1})\]
+        \[\frac{\widetilde{x_n} - \widetilde{x_{n-1}}}
+        {y_n - y_{n - 1}} = \frac{x_n - x_{n - 1}}{y_n - y_{n - 1}}  - l
+        \rightarrow 0 \xRightarrow[]{l = 0} \frac{\widetilde{x_n}}{y_n}
+        \rightarrow 0 \Rightarrow \frac{\widetilde{x_n}}{y_n} =
+        \frac{x_n - l \cdot y_n}{y_n} = \frac{x_n}{y_n} - l
+        \rightarrow 0 \Rightarrow \frac{x_n}{y_n} \rightarrow l\]
+    
+        \textbf{Случай $l = +\infty$:}
+    
+        \[\frac{x_n - x_{n - 1}}{y_n - y_{n - 1}} \rightarrow +\infty
+        \Rightarrow \frac{x_n - x_{n - 1}}{y_n - y_{n - 1}} > 1\] 
+        начиная с некоторого номера \\
+        $\Rightarrow x_n - x_{n - 1} > y_n - y_{n - 1} > 0 \Rightarrow
+        x_n$ строго возрастает с нек. номера $m \Rightarrow$\\
+        $\Rightarrow x_n - x_m > y_n - y_m \Rightarrow
+        x_n > y_n + (x_m - y_m) \rightarrow +\infty \Rightarrow
+        x_n \rightarrow +\infty$
+    
+        Рассмотрим
+        \[\frac{y_n - y_{n - 1}}{x_n - x_{n - 1}} \rightarrow 0
+        \xRightarrow[]{l = 0} \frac{y_n}{x_n} \rightarrow 0 \Rightarrow
+        \frac{x_n}{y_n} \rightarrow +\infty\] (а не $\infty$, т.к. 
+        $x_n > 0, y_n > 0$ с нек. номера)
+    
+        \textbf{Случай $l = -\infty$}
+    
+        Пусть $\widetilde{x_n} := -x_n$.
+        \[\frac{x_n - x_{n-1}}{y_n - y_{n - 1}} \rightarrow -\infty
+        \Rightarrow \frac{\widetilde{x_n} - \widetilde{x_{n-1}}}
+        {y_n - y_{n - 1}} = -\frac{x_n - x_{n-1}}{y_n - y{n - 1}}
+        \rightarrow +\infty \Rightarrow -\frac{x_n}{y_n} =
+        \frac{\widetilde{x_n}}{y_n} \rightarrow +\infty
+        \Rightarrow \frac{x_n}{y_n} \rightarrow -\infty\] 
+    
+    \end{proof}
+    
+    \textbf{Следствие.}
+    \[\text{Если } \lim a_n = a \in \overline{\mathbb{R}}
+    \text{, то } \lim \frac{a_1 + a_2 + ... + a_n}{n} = a\] 
+    \begin{proof}
+        \[x_n := \sum_{k=1}^n a_k, \quad y_n := n \nearrow +\infty\]
+        \[\lim \frac{x_n - x_{n-1}}{y_n - y_{n-1}} = \lim{a_n}{n - (n - 1)}
+        = \lim a_n = a \Rightarrow \lim \frac{a_1 + a_2 + ... + a_n}{n} = a\]
+    \end{proof}
+    
+    Пример. Найти предел:
+    \[m \in \mathbb{N}, \quad \frac{1}{n^{m + 1}} \cdot \sum_{k=1}^{n} k^m\]
+    
+    \[x_n := \sum_{k=1}^{n} k^m, \quad y_n := n^{m + 1} \nearrow +\infty\]
+    \begin{gather*}
+        \lim \frac{y_n - y_{n - 1}}{x_n - x_{n - 1}} =
+        \lim \frac{n^{m + 1} - (n - 1)^{m + 1}}{n^m} =
+        \lim \frac{n^{m+1} - (n^{m+1} + \sum_{k = 1}^{m + 1} 
+        (C_{m+1}^k (-1)^k n^{m+1-k})}{n^m}) = \\
+        = \lim \sum_{k = 1}^{m + 1} 
+        ((-1)^{k+1} \cdot \frac{C_{m+1}^k}{n^{k - 1}}) =
+        \lim C_{m + 1}^1 + \lim \sum_{k = 2}^{m + 1} 
+        ((-1)^{k+1} \cdot \frac{C_{m+1}^k}{n^{k - 1}}) =
+        (m + 1) + 0 = m + 1
+    \end{gather*}
+    \[\lim\frac{x_n - x_{n - 1}}{y_n - y_{n-1}} = \frac1{m + 1}
+    \Rightarrow \lim\frac{x_n}{y_n} = \frac1{m + 1}\]
+    
+    \section{Теорема Штольца (для неопределённости $\frac 0 0$)}
+    
+    \begin{theorem}Штольца № 2\end{theorem}
+    \[0<y_n<y_{n-1} \text{ и } \lim x_n = \lim y_n = 0
+    \text{ Тогда если }\lim\frac{x_n - x_{n-1}}{y_n - y_{n-1}} = l \in
+    \overline{\mathbb{R}}\text{, то }\lim \frac{x_n}{y_n} = l\]
+    
+    \begin{proof}
+        \textbf{Случай $l = 0$:}
+    
+        Пусть \[\varepsilon_n := 
+        \frac{x_n - x_{n - 1}}{y_n - y_{n - 1}} \rightarrow 0\]
+    
+        Зафиксируем $\varepsilon > 0$ и найдём $m$, т.ч. $
+        \abs{\varepsilon_n} < \varepsilon$ при $n \geq m$.
+        \[x_n - x_m = \sum_{k=m+1}^n(x_k - x_{k-1}) =
+        \sum_{k=m+1}^n \varepsilon_k (y_k - y_{k-1}) \Rightarrow
+        \abs{x_n - x_m} \leq\] \[\leq \sum_{k=m+1}^n -\abs{\varepsilon_k}
+        (y_k - y_{k-1}) < \varepsilon \sum_{k=m+1}^n (y_k - y_{k-1}) =
+        \varepsilon (y_m - y_n)\]
+        \[(x_n - x_m) < \varepsilon (y_m - y_n)\]
+        \[\text{Устремим } n \text{ к } +\infty \Rightarrow
+        \abs{x_n - x_m} \rightarrow \abs{-x_m} = x_m, \quad
+        \varepsilon (y_m - y_n) \rightarrow \varepsilon y_m \Rightarrow\]
+        \[\Rightarrow \text{по пред. переходу в нер., при }
+        m \geq \text{нек. } N \quad \abs{x_m} < \varepsilon y_m
+        \Rightarrow \abs{\frac{x_m}{y_m}} < \varepsilon
+        \Rightarrow \lim \frac{x_m}{y_m} = 0\]
+    
+        \textbf{Случай $l \in \overline{\mathbb{R}}$:}
+        Так же, как в теореме Штольца № 1
+        \[\widetilde{x_n} := x_n - l \cdot y_n, \widetilde{x_n} -
+        \widetilde{x_{n-1}} = x_n - x_{n-1} - l \cdot (y_n - y_{n-1})\]
+        \[\frac{\widetilde{x_n} - \widetilde{x_{n-1}}}
+        {y_n - y_{n - 1}} = \frac{x_n - x_{n - 1}}{y_n - y_{n - 1}}  - l
+        \rightarrow 0 \xRightarrow[]{l = 0} \frac{\widetilde{x_n}}{y_n}
+        \rightarrow 0 \Rightarrow \frac{\widetilde{x_n}}{y_n} =
+        \frac{x_n - l \cdot y_n}{y_n} = \frac{x_n}{y_n} - l
+        \rightarrow 0 \Rightarrow \frac{x_n}{y_n} \rightarrow l\]
+    
+        \textbf{Случай $l = +\infty$:}
+        \[\frac{x_n - x_{n - 1}}{y_n - y_{n - 1}} \rightarrow +\infty
+        \Rightarrow \frac{x_{n - 1} - x_n}{y_{n - 1} - y_{n}} =
+        \frac{x_n - x_{n - 1}}{y_n - y_{n - 1}} > 1 \text{ начиная
+        с некоторого номера} \Rightarrow\] \[\Rightarrow
+        x_{n - 1} - x_n > y_{n - 1} - y_n > 0 \Rightarrow x_n
+        \text{ строго убывает} \Rightarrow \lim \frac{y_n - y_{n - 1}}
+        {x_n - x_{n - 1}} = 0 \xRightarrow[]{l = 0} \lim \frac{y_n}{x_n} = 0
+        \Rightarrow \] \[\Rightarrow \frac{x_n}{y_n} = +\infty\]
+    
+        \textbf{Случай $l = -\infty$:}
+        Так же, как в теореме Штольца № 1
+    
+        Пусть $\widetilde{x_n} := -x_n$.
+        \[\frac{x_n - x_{n-1}}{y_n - y_{n - 1}} \rightarrow -\infty
+        \Rightarrow \frac{\widetilde{x_n} - \widetilde{x_{n-1}}}
+        {y_n - y_{n - 1}} = -\frac{x_n - x_{n-1}}{y_n - y{n - 1}}
+        \rightarrow +\infty \Rightarrow -\frac{x_n}{y_n} =
+        \frac{\widetilde{x_n}}{y_n} \rightarrow +\infty
+        \Rightarrow \frac{x_n}{y_n} \rightarrow -\infty\] 
+    
+    \end{proof}
+    
+    \section{Подпоследовательности (определение и простейшие свойства).
+    Теорема о стягивающихся отрезках)}
+    
+    \begin{conj}
+    Последовательность $(x_n)$, $n_1 < n_2 < n_3 < ...$ Тогда
+    $(x_{n_k})$ - подпоследовательность.
+    \end{conj}
+    \textbf{Замечание.} $n_k \geq k$ (по индукции)
+    
+    \textbf{Свойства:}
+    \begin{enumerate}
+        \item Если последовательность имеет предел, то подпоследовательность
+        имеет тот же предел.
+        \item Пусть две подпоследовательности в объединении дают исходную
+        последовательность. Если подпоследовательности имеют одинаковый
+        предел, то исходная последовательность имеет тот же предел.
+    \end{enumerate}
+    
+    \begin{theorem}О стягивающихся отрезках.\end{theorem}
+    \[\text{Пусть }[a_1; b_1] \supset [a_2; b_2] \supset [a_3; b_3] 
+    \supset ... \text{ и } \lim (b_n - a_n) = 0\]
+    Тогда существует единственная точка $c$, принадлежащая всем отрезкам
+    и $\lim a_n = \lim b_n = c$.
+    \[\text{Т.е. } \bigcap_{n = 1}^{+\infty} [a_n; b_n] = {c}\]
+    
+    \begin{proof}
+        По теореме о вложенных отрезках $\bigcap_{n = 1}^{+\infty} [a_n; b_n]
+        \neq \varnothing$.
+        \[\text{Пусть } c,d \in \bigcap_{n = 1}^{+\infty} [a_n; b_n]
+        \Rightarrow c, d \in [a_n; b_n] \forall n; \text{ НУО, } d \geq c\]
+        \[0 \leq d - c \leq b_n - a_n \rightarrow 0 \Rightarrow c = d
+        \text{, иначе } \exists n : b_n - a_n < \varepsilon = d - c\]
+        \[0 \leq c - a_n \leq b_n - a_n \rightarrow 0
+        \xRightarrow[]{\text{2 мил.}}
+        c - a_n \rightarrow 0 \Rightarrow \lim a_n = c\]
+        \[0 \leq b_n - c \leq b_n - a_n \rightarrow 0
+        \xRightarrow[]{\text{2 мил.}}
+        b_n - c \rightarrow 0 \Rightarrow \lim b_n = c\]
+    \end{proof}
+    
+    \section{Теорема Больцано-Вейерштрасса в $\mathbb{R}$}
+    \begin{theorem}
+        Из любой ограниченной последовательности можно выделить
+        сходящуюся подпоследовательность.
+    \end{theorem}
+    \begin{proof}
+    ${x_n}$ ограничено $\Rightarrow x_n \in [a; b]$
+    
+    В каком-то из отрезков $[a; \frac{a + b}{2}]$ и $[\frac{a + b}{2}; b]$
+    содержится бесконечное число членов послед.\\
+    Назовём этот отрезок $[a_1; b_1]$.
+    
+    В каком-то из отрезков $[a_1; \frac{a_1 + b_1}{2}]$ и 
+    $[\frac{a_1 + b_1}{2}; b_1]$
+    содержится бесконечное число членов послед.\\
+    Назовём этот отрезок $[a_2; b_2]$.
+    
+    В каком-то из отрезков $[a_2; \frac{a_2 + b_2}{2}]$ и 
+    $[\frac{a_2 + b_2}{2}; b_2]$
+    содержится бесконечное число членов послед.\\
+    Назовём этот отрезок $[a_3; b_3]$.
+    \[...\]
+    \[[a; b] \supset [a_1; b_1] \supset [a_2; b_2] \supset
+    [a_3; b_3] \supset ...\]
+    \[b_n - a_n = \frac{b - a}{2^n} \rightarrow 0\]
+    
+    Тогда по теореме о стягивающихся отрезках $\lim a_n = \lim b_n = c$
+    
+    Выберем подпоследовательность. Берём $[a_1; b_1]$, в нём есть
+    какой-то член последовательности, назовём его $x_{n_1}$.
+    
+    В $[a_2; b_2]$ содержится бесконечное число членов последовательности
+    $\Rightarrow$ есть член последовательности с номером, большим $n_1$.
+    Обозначим его $x_{n_2}$, тогда $n_2 > n_1$.
+    \[...\]
+    $x_{n_k} \in [a_k; b_k], n_1 < n_2 < n_3 < ...$, значит построили
+    подпоследовательность.
+    
+    \[a_k \rightarrow c, \,\, b_k \rightarrow c \quad a_k \leq x_{n_k} \leq b_k
+    \xRightarrow[]{\text{2 мил.}} \lim x_{n_k} = c \]
+    \end{proof}
+    
+    \section{Аналог теоремы Больцано–Вейерштрасса для неограниченной 
+    последовательности. Частичные пределы. Теорема о характеристике 
+    частичных пределов.}
+    
+    \begin{theorem}\end{theorem}
+    \begin{enumerate}
+        \item Неограниченная монотонная последовательность стремится
+        к $+\infty$ или к $-\infty$.
+        \item Из любой неограниченной последовательности можно выделить
+        подпоследовательность, стремящуюся к $+\infty$ или к $-\infty$.
+    \end{enumerate}
+    \begin{proof}.
+    \begin{enumerate}
+        \item Пусть $(x_n)$ возрастает. $(x_n)$ неограничена $\Rightarrow$
+        никакое $u$ не является верхней границей $\Rightarrow \exists m : x_m
+        x_m > u \Rightarrow u < x_m \leq x_{m + 1} \leq x_{m + 2} \leq \dots
+        \Rightarrow x_n > u$, начиная с некоторого номера $\Rightarrow
+        \lim x_n = +\infty$
+    
+        \item Пусть $(x_n)$ неограничена сверху.
+        
+        $1$ не является верхней границей $\Rightarrow \exists x_{n_1} > 1$;\\
+        $\max\{2, x_1, x_2, \dots, x_{n_1}\}$ не является верхней границей
+        $\Rightarrow \exists x_{n_2} > \max\{\dots\} \Rightarrow x_{n_2} > 2,\\
+        n_2 > n_1$;\\
+        $\max\{3, x_1, x_2, \dots, x_{n_2}\}$ не является верхней границей
+        $\Rightarrow \exists x_{n_3} > \max\{\dots\} \Rightarrow x_{n_3} > 3,\\
+        n_3 > n_2$;\\
+        и т.д.
+    
+        Итого, $x_{n_k} > k$ и $n_1 < n_2 < \dots \Rightarrow (x_{n_k})$
+        -- подпоследовательность $(x_n)$ и $\lim x_{n_k} = +\infty$ по
+        предельному переходу в неравенстве.
+    \end{enumerate}
+    \end{proof}
+    
+    \begin{conj}
+    $a$ -- частичный предел последовательности $(x_n)$, если найдётся
+    подпоследовательность $x_{n_k} \rightarrow a$.
+    \end{conj}
+    \begin{theorem}
+    $a$ -- частичный предел последовательности $\Leftrightarrow$
+    в любой окрестности точки $a$ найдётся бесконечное число членов
+    последовательности.
+    \end{theorem}
+    \begin{proof} $ $
+    
+        ''$\Longrightarrow$'':
+    
+        Если $a = \lim x_{n_k}$ и $U_a$ -- окрестность точки $a$, то
+        все $x_{n_k}$ кроме конечного числа лежат в $U_a \Rightarrow$
+        в $U_a$ лежит бесконечное число членов последовательности $(x_n)$.
+    
+        ''$\Longleftarrow$'':
+    
+        Будем строить подпоследовательность, имеющую предел $a$.
+    
+        В $B_{1}(a)$ найдётся бесконечное число членов последовательности,
+        возьмём какой-то и назовём его $x_{n_1}$.\\
+        В $B_{1/2}(a)$ найдётся бесконечное число членов
+        последовательности, значит найдётся член $(x_n)$ с индексом, большим
+        $n_1$, назовём его $x_{n_2}$.\\
+        В $B_{1/3}(a)$ найдётся бесконечное число членов
+        последовательности, значит найдётся член $(x_n)$ с индексом, большим
+        $n_2$, назовём его $x_{n_3}$.\\
+        $\dots$
+    
+        $n_1 < n_2 < n_3 < \dots$\\
+        $x_{n_k} \in B_{1/k}(a) \Rightarrow \rho(x_{n_k}, a) < \frac1k
+        \Rightarrow \rho(x_{n_k}, a) \rightarrow 0 \Rightarrow
+        \lim x_{n_k} = a$
+    
+    \end{proof}
+    
+    \section{Фундаментальные последовательности. Свойства. Критерий Коши.}
+    
+    \begin{conj}
+    Фундаментальная последовательность (сходящаяся в себе,
+    последовательность Коши)
+    \end{conj}
+    Пусть $(X, \rho)$ -- метрическое пространство. $x_n \in X$.
+    $x_n$ -- фундаментальная последовательность, если $\forall
+    \varepsilon > 0 \,\, \exists N : \forall n, m \geq N \,\,
+    \rho(x_n, x_m) < \varepsilon$
+    
+    \textbf{Свойства:}
+    \begin{enumerate}
+        \item Сходящаяся последовательность фундаментальна.
+        
+        \textbf{Доказательство:}\\
+        Пусть $\lim x_n := a$. Зафиксируем $\varepsilon > 0$.
+        Тогда $\exists N :\\ \forall n \geq N \,\,\, \rho(x_n, a) < 
+        \frac{1}{2} \varepsilon$\\ 
+        $\forall m \geq N \,\,\, \rho(x_m, a) < \frac{1}{2} \varepsilon$\\
+        $\Rightarrow \rho(x_n, x_m) \leq \rho(x_n, a) + \rho(x_m, a) <
+        \varepsilon$
+    
+        \item Фундаментальная последовательность ограничена
+        
+        \textbf{Доказательство:}\\
+        Берём $\varepsilon = 1$. Тогда $\exists N : \forall n, m \geq N \,\,
+        \rho(x_n, x_m) < 1 \Rightarrow$\\
+        $\Rightarrow \forall n \geq N \,\, \rho(x_n, x_N) < 1
+        \Leftrightarrow x_n \in B_1(x_N)$\\
+        $R := \max\{\rho(x_1, x_N), \rho(x_2, x_N), \dots, 
+        \rho(x_{N-1}, x_N)\} \Rightarrow \forall n \,\, x_n \in B_R(x_N)$
+    
+        \item Если у фундаментальной последовательности есть сходящаяся
+        подпоследовательность, то фундаментальная последовательность
+        имеет тот же предел.
+    
+        \textbf{Доказательство:}\\
+        Пусть $\lim x_{n_k} = a$. Зафиксируем $\varepsilon > 0$.\\
+        $\exists K : \forall k \geq K \quad \rho(x_k, a) <
+        \frac{1}{2} \varepsilon$\\
+        $\exists N : \forall n, m \geq N \quad \rho(x_n, x_m) <
+        \frac{1}{2} \varepsilon$\\
+        Возьмём $N \geq 0$ и подберём такое $k$, что $k \geq N$\\
+        и $n_k \geq N$ (например, $k \geq \max{N, K}$ подходит)\\
+        Тогда $\rho(x_n, x_{n_k}) < \frac{1}{2} \varepsilon$
+        (т.к. $n_k \geq N$)\\
+        И тогда $\rho(x_{n_k}, a) < \frac{1}{2} \varepsilon$
+        (т.к. $k \geq K$)\\
+        $\Rightarrow \rho(x_n, a) \leq \rho(x_n, x_{n_k}) +
+        \rho(x_{n_k}, a) < \varepsilon \Rightarrow \lim x_n = a$
+    \end{enumerate}
+    
+    \begin{theorem}Критерий Коши\end{theorem}
+    Числовая последовательность имеет предел $\Leftrightarrow$
+    она фундаментальна.
+    
+    \begin{proof} $ $
+    
+    ''$\Longrightarrow$'':\\
+    По свойству 1.
+    
+    ''$\Longleftarrow$'':\\
+    фундаментальность $\xRightarrow[]{\text{св-во 2}}$
+    ограниченность $\xRightarrow[]
+    {\text{Больцано–Вейерштрасса}}$\\
+    $\begin{rcases*}
+        \Rightarrow \text{сущ. сходящаяся подпосл.}\\
+        \quad\quad\text{фундаментальность}
+    \end{rcases*}$
+    $\xRightarrow[]{\text{св-во 3}}$ существует конечный предел.
+    
+    \end{proof}
+    
+    \section{Теорема Больцано–Вейерштрасса в $\mathbb{R}^d$.
+    Полнота $\mathbb{R}^d$ }
+    
+    \begin{conj}
+    Полнота метрического простраства
+    \end{conj}
+    Пусть $(X, \rho)$ -- метрическое пространство.
+    $X$ - полное, если любая фундаментальная последовательность
+    в нём имеет предел.
+    
+    \begin{theorem}
+        $\mathbb{R}^d$ - полное пространство.
+    \end{theorem}
+    \begin{proof} $ $
+    
+        Возьмём фундаментальную последовательность $(x_n)$.
+        $x_n = (x_n^{(1)}, x_n^{(2)}, \dots, x_n^{(d)})$
+    
+        \[\forall \varepsilon > 0 \,\, \exists N :
+        \forall n, m \geq N \,\, \rho(x_n, x_m) <
+        \varepsilon \Rightarrow\]
+        \[\Rightarrow \abs{x_n^{(k)} -
+        x_m^{(k)}} \leq \sqrt{(x_n^{(1)} -
+        x_m^{(1)})^2 + (x_n^{(2)} - x_m^{(2)})^2 +
+        \dots + (x_n^{(d)} - x_m^{(d)})^2} < \varepsilon
+        \Rightarrow\] \[ \Rightarrow
+        \text{числовая послед. } x_n^{(k)}
+        \text{ фундаментальна } \Rightarrow \text
+        {у неё есть конечный предел}\] \[\lim x_n^{(k)}
+        = a_k \Rightarrow \lim x_n = a, \quad a = 
+        (a_1, a_2, \dots, a_d) \]
+        Т.к. в $\mathbb{R}^d$ покоординатная и
+        сходимость по метрике -- одно и то же.
+    
+    \end{proof}
+    
+    \begin{theorem}
+    Больцано–Вейерштрасса в $\mathbb{R}^d$.
+    \end{theorem}
+    \begin{proof}
+    Пусть векторная последовательность
+    $x_n = (x_n^{(1)}, x_n^{(2)}, \dots, x_n^{(d)})$ ограничена.
+    Это равносильно тому, что все её координатные последовательности
+    ограничены.
+    
+    Выделим из первой координатной последовательности сходящуюся
+    подпоследовательность $(x_{n_{1, k}}^{(1)})$. Тогда получим
+    подпоследовательность $(x_{n_{1, k}})$, первая координатная
+    последовательность которой сходится, а остальные ограничены.
+    
+    Тогда в ней можно выделить такую подпоследовательность
+    $(x_{n_{2, k}})$ так, чтобы вторая координатная последовательность
+    сходилась.
+    
+    Повторим так ещё $d - 2$ раз и получим то, что в векторной 
+    подпоследовательности $(x_{n_{k}})$, где $n_k = n_{d, k}$, 
+    любая координатная последовательность сходится $\Rightarrow$
+    $(x_{n_{k}})$ тоже сходится, т.к. в $\mathbb{R}^d$ покоординатная и
+    сходимость по метрике -- одно и то же.
+    
+    \end{proof}
+    
+    
+    \section{Верхний и нижний пределы. Определение и
+    теорема существования. Связь между частичными пределами и  
+    верхним и нижним пределами.}
+    
+    \begin{conj}
+    Нижний и верхний пределы
+    \end{conj}
+    $x_n$ - числовая последовательность.
+    
+    $\underline{\lim} x_n := \liminf x_n := \lim \inf_{k \geq n} x_k$ -- 
+    нижний предел.
+    
+    $\overline{\lim} x_n := \limsup x_n := \lim \sup_{k \geq n} x_k$ -- 
+    верхний предел.
+    
+    $y_n := \inf_{k \geq n} x_k = \inf\{x_n, x_{n+1}, x_{n+2}, \dots\}$
+    $\quad y_n \leq y_{n+1}$\\
+    $z_n := \sup_{k \geq n} x_k = \sup\{x_n, x_{n+1}, x_{n+2}, \dots\}$
+    $\quad z_n \geq z_{n+1}$
+    
+    \begin{theorem}
+        $\underline{\lim}$ и $\overline{\lim}$ существуют в 
+        $\overline{\mathbb{R}}$ и $\underline{\lim} \leq \overline{\lim}$
+    \end{theorem}
+    \begin{proof} $ $
+    
+    Про $\underline{\lim}$: $y_n \leq y_{n+1} \Rightarrow (y_n)$ --
+    возрастающая последовательность $\Rightarrow$ у неё есть предел в
+    $\overline{\mathbb{R}}$.
+    
+    Про $\overline{\lim}$: $z_n \geq z_{n+1} \Rightarrow (z_n)$ --
+    убывающая последовательность $\Rightarrow$ у неё есть предел в
+    $\overline{\mathbb{R}}$.
+    
+    Про неравенство $\underline{\lim} \leq \overline{\lim}$:
+    $y_n \leq z_n$, $y_n \rightarrow \underline{\lim}$,
+    $z_n \rightarrow \overline{\lim} \Rightarrow$ по предельному
+    переходу в неравенстве $\underline{\lim} \leq \overline{\lim}$.
+    \end{proof}
+    
+    \begin{theorem}\end{theorem}
+    \begin{enumerate}
+        \item $\overline{\lim}$ -- наибольший частичный предел
+        \item $\underline{\lim}$ -- наименьший частичный предел
+        \item $\exists \lim \in \overline{\mathbb{R}} \Leftrightarrow
+        \overline{\lim} = \underline{\lim}$ и в этом случае 
+        $\lim = \overline{\lim} = \underline{\lim}$ 
+    \end{enumerate}
+    \begin{proof} $ $
+    
+        \begin{enumerate}
+            \item $a := \overline{\lim} \, x_n$
+            
+            Рассмотрим \textbf{случай} $a \in \mathbb{R}$
+    
+            Докажем, что $a$ -- частичный предел.
+    
+            $a = \lim z_n$, $z_n = \sup_{k \geq n} x_k$, $z_n \searrow a$
+    
+            Будем строить некоторую подпоследовательность $(x_{n_k})$.\\
+            Найдётся $n_k \geq n_{k-1} : x_{n_k} > a - \frac{1}{k}$.
+            Пусть не нашлось $\Rightarrow x_n \leq a - \frac{1}{k} \forall
+            n \geq n_{k-1} \Rightarrow \sup \{x_{n_{k-1}}, x_{n_{k-1} + 1},
+            \dots \} \leq a - \frac{1}{k} \Rightarrow a \leq z_{n_{k - 1}} 
+            \leq a - \frac{1}{k}$. Противоречие
+    
+            $a - \frac{1}{k} \rightarrow a$, $z_{n_k} \rightarrow a$,
+            $a - \frac{1}{k} < x_{n_k} \leq z_{n_k} \xRightarrow[]
+            {\text{2 мил.}} x_{n_k} \rightarrow a$
+    
+            Докажем, что $a$ -- наибольший частичный предел.
+    
+            Пусть $b$ - частичный предел $\Rightarrow b = \lim x_{n_k}$.
+            Но $x_{n_k} \rightarrow b$, $z_{n_k} \rightarrow a \Rightarrow$
+            по предельному переходу $b \leq a$. 
+    
+            Рассмотрим \textbf{случай} $a = -\infty$.
+    
+            Тогда $z_n \rightarrow -\infty$, но $z_n = 
+            \sup\{x_n, x_{n+1},\dots\} \geq x_n \Rightarrow x_n
+            \rightarrow -\infty$.
+    
+            Рассмотрим \textbf{случай} $a = +\infty$.
+    
+            Тогда $z_n = +\infty \Rightarrow \sup {x_1, x_2, \dots} =
+            +\infty \Rightarrow x_n$ не ограничена сверху $\Rightarrow$
+            в ней найдётся подпоследовательность, стремящаяся к $+\infty$.
+    
+            \item Доказывается аналогично
+            
+            \item 
+            ''$\Longrightarrow$'':
+            
+            Если $a = \lim x_n$, то все подпоследовательности стремятся
+            к $a \Rightarrow$ все частичные пределы равны $a \Rightarrow
+            \overline{\lim} x_n = \underline{\lim} x_n = \lim x_n = a$.
+    
+            ''$\Longleftarrow$'':
+    
+            $y_n \rightarrow a$, $z_n \rightarrow a$, $y_n \leq x_n \leq z_n$
+            $\xRightarrow[]{\text{2 мил.}} x_n \rightarrow a \Rightarrow
+            \lim x_n = \overline{\lim}\, x_n = \underline{\lim}\, x_n = a$
+        \end{enumerate}
+    \end{proof}
+    
+    \textbf{Замечание.} Арифметики для верхних и нижних пределов нет.
+    
+    Пример.
+    \[x_n = (-1)^n, \quad y_n = (-1)^{n + 1} \Rightarrow
+    \underline{\lim}\, x_n = \underline{\lim}\, y_n = -1\]
+    \[x_n + y_n = 0 \Rightarrow \underline{\lim}\, (x_n + y_n) = 
+    \underline{\lim}\, (x_n + y_n) = 0\]
+    \[\underline{\lim}\, x_n + \underline{\lim}\, y_n = -2 < 0 =
+    \underline{\lim}\, (x_n + y_n)\]
+    
+    \section{Характеристика верхних и нижних пределов с помощью 
+    $N$ и $\varepsilon$. Сохранение неравенств.}
+    
+    \begin{theorem}\end{theorem}
+    \begin{enumerate}
+        \item $a = \underline{\lim}\, x_n \in \mathbb{R} \Leftrightarrow
+        \begin{cases}
+            \forall \varepsilon > 0 \,\, \exists N : \forall n \geq N
+            \,\, x_n > a - \varepsilon\\
+            \forall \varepsilon > 0 \,\, \forall N \,\, \exists n \geq N
+            : x_n < a + \varepsilon\\
+        \end{cases}$
+        \item $b = \overline{\lim}\, x_n \in \mathbb{R} \Leftrightarrow
+        \begin{cases}
+            \forall \varepsilon > 0 \,\, \exists N : \forall n \geq N
+            \,\, x_n < b + \varepsilon \quad \circled{1}\\
+            \forall \varepsilon > 0 \,\, \forall N \,\, \exists n \geq N
+            : x_n > b - \varepsilon \quad \circled{2}\\
+        \end{cases}$
+    \end{enumerate}
+    \begin{proof} $ $
+    
+        2. Докажем \circled{1} $\Leftrightarrow \forall \varepsilon > 0\,\, 
+        \exists N : z_N < b + \varepsilon$
+    
+        ''$\Longrightarrow$'':
+        \[\forall \varepsilon > 0 \,\, \exists N : \forall n \geq N
+        \,\, x_n < b + \varepsilon \Rightarrow
+        \forall \varepsilon > 0 \,\, \exists N : \forall n \geq N
+        \,\, x_n < b + \frac{\varepsilon}{2} \Rightarrow\] \[\Rightarrow
+        z_N = \sup \{x_N, x_{N + 1}, \dots\} \leq b + \frac{\varepsilon}{2}
+        < b + \varepsilon \Rightarrow \forall \varepsilon > 0\,\, 
+        \exists N : z_N < b + \varepsilon\]
+    
+        ''$\Longleftarrow$'':
+        \[\text{Зафиксируем } \varepsilon > 0
+        \Rightarrow \exists N : z_N < b + \varepsilon \Leftrightarrow
+        \sup\{x_N, x_{N + 1}, \dots\} < b + \varepsilon \Rightarrow
+        x_n < b + \varepsilon \,\, \forall n \geq N\]
+    
+        Докажем \circled{2} $\Leftrightarrow \forall \varepsilon > 0 \,\,
+        \forall N \,\, z_N > b - \varepsilon$
+    
+        ''$\Longrightarrow$'':
+        \[\forall \varepsilon > 0 \,\, \forall N \,\, \exists n \geq N
+        : x_n > b - \varepsilon \text{ при этом } z_N = \sup\{
+        x_N, x_{N+1}, x_{N+2}, \dots\} \Rightarrow \forall
+        \varepsilon > 0 \,\, \forall N \,\, z_N > b - \varepsilon\]
+    
+        ''$\Longleftarrow$'':
+        \[\text{Зафиксируем } \varepsilon > 0 \text{ и } N \Rightarrow
+        z_N > b - \varepsilon \Leftrightarrow \sup\{ x_N, x_{N+1}, \dots\}
+        > b - \varepsilon \Rightarrow \exists n \geq N : x_n > b -
+        \varepsilon,\] \[\text{иначе } \forall n \geq N : x_n \leq b -
+        \varepsilon \text{ и тогда } \sup\{ x_N, x_{N+1}, \dots\} \leq
+        b - \varepsilon \Leftrightarrow z_N \leq b - \varepsilon\]
+    
+        \circled{1} + \circled{2} $\Leftrightarrow
+        \begin{cases}
+            \forall \varepsilon > 0\,\, 
+            \exists N : z_N < b + \varepsilon\\
+            \forall \varepsilon > 0 \,\,
+            \forall N \,\, z_N > b - \varepsilon\\
+        \end{cases}$
+        $\Leftrightarrow$ т.к. $z_n \searrow$
+        $\begin{cases}
+            \forall \varepsilon > 0\,\, 
+            \exists N : \forall n \geq N \,\, z_n < b + \varepsilon\\
+            \forall \varepsilon > 0 \,\,
+            \forall N \,\, z_N > b - \varepsilon\\
+        \end{cases}$
+    
+        Это и есть определение предела $\Rightarrow b = 
+        \overline{\lim}\, x_n$
+    
+        В обратную сторону, первая строка следует из определения предела,
+        вторая строка следует из того, что $(z_n) \searrow$. Более того,
+        $(z_n) \searrow$, $\lim z_n = b \Rightarrow z_n \geq b$
+    
+    \end{proof}
+    
+    \begin{theorem}\end{theorem}
+    Если $x_n \leq y_n$, то 
+    $\underline{\lim}\, x_n \leq \underline{\lim}\, y_n$ и  
+    $\overline{\lim}\, x_n \leq \overline{\lim}\, y_n$
+    
+    \begin{proof} $ $
+    
+    $x_n \leq y_n \Rightarrow \inf\{x_n, x_{n + 1}, ...\} \leq
+    \inf\{y_n, y_{n + 1}, ...\} \Rightarrow$ по пред. переходу 
+    $\underline{\lim}\, x_n \leq \underline{\lim}\, y_n$
+    
+    Аналогично для $\overline{\lim}\, x_n \leq \overline{\lim}\, y_n$.
+    \end{proof}
+    
+    \section{Сходимость рядов. Необходимое условие сходимости рядов. Примеры.}
+    
+    \begin{conj}Ряд\end{conj}
+    $x_n \in \mathbb{R}, \quad \sum_{n=1}^{+\infty} x_n$ -- ряд.
+    
+    \begin{conj}Частичная сумма ряда\end{conj}
+    $S_n := \sum_{k=1}^{n} x_k$
+    
+    \begin{conj}Сумма ряда\end{conj}
+    Cумма ряда -- $\lim S_n$, если он существует.
+    
+    \begin{conj}Сходимость ряда\end{conj}
+    Ряд сходится, если $\exists \lim S_n \in \mathbb{R}$\\
+    В противном случае ряд расходится.
+    
+    \begin{theorem}
+    Необходимое условие сходимости
+    \end{theorem}
+    Если $\sum_{n = 1}^{+\infty} x_n$ сходится, то $\lim x_n = 0$.
+    
+    \begin{proof}
+        Если ряд сходится, то $S := \lim S_n \in \mathbb{R}$. Тогда
+        $x_n = S_n - S_{n - 1} \Rightarrow \lim x_n = \lim S_n - 
+        \lim S_{n - 1} = S - S = 0$
+    \end{proof}
+    
+    \textbf{Примеры:}
+    \begin{enumerate}
+        \item Геометрическая прогрессия $1 + q + q^2 + \dots$
+        $\sum_{n = 0}^{+\infty} q^n$
+    
+        При $\abs{q} < 1$ $S_n = 1 + q + q^2 + \dots + q^{n - 1} =
+        \frac{1 - q^n}{1 - q} \rightarrow \frac{1}{1 - q}$
+    
+        При $\abs{q} > 1$ ряд расходящийся, т.к. не выполнено
+        необходимое условие.
+    
+        \item $1 - 1 + 1 - 1 + 1 - 1 + \dots$
+        
+        $S_{2n} = 0, \,\, S_{2n + 1} = 1 \Rightarrow$ предела нет.
+    
+        \item Гармонический ряд $1 + \frac{1}{2} + \frac{1}{3} + \dots$
+        $\sum_{n = 1}^{+\infty} \frac{1}{n}$
+    
+        $H_n := \sum_{k = 1}{n} \frac{1}{k}$ -- гармонические числа.
+        $H_n$ монотонно возрастает.
+        \[H_{2^n} = 1 + \frac{1}{2} + \underbrace{\left(\frac{1}{3} + 
+        \frac{1}{4}\right)}_{> 2 \cdot \frac{1}{4} = \frac{1}{2}} +
+        \underbrace{\left(\frac{1}{5} + \frac{1}{6} + \frac{1}{7} + 
+        \frac{1}{8}\right)}_{> 4 \cdot \frac{1}{8} = \frac{1}{2}} +
+        \dots + \underbrace{\left(\frac{1}{2^{n - 1} + 1} + 
+        \frac{1}{2^{n-1} + 2} + \dots + \frac{1}{2^n} \right)}_
+        {> 2^{n-1} \cdot \frac{1}{2^n} = \frac{1}{2}} >\]
+        \[> 1 + \underbrace{\frac{1}{2} + \frac{1}{2} + ... + \frac{1}{2}}_
+        {n \text{ шт.}} = 1 + \frac{n}{2} \Rightarrow \text{ частичные
+        суммы сколь угодно большие } \Rightarrow \lim H_n = +\infty\]
+    
+        Гармонический ряд -- расходящийся ряд, члены которого стремятся к $0$.
+    
+        \item \[\frac{1}{1 \cdot 2} + \frac{1}{2 \cdot 3} + \frac{1}{3 \cdot 4}
+        + \dots \quad\quad\sum_{n=1}^{+\infty} \frac{1}{n\cdot(n+1)}\]
+        \[\frac{1}{k\cdot(k+1)} = \frac{1}{k} - \frac{1}{k + 1} \Rightarrow
+        S_n = \frac{1}{1 \cdot 2} + \frac{1}{2 \cdot 3} + \frac{1}{3 \cdot 4}
+        + \dots + \frac{1}{n\cdot(n+1)} = 1 - \frac{1}{n+1} \rightarrow 1\]
+    
+    
+    \end{enumerate}
+    
+\ifdefined\niveldos\else
 \end{document} 
 \fi
