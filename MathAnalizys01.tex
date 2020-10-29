@@ -1059,7 +1059,7 @@ $Int A = X \setminus Cl(X \setminus A)$
     \end{theorem-non}
     \begin{conj}
         $a=\lim x_n$, если
-    \[ \forall \varepsilon>0 \exists N : \forall n\geq N d(x_n, a)<\varepsilon\]
+    \[ \forall \varepsilon>0 \exists N : \forall n\geqslant N d(x_n, a)<\varepsilon\]
     \end{conj}
     \begin{conj}
         $A \subset X, (X, d)$ - метрическое пространство
@@ -1080,20 +1080,20 @@ $Int A = X \setminus Cl(X \setminus A)$
             \item Если последовательность имеет предел, то она ограничена
             \begin{proof}
                 \quad \\
-                Возьмем $\varepsilon=1$. Тогда $\exists N: \forall n\geq N\ x_n \in B_1(a)$. \\
+                Возьмем $\varepsilon=1$. Тогда $\exists N: \forall n\geqslant N\ x_n \in B_1(a)$. \\
                 Тогда $r:= \max\{d(a, x_1), d(a, x_2),..., d(a, x_N)\}+1$
             \end{proof}
             \item $a=\lim x_n \Longleftrightarrow \lim d(x_n, a)=0$
             \begin{proof}
                 \quad \\
-                $\lim d(x_n, a)=0 \Longleftrightarrow \forall \varepsilon > 0 \exists N : \forall n \geq N d(x_n, a) < \varepsilon \Longleftrightarrow \lim x_n = a$
+                $\lim d(x_n, a)=0 \Longleftrightarrow \forall \varepsilon > 0 \exists N : \forall n \geqslant N d(x_n, a) < \varepsilon \Longleftrightarrow \lim x_n = a$
             \end{proof}
             \item Если $a=\lim x_n$ и $b = \lim y_n$, то $\lim d(x_n, y_n) = d(a, b)$
             \begin{proof}
                 \quad \\
-                $d(a, b) \leq d(a, x_n)+d(x_n, y_n)+d(y_n, b)$
-                $d(x_n, y_n) \leq d(a, x_n)+d(a, b)+d(b, y_n) \Longrightarrow$
-                $|d(x_n, y_n)-d(a, b)|\leq d(x_n, a)+d(y_n, b)$ \\
+                $d(a, b) \leqslant d(a, x_n)+d(x_n, y_n)+d(y_n, b)$
+                $d(x_n, y_n) \leqslant d(a, x_n)+d(a, b)+d(b, y_n) \Longrightarrow$
+                $|d(x_n, y_n)-d(a, b)|\leqslant d(x_n, a)+d(y_n, b)$ \\
                 Справа каждая меньше $\varepsilon /2$, тогда слева стремится к нулю
             \end{proof}
         \end{enumerate}
@@ -1107,10 +1107,10 @@ $Int A = X \setminus Cl(X \setminus A)$
         \begin{proof}
             \quad \\
             ``$\Longleftarrow$'': \quad Пусть $x_n \in A$ и $\lim x_n = a$. \\
-            Тогда в $B_r(a)\setminus \{a\}$ содержится бесконечное количество точек из $x_n$, так как $\exists N : \forall n \geq N x_n \in B_r(a)$ \\
+            Тогда в $B_r(a)\setminus \{a\}$ содержится бесконечное количество точек из $x_n$, так как $\exists N : \forall n \geqslant N x_n \in B_r(a)$ \\
             ``$\Longrightarrow$'': \quad
             $r_1 = 1 \Longrightarrow \exists x_1 \in B_1(a), r_2 = \min\{1/2, d(a, x_1)\}, r_3=\min\{1/3, d(a, x_2)\}...$ \\
-            $\forall \varepsilon>0\ \exists N: 1/N<\varepsilon \Longrightarrow \forall n\geq N\ d(x_n, a) < 1/n \leq 1/N < \varepsilon$
+            $\forall \varepsilon>0\ \exists N: 1/N<\varepsilon \Longrightarrow \forall n\geqslant N\ d(x_n, a) < 1/n \leqslant 1/N < \varepsilon$
         \end{proof}
     \end{theorem-non}
     
@@ -1128,25 +1128,25 @@ $Int A = X \setminus Cl(X \setminus A)$
     
     \begin{theorem-non}
         Предельный переход в неравенстве. $x_n, y_n \in \mathbb{R}$ \\
-        $x_n \leq y_n\ \forall n, a=\lim x_n, b=\lim y_n \Longrightarrow a\leq b$
+        $x_n \leqslant y_n\ \forall n, a=\lim x_n, b=\lim y_n \Longrightarrow a\leqslant b$
     \end{theorem-non}
         
     \begin{proof}
         Пусть $a>b$ \\
         $\varepsilon = \frac{a+b}{2}$ \\
-        $\exists N_1: \forall n\geq N_1\ x_n\in (a-\varepsilon, a+\varepsilon)$ \\
-        $\exists N_2: \forall n\geq N_2\ y_n \in (b-\varepsilon, b+\varepsilon)$ \\
+        $\exists N_1: \forall n\geqslant N_1\ x_n\in (a-\varepsilon, a+\varepsilon)$ \\
+        $\exists N_2: \forall n\geqslant N_2\ y_n \in (b-\varepsilon, b+\varepsilon)$ \\
         $n:=\max\{N_1, N_2\}$ \\
-        $y_n \leq x_n$. Противоречие
+        $y_n \leqslant x_n$. Противоречие
     \end{proof}
     
     \notice - неверно для строгого знака ($-1/n, 1/n$)
     
-    \follow \; Если $x_n \leq b \forall n, \lim x_n = a \Longrightarrow a\leq b$
+    \follow \; Если $x_n \leqslant b \forall n, \lim x_n = a \Longrightarrow a\leqslant b$
     \begin{proof}
         $y_n:=b$, далее из теоремы 1
     \end{proof}
-    \follow \; Если $x_n \geq a \forall n, \lim x_n = b \Longrightarrow a \leq b$
+    \follow \; Если $x_n \geqslant a \forall n, \lim x_n = b \Longrightarrow a \leqslant b$
 
     \begin{proof}
         $y_n:=a$, далее из теоремы 1
@@ -1160,7 +1160,7 @@ $Int A = X \setminus Cl(X \setminus A)$
     
     \begin{theorem-non}
         Теорема о сжатой последовательности (о двух милиционерах) \\
-        $x_n \leq y_n \leq z_n\ \forall n\in N, \lim x_n = \lim z_n = a \Longrightarrow \lim y_n = a$
+        $x_n \leqslant y_n \leqslant z_n\ \forall n\in N, \lim x_n = \lim z_n = a \Longrightarrow \lim y_n = a$
     \end{theorem-non}
     \begin{proof}
         \[
@@ -1170,13 +1170,13 @@ $Int A = X \setminus Cl(X \setminus A)$
     \end{drcases}
     \Longrightarrow x_n > a-\varepsilon, z_n<a+\varepsilon 
     \] \\
-    При $n\geq \max\{N_1, N_2\}\ a-\varepsilon<x_n\leq y_n \leq z_n<a+\varepsilon \Longrightarrow a-\varepsilon<y_n<a+\varepsilon$\\
+    При $n\geqslant \max\{N_1, N_2\}\ a-\varepsilon<x_n\leqslant y_n \leqslant z_n<a+\varepsilon \Longrightarrow a-\varepsilon<y_n<a+\varepsilon$\\
     \end{proof}
     
-    \follow \; $|y_n|\leq z_n\ \forall n, \lim z_n = 0 \Longrightarrow \lim y_n = 0$
+    \follow \; $|y_n|\leqslant z_n\ \forall n, \lim z_n = 0 \Longrightarrow \lim y_n = 0$
     
     \begin{proof}
-        $x_n:=-z_n \Longrightarrow x_n \leq |y_n| \leq z_n,\ x_n \to 0,\ z_n \to 0 \Longrightarrow y_n \to 0$
+        $x_n:=-z_n \Longrightarrow x_n \leqslant |y_n| \leqslant z_n,\ x_n \to 0,\ z_n \to 0 \Longrightarrow y_n \to 0$
     \end{proof}
     
     \section{Монотонные последовательности}
@@ -1184,7 +1184,7 @@ $Int A = X \setminus Cl(X \setminus A)$
     \begin{conj}
         \quad \\
         \begin{itemize}
-            \item[] $x_n$ монотонно возрастает(убывает), если $\forall n\ x_n\leq(\geq ) x_{n+1}$
+            \item[] $x_n$ монотонно возрастает(убывает), если $\forall n\ x_n\leq(\geqslant ) x_{n+1}$
             \item[] $x_n$ монотонна, если она монотонно возрастает или монотонно убывает
         \end{itemize}
     \end{conj}
@@ -1193,8 +1193,8 @@ $Int A = X \setminus Cl(X \setminus A)$
         Если последовательность монотонно возрастает(убывает) и ограничена сверху(снизу), то она имеет предел.
     \end{theorem-non}
     \begin{proof}
-        $x_n$ такова, что $x_1\leq x_2\leq x_3...$ и ограничена сверху. Тогда у нее есть $sup:=S$. Докажем, что $\lim x_n = S$. \\
-        $\forall \varepsilon>0\ \ S-\varepsilon$ не является верхней границей $\Longrightarrow \exists x_N>s-\varepsilon \Longrightarrow \forall n\geq N\ S-\varepsilon < x_n < S+\varepsilon \Longrightarrow$ S - предел
+        $x_n$ такова, что $x_1\leqslant x_2\leqslant x_3...$ и ограничена сверху. Тогда у нее есть $sup:=S$. Докажем, что $\lim x_n = S$. \\
+        $\forall \varepsilon>0\ \ S-\varepsilon$ не является верхней границей $\Longrightarrow \exists x_N>s-\varepsilon \Longrightarrow \forall n\geqslant N\ S-\varepsilon < x_n < S+\varepsilon \Longrightarrow$ S - предел
     \end{proof}
 
     \follow \; Если последовательность монотонна, то она имеет предел тогда и только тогда, когда она ограничена.
@@ -1216,7 +1216,7 @@ $Int A = X \setminus Cl(X \setminus A)$
     \subsubsection*{Примеры}
     \begin{itemize}
         \item[] $\{\varnothing, X\}$
-        \item[] $X = [0, +\infty), \Omega = (a, +\infty), a\geq 0\}$
+        \item[] $X = [0, +\infty), \Omega = (a, +\infty), a\geqslant 0\}$
     \end{itemize}  
 
     \begin{conj}
@@ -1233,7 +1233,7 @@ $Int A = X \setminus Cl(X \setminus A)$
     \end{conj}
     \begin{conj}
         $a = \lim x_n$, если вне любого открытого множества, содержащего точку $a$ находится лишь конечное число членов последовательности \\
-        $\forall U \ni a\ \exists N\ \forall n\geq N\ x_n \in U$
+        $\forall U \ni a\ \exists N\ \forall n\geqslant N\ x_n \in U$
     \end{conj}
     \begin{conj}
         Хаусдорфовость \\
@@ -1276,7 +1276,7 @@ $Int A = X \setminus Cl(X \setminus A)$
         Скалярное произведение $\langle \bullet, \bullet\rangle X\times X \to \mathbb{R}$
     
         \begin{enumerate}
-            \item $\langle x, x\rangle \geq 0,\ \langle x, x\rangle =0 \Longleftrightarrow x=\overrightarrow{0}$
+            \item $\langle x, x\rangle \geqslant 0,\ \langle x, x\rangle =0 \Longleftrightarrow x=\overrightarrow{0}$
             \item $\langle x, y\rangle = \langle y, x\rangle$
             \item $\langle x+y, z\rangle = \langle x, z\rangle + \langle y, z \rangle $
             \item $\langle \alpha x, y\rangle = \alpha \langle x, y \rangle $
@@ -1284,14 +1284,14 @@ $Int A = X \setminus Cl(X \setminus A)$
     \end{conj}
     
     \begin{conj}
-        Неравенство Коши-Буняковского: $\langle x, y \rangle^2 \leq \langle x, x \rangle \langle y, y \rangle$
+        Неравенство Коши-Буняковского: $\langle x, y \rangle^2 \leqslant \langle x, x \rangle \langle y, y \rangle$
     \end{conj} 
     
     \begin{proof}
     
-    $f(t):=\langle x+ty, x+ty\rangle = \langle x, x+ty \rangle + \langle ty, x+ty \rangle =\langle x, x \rangle + t\langle x, y \rangle + t\langle y, x \rangle + t^2\langle y, y \rangle = \langle x, x \rangle + 2t\langle x, y \rangle + t^2\langle y, y \rangle \geq 0$. Это всегда неотрицательно, тогда дискриминант неположителен.
+    $f(t):=\langle x+ty, x+ty\rangle = \langle x, x+ty \rangle + \langle ty, x+ty \rangle =\langle x, x \rangle + t\langle x, y \rangle + t\langle y, x \rangle + t^2\langle y, y \rangle = \langle x, x \rangle + 2t\langle x, y \rangle + t^2\langle y, y \rangle \geqslant 0$. Это всегда неотрицательно, тогда дискриминант неположителен.
 
-    \[4t^2\langle x, y \rangle^2 - 4t^2\langle x, x \rangle \langle y, y \rangle \leq 0 \Longrightarrow \langle x, y \rangle^2 \leq \langle x, x \rangle \langle y, y \rangle\]
+    \[4t^2\langle x, y \rangle^2 - 4t^2\langle x, x \rangle \langle y, y \rangle \leqslant 0 \Longrightarrow \langle x, y \rangle^2 \leqslant \langle x, x \rangle \langle y, y \rangle\]
     \end{proof}
 
     \section{Норма}
@@ -1299,9 +1299,9 @@ $Int A = X \setminus Cl(X \setminus A)$
     \begin{conj}
         Норма $||\bullet || : X\to \mathbb{R}$\\
         \begin{enumerate}
-            \item $||x|| \geq 0$, $||x|| = 0 \Longleftrightarrow x = \overleftarrow{0}$
+            \item $||x|| \geqslant 0$, $||x|| = 0 \Longleftrightarrow x = \overleftarrow{0}$
             \item $||\alpha x|| = |\alpha|*||x||$
-            \item $||x+y|| \leq ||x||+||y||$
+            \item $||x+y|| \leqslant ||x||+||y||$
         \end{enumerate}
     \end{conj}
     
@@ -1313,19 +1313,19 @@ $Int A = X \setminus Cl(X \setminus A)$
         Если $\langle \bullet, \bullet \rangle$ - скалярное произведение в $X$, то $||x||:= \sqrt{\langle x, x \rangle}$ - норма.\\
         $||\alpha x|| = \sqrt{\langle \alpha x, \alpha x\rangle} = \sqrt{\alpha^2 \langle x, x\rangle} = |\alpha|\sqrt{\langle x, x \rangle}$\\
         $||x+y||^2 = \langle x+y, x+y \rangle = \langle x,x\rangle + 2\langle x, y\rangle + \langle y, y\rangle \Longrightarrow ||x||^2 + 2\langle x, y\rangle + ||y||^2 \overset{?}{\leq} ||x||^2 + 2||x||*||y|| + ||y||^2$ \vspace*{0,001cm}\\
-        $2\langle x, y \rangle \leq 2||x||*||y|| = \sqrt{\langle x, x\rangle}\sqrt{\langle y, y\rangle\ }$ - верно по неравенству Коши Буняковского
+        $2\langle x, y \rangle \leqslant 2||x||*||y|| = \sqrt{\langle x, x\rangle}\sqrt{\langle y, y\rangle\ }$ - верно по неравенству Коши Буняковского
     \end{theorem-non}
     
     \begin{theorem-non}
         Свойства норм:
         \begin{enumerate}
-            \item $||x-y||=||(x-z)+(z-y)|| \leq ||x-z||+||z-y||$
+            \item $||x-y||=||(x-z)+(z-y)|| \leqslant ||x-z||+||z-y||$
             \item $d(x, y):=||x-y||$ - метрика
-            \item $|\ ||x||-||y||\ | \leq ||x-y||$ \\
-            $|x|| = ||(x-y)+y|| \leq ||x-y||+||y||$ \\
-            $||y|| = ||(y-x)+x|| \leq ||y-x||+||x||=||x-y||+||x||$ \\
-            $||x-y||\geq ||x||-||y||$ \\
-            $||x-y||\geq -(||x||-||y||)$
+            \item $|\ ||x||-||y||\ | \leqslant ||x-y||$ \\
+            $|x|| = ||(x-y)+y|| \leqslant ||x-y||+||y||$ \\
+            $||y|| = ||(y-x)+x|| \leqslant ||y-x||+||x||=||x-y||+||x||$ \\
+            $||x-y||\geqslant ||x||-||y||$ \\
+            $||x-y||\geqslant -(||x||-||y||)$
         \end{enumerate}
     \end{theorem-non}
     \begin{theorem-non}
@@ -1792,12 +1792,12 @@ $Int A = X \setminus Cl(X \setminus A)$
         \frac{x_n - x_{n - 1}}{y_n - y_{n - 1}} \rightarrow 0\]
     
         Зафиксируем $\varepsilon > 0$ и найдём $m$, т.ч. $
-        \abs{\varepsilon_n} < \varepsilon$ при $n \geq m$.
+        \abs{\varepsilon_n} < \varepsilon$ при $n \geqslant m$.
     
         \[x_n - x_m = (x_n - x_{n - 1}) + (x_{n - 1} - x_{n - 2})
         + ... + (x_{m + 1} - x_m) = \sum_{k=m+1}^n \varepsilon_k
         \cdot (y_k - y_{k - 1})\]
-        \[\abs{x_n - x_m} \leq \sum_{k=m+1}^n \abs{\varepsilon_k}
+        \[\abs{x_n - x_m} \leqslant \sum_{k=m+1}^n \abs{\varepsilon_k}
         \cdot (y_k - y_{k - 1}) < \sum_{k=m+1}^n \varepsilon
         \cdot (y_k - y_{k - 1}) = \varepsilon \cdot \sum_{k=m+1}^n 
         (y_k - y_{k - 1}) = \varepsilon \cdot (y_n - y_m) <
@@ -1809,7 +1809,7 @@ $Int A = X \setminus Cl(X \setminus A)$
         $\Rightarrow$ $\lim \frac{\abs{x_m}}{y_n} = 0$ и
         $\frac{\abs{x_m}}{y_n} < \varepsilon$, начиная с некоторого номера.
     
-        \[\abs{x_n} \leq \abs{x_m} + \abs{x_n - x_m} < 
+        \[\abs{x_n} \leqslant \abs{x_m} + \abs{x_n - x_m} < 
         \abs{x_m} + \varepsilon y_n \Rightarrow \abs{\frac{x_n}{y_n}} <
         \frac{\abs{x_m}}{y_n} + \varepsilon < 2 \varepsilon\]
         начиная с некоторого номера $\Rightarrow \lim \abs{\frac{x_n}{y_n}} = 0 = l$.
@@ -1894,10 +1894,10 @@ $Int A = X \setminus Cl(X \setminus A)$
         \frac{x_n - x_{n - 1}}{y_n - y_{n - 1}} \rightarrow 0\]
     
         Зафиксируем $\varepsilon > 0$ и найдём $m$, т.ч. $
-        \abs{\varepsilon_n} < \varepsilon$ при $n \geq m$.
+        \abs{\varepsilon_n} < \varepsilon$ при $n \geqslant m$.
         \[x_n - x_m = \sum_{k=m+1}^n(x_k - x_{k-1}) =
         \sum_{k=m+1}^n \varepsilon_k (y_k - y_{k-1}) \Rightarrow
-        \abs{x_n - x_m} \leq\] \[\leq \sum_{k=m+1}^n -\abs{\varepsilon_k}
+        \abs{x_n - x_m} \leq\] \[\leqslant \sum_{k=m+1}^n -\abs{\varepsilon_k}
         (y_k - y_{k-1}) < \varepsilon \sum_{k=m+1}^n (y_{k-1} - y_k) =
         \varepsilon (y_m - y_n)\]
         \[\abs{x_n - x_m} < \varepsilon (y_m - y_n)\]
@@ -1905,7 +1905,7 @@ $Int A = X \setminus Cl(X \setminus A)$
         \abs{x_n - x_m} \rightarrow \abs{-x_m} = \abs{x_m}, \quad
         \varepsilon (y_m - y_n) \rightarrow \varepsilon y_m \Rightarrow\]
         \[\Rightarrow \text{по пред. переходу в нер., при }
-        m \geq \text{нек. } N \quad \abs{x_m} < \varepsilon y_m
+        m \geqslant \text{нек. } N \quad \abs{x_m} < \varepsilon y_m
         \Rightarrow \abs{\frac{x_m}{y_m}} < \varepsilon
         \Rightarrow \lim \frac{x_m}{y_m} = 0\]
     
@@ -1950,7 +1950,7 @@ $Int A = X \setminus Cl(X \setminus A)$
     Последовательность $(x_n)$, $n_1 < n_2 < n_3 < ...$ Тогда
     $(x_{n_k})$ - подпоследовательность.
     \end{conj}
-    \textbf{Замечание.} $n_k \geq k$ (по индукции)
+    \textbf{Замечание.} $n_k \geqslant k$ (по индукции)
     
     \textbf{Свойства:}
     \begin{enumerate}
@@ -1972,13 +1972,13 @@ $Int A = X \setminus Cl(X \setminus A)$
         По теореме о вложенных отрезках $\bigcap_{n = 1}^{+\infty} [a_n; b_n]
         \neq \varnothing$.
         \[\text{Пусть } c,d \in \bigcap_{n = 1}^{+\infty} [a_n; b_n]
-        \Rightarrow c, d \in [a_n; b_n] \forall n; \text{ НУО, } d \geq c\]
-        \[0 \leq d - c \leq b_n - a_n \rightarrow 0 \Rightarrow c = d
+        \Rightarrow c, d \in [a_n; b_n] \forall n; \text{ НУО, } d \geqslant c\]
+        \[0 \leqslant d - c \leqslant b_n - a_n \rightarrow 0 \Rightarrow c = d
         \text{, иначе } \exists n : b_n - a_n < \varepsilon = d - c\]
-        \[0 \leq c - a_n \leq b_n - a_n \rightarrow 0
+        \[0 \leqslant c - a_n \leqslant b_n - a_n \rightarrow 0
         \xRightarrow[]{\text{2 мил.}}
         c - a_n \rightarrow 0 \Rightarrow \lim a_n = c\]
-        \[0 \leq b_n - c \leq b_n - a_n \rightarrow 0
+        \[0 \leqslant b_n - c \leqslant b_n - a_n \rightarrow 0
         \xRightarrow[]{\text{2 мил.}}
         b_n - c \rightarrow 0 \Rightarrow \lim b_n = c\]
     \end{proof}
@@ -2021,7 +2021,7 @@ $Int A = X \setminus Cl(X \setminus A)$
     $x_{n_k} \in [a_k; b_k], n_1 < n_2 < n_3 < ...$, значит построили
     подпоследовательность.
     
-    \[a_k \rightarrow c, \,\, b_k \rightarrow c \quad a_k \leq x_{n_k} \leq b_k
+    \[a_k \rightarrow c, \,\, b_k \rightarrow c \quad a_k \leqslant x_{n_k} \leqslant b_k
     \xRightarrow[]{\text{2 мил.}} \lim x_{n_k} = c \]
     \end{proof}
     
@@ -2041,7 +2041,7 @@ $Int A = X \setminus Cl(X \setminus A)$
     \begin{enumerate}
         \item Пусть $(x_n)$ возрастает. $(x_n)$ неограничена $\Rightarrow$
         никакое $u$ не является верхней границей $\Rightarrow \exists m :
-        x_m > u \Rightarrow u < x_m \leq x_{m + 1} \leq x_{m + 2} \leq \dots
+        x_m > u \Rightarrow u < x_m \leqslant x_{m + 1} \leqslant x_{m + 2} \leqslant \dots
         \Rightarrow x_n > u$, начиная с некоторого номера $\Rightarrow
         \lim x_n = +\infty$
     
@@ -2108,7 +2108,7 @@ $Int A = X \setminus Cl(X \setminus A)$
     \end{conj}
     Пусть $(X, \rho)$ -- метрическое пространство. $x_n \in X$.
     $x_n$ -- фундаментальная последовательность, если $\forall
-    \varepsilon > 0 \,\, \exists N : \forall n, m \geq N \,\,
+    \varepsilon > 0 \,\, \exists N : \forall n, m \geqslant N \,\,
     \rho(x_n, x_m) < \varepsilon$
     
     \textbf{Свойства:}
@@ -2117,18 +2117,18 @@ $Int A = X \setminus Cl(X \setminus A)$
         
         \textbf{Доказательство:}\\
         Пусть $\lim x_n := a$. Зафиксируем $\varepsilon > 0$.
-        Тогда $\exists N :\\ \forall n \geq N \,\,\, \rho(x_n, a) < 
+        Тогда $\exists N :\\ \forall n \geqslant N \,\,\, \rho(x_n, a) < 
         \frac{1}{2} \varepsilon$\\ 
-        $\forall m \geq N \,\,\, \rho(x_m, a) < \frac{1}{2} \varepsilon$\\
-        $\Rightarrow \rho(x_n, x_m) \leq \rho(x_n, a) + \rho(x_m, a) <
+        $\forall m \geqslant N \,\,\, \rho(x_m, a) < \frac{1}{2} \varepsilon$\\
+        $\Rightarrow \rho(x_n, x_m) \leqslant \rho(x_n, a) + \rho(x_m, a) <
         \varepsilon$
     
         \item Фундаментальная последовательность ограничена
         
         \textbf{Доказательство:}\\
-        Берём $\varepsilon = 1$. Тогда $\exists N : \forall n, m \geq N \,\,
+        Берём $\varepsilon = 1$. Тогда $\exists N : \forall n, m \geqslant N \,\,
         \rho(x_n, x_m) < 1 \Rightarrow$\\
-        $\Rightarrow \forall n \geq N \,\, \rho(x_n, x_N) < 1
+        $\Rightarrow \forall n \geqslant N \,\, \rho(x_n, x_N) < 1
         \Leftrightarrow x_n \in B_1(x_N)$\\
         $R := \max\{\rho(x_1, x_N), \rho(x_2, x_N), \dots, 
         \rho(x_{N-1}, x_N)\} + 1 \Rightarrow \forall n \,\, x_n \in 
@@ -2140,17 +2140,17 @@ $Int A = X \setminus Cl(X \setminus A)$
     
         \textbf{Доказательство:}\\
         Пусть $\lim x_{n_k} = a$. Зафиксируем $\varepsilon > 0$.\\
-        $\exists K : \forall k \geq K \quad \rho(x_{n_k}, a) <
+        $\exists K : \forall k \geqslant K \quad \rho(x_{n_k}, a) <
         \frac{1}{2} \varepsilon$\\
-        $\exists N : \forall n, m \geq N \quad \rho(x_n, x_m) <
+        $\exists N : \forall n, m \geqslant N \quad \rho(x_n, x_m) <
         \frac{1}{2} \varepsilon$\\
-        Возьмём $N \geq 0$ и подберём такое $k$, что $k \geq N$\\
-        и $n_k \geq N$ (например, $k \geq \max\{N, K\}$ подходит)\\
+        Возьмём $N \geqslant 0$ и подберём такое $k$, что $k \geqslant N$\\
+        и $n_k \geqslant N$ (например, $k \geqslant \max\{N, K\}$ подходит)\\
         Тогда $\rho(x_n, x_{n_k}) < \frac{1}{2} \varepsilon$
-        (т.к. $n_k \geq N$)\\
+        (т.к. $n_k \geqslant N$)\\
         И тогда $\rho(x_{n_k}, a) < \frac{1}{2} \varepsilon$
-        (т.к. $k \geq K$)\\
-        $\Rightarrow \rho(x_n, a) \leq \rho(x_n, x_{n_k}) +
+        (т.к. $k \geqslant K$)\\
+        $\Rightarrow \rho(x_n, a) \leqslant \rho(x_n, x_{n_k}) +
         \rho(x_{n_k}, a) < \varepsilon \Rightarrow \lim x_n = a$
     \end{enumerate}
     
@@ -2194,10 +2194,10 @@ $Int A = X \setminus Cl(X \setminus A)$
         $x_n = (x_n^{(1)}, x_n^{(2)}, \dots, x_n^{(d)})$
     
         \[\forall \varepsilon > 0 \,\, \exists N :
-        \forall n, m \geq N \,\, \rho(x_n, x_m) <
+        \forall n, m \geqslant N \,\, \rho(x_n, x_m) <
         \varepsilon \Rightarrow\]
         \[\Rightarrow \abs{x_n^{(k)} -
-        x_m^{(k)}} \leq \sqrt{(x_n^{(1)} -
+        x_m^{(k)}} \leqslant \sqrt{(x_n^{(1)} -
         x_m^{(1)})^2 + (x_n^{(2)} - x_m^{(2)})^2 +
         \dots + (x_n^{(d)} - x_m^{(d)})^2} < \varepsilon
         \Rightarrow\] \[ \Rightarrow
@@ -2246,35 +2246,35 @@ $Int A = X \setminus Cl(X \setminus A)$
     \end{conj}
     $x_n$ - числовая последовательность.
     
-    $\underline{\lim} x_n := \liminf x_n := \lim \inf_{k \geq n} x_k$ -- 
+    $\underline{\lim} x_n := \liminf x_n := \lim \inf_{k \geqslant n} x_k$ -- 
     нижний предел.
     
-    $\overline{\lim} x_n := \limsup x_n := \lim \sup_{k \geq n} x_k$ -- 
+    $\overline{\lim} x_n := \limsup x_n := \lim \sup_{k \geqslant n} x_k$ -- 
     верхний предел.
     
-    $y_n := \inf_{k \geq n} x_k = \inf\{x_n, x_{n+1}, x_{n+2}, \dots\}$
-    $\quad y_n \leq y_{n+1}$\\
-    $z_n := \sup_{k \geq n} x_k = \sup\{x_n, x_{n+1}, x_{n+2}, \dots\}$
-    $\quad z_n \geq z_{n+1}$
+    $y_n := \inf_{k \geqslant n} x_k = \inf\{x_n, x_{n+1}, x_{n+2}, \dots\}$
+    $\quad y_n \leqslant y_{n+1}$\\
+    $z_n := \sup_{k \geqslant n} x_k = \sup\{x_n, x_{n+1}, x_{n+2}, \dots\}$
+    $\quad z_n \geqslant z_{n+1}$
     
     \begin{theorem-non}
         $\underline{\lim}$ и $\overline{\lim}$ существуют в 
-        $\overline{\mathbb{R}}$ и $\underline{\lim} \leq \overline{\lim}$
+        $\overline{\mathbb{R}}$ и $\underline{\lim} \leqslant \overline{\lim}$
     \end{theorem-non}
     \begin{proof} $ $
     
-    Про $\underline{\lim}$: $y_n \leq y_{n+1} \Rightarrow (y_n)$ --
+    Про $\underline{\lim}$: $y_n \leqslant y_{n+1} \Rightarrow (y_n)$ --
     возрастающая последовательность $\Rightarrow$ у неё есть предел в
     $\overline{\mathbb{R}}$.
     
-    Про $\overline{\lim}$: $z_n \geq z_{n+1} \Rightarrow (z_n)$ --
+    Про $\overline{\lim}$: $z_n \geqslant z_{n+1} \Rightarrow (z_n)$ --
     убывающая последовательность $\Rightarrow$ у неё есть предел в
     $\overline{\mathbb{R}}$.
     
-    Про неравенство $\underline{\lim} \leq \overline{\lim}$:
-    $y_n \leq z_n$, $y_n \rightarrow \underline{\lim}$,
+    Про неравенство $\underline{\lim} \leqslant \overline{\lim}$:
+    $y_n \leqslant z_n$, $y_n \rightarrow \underline{\lim}$,
     $z_n \rightarrow \overline{\lim} \Rightarrow$ по предельному
-    переходу в неравенстве $\underline{\lim} \leq \overline{\lim}$.
+    переходу в неравенстве $\underline{\lim} \leqslant \overline{\lim}$.
     \end{proof}
     
     \begin{theorem-non}\end{theorem-non}
@@ -2294,29 +2294,29 @@ $Int A = X \setminus Cl(X \setminus A)$
     
             Докажем, что $a$ -- частичный предел.
     
-            $a = \lim z_n$, $z_n = \sup_{k \geq n} x_k$, $z_n \searrow a$
+            $a = \lim z_n$, $z_n = \sup_{k \geqslant n} x_k$, $z_n \searrow a$
     
             Будем строить некоторую подпоследовательность $(x_{n_k})$.\\
             Найдётся $n_k > n_{k-1} : x_{n_k} > a - \frac{1}{k}$.
-            Пусть не нашлось $\Rightarrow x_n \leq a - \frac{1}{k} \forall
-            n \geq n_{k-1} \Rightarrow \sup \{x_{n_{k-1}}, x_{n_{k-1} + 1},
-            \dots \} \leq a - \frac{1}{k} \Rightarrow a \leq z_{n_{k - 1}} 
-            \leq a - \frac{1}{k}$. Противоречие
+            Пусть не нашлось $\Rightarrow x_n \leqslant a - \frac{1}{k} \forall
+            n \geqslant n_{k-1} \Rightarrow \sup \{x_{n_{k-1}}, x_{n_{k-1} + 1},
+            \dots \} \leqslant a - \frac{1}{k} \Rightarrow a \leqslant z_{n_{k - 1}} 
+            \leqslant a - \frac{1}{k}$. Противоречие
     
             $a - \frac{1}{k} \rightarrow a$, $z_{n_k} \rightarrow a$,
-            $a - \frac{1}{k} < x_{n_k} \leq z_{n_k} \xRightarrow[]
+            $a - \frac{1}{k} < x_{n_k} \leqslant z_{n_k} \xRightarrow[]
             {\text{2 мил.}} x_{n_k} \rightarrow a$
     
             Докажем, что $a$ -- наибольший частичный предел.
     
             Пусть $b$ - частичный предел $\Rightarrow b = \lim x_{n_k}$.
             Но $x_{n_k} \rightarrow b$, $z_{n_k} \rightarrow a \Rightarrow$
-            по предельному переходу $b \leq a$. 
+            по предельному переходу $b \leqslant a$. 
     
             Рассмотрим \textbf{случай} $a = -\infty$.
     
             Тогда $z_n \rightarrow -\infty$, но $z_n = 
-            \sup\{x_n, x_{n+1},\dots\} \geq x_n \Rightarrow x_n
+            \sup\{x_n, x_{n+1},\dots\} \geqslant x_n \Rightarrow x_n
             \rightarrow -\infty$.
     
             Рассмотрим \textbf{случай} $a = +\infty$.
@@ -2336,7 +2336,7 @@ $Int A = X \setminus Cl(X \setminus A)$
     
             ''$\Longleftarrow$'':
     
-            $y_n \rightarrow a$, $z_n \rightarrow a$, $y_n \leq x_n \leq z_n$
+            $y_n \rightarrow a$, $z_n \rightarrow a$, $y_n \leqslant x_n \leqslant z_n$
             $\xRightarrow[]{\text{2 мил.}} x_n \rightarrow a \Rightarrow
             \lim x_n = \overline{\lim}\, x_n = \underline{\lim}\, x_n = a$
         \end{enumerate}
@@ -2359,16 +2359,16 @@ $Int A = X \setminus Cl(X \setminus A)$
     \begin{enumerate}
         \item $a = \underline{\lim}\, x_n \in \mathbb{R} \Leftrightarrow
         \begin{cases}
-            \forall \varepsilon > 0 \,\, \exists N : \forall n \geq N
+            \forall \varepsilon > 0 \,\, \exists N : \forall n \geqslant N
             \,\, x_n > a - \varepsilon\\
-            \forall \varepsilon > 0 \,\, \forall N \,\, \exists n \geq N
+            \forall \varepsilon > 0 \,\, \forall N \,\, \exists n \geqslant N
             : x_n < a + \varepsilon\\
         \end{cases}$
         \item $b = \overline{\lim}\, x_n \in \mathbb{R} \Leftrightarrow
         \begin{cases}
-            \forall \varepsilon > 0 \,\, \exists N : \forall n \geq N
+            \forall \varepsilon > 0 \,\, \exists N : \forall n \geqslant N
             \,\, x_n < b + \varepsilon \quad \circled{1}\\
-            \forall \varepsilon > 0 \,\, \forall N \,\, \exists n \geq N
+            \forall \varepsilon > 0 \,\, \forall N \,\, \exists n \geqslant N
             : x_n > b - \varepsilon \quad \circled{2}\\
         \end{cases}$
     \end{enumerate}
@@ -2378,11 +2378,11 @@ $Int A = X \setminus Cl(X \setminus A)$
         \exists N : z_N < b + \varepsilon$
     
         ''$\Longrightarrow$'':
-        \[\forall \varepsilon > 0 \,\, \exists N : \forall n \geq N
+        \[\forall \varepsilon > 0 \,\, \exists N : \forall n \geqslant N
         \,\, x_n < b + \varepsilon \Rightarrow
-        \forall \varepsilon > 0 \,\, \exists N : \forall n \geq N
+        \forall \varepsilon > 0 \,\, \exists N : \forall n \geqslant N
         \,\, x_n < b + \frac{\varepsilon}{2} \Rightarrow\] \[\Rightarrow
-        z_N = \sup \{x_N, x_{N + 1}, \dots\} \leq b + \frac{\varepsilon}{2}
+        z_N = \sup \{x_N, x_{N + 1}, \dots\} \leqslant b + \frac{\varepsilon}{2}
         < b + \varepsilon \Rightarrow \forall \varepsilon > 0\,\, 
         \exists N : z_N < b + \varepsilon\]
     
@@ -2390,13 +2390,13 @@ $Int A = X \setminus Cl(X \setminus A)$
         \[\text{Зафиксируем } \varepsilon > 0
         \Rightarrow \exists N : z_N < b + \varepsilon \Leftrightarrow
         \sup\{x_N, x_{N + 1}, \dots\} < b + \varepsilon \Rightarrow
-        x_n < b + \varepsilon \,\, \forall n \geq N\]
+        x_n < b + \varepsilon \,\, \forall n \geqslant N\]
     
         Докажем \circled{2} $\Leftrightarrow \forall \varepsilon > 0 \,\,
         \forall N \,\, z_N > b - \varepsilon$
     
         ''$\Longrightarrow$'':
-        \[\forall \varepsilon > 0 \,\, \forall N \,\, \exists n \geq N
+        \[\forall \varepsilon > 0 \,\, \forall N \,\, \exists n \geqslant N
         : x_n > b - \varepsilon \text{ при этом } z_N = \sup\{
         x_N, x_{N+1}, x_{N+2}, \dots\} \Rightarrow \forall
         \varepsilon > 0 \,\, \forall N \,\, z_N > b - \varepsilon\]
@@ -2404,10 +2404,10 @@ $Int A = X \setminus Cl(X \setminus A)$
         ''$\Longleftarrow$'':
         \[\text{Зафиксируем } \varepsilon > 0 \text{ и } N \Rightarrow
         z_N > b - \varepsilon \Leftrightarrow \sup\{ x_N, x_{N+1}, \dots\}
-        > b - \varepsilon \Rightarrow \exists n \geq N : x_n > b -
-        \varepsilon,\] \[\text{иначе } \forall n \geq N : x_n \leq b -
+        > b - \varepsilon \Rightarrow \exists n \geqslant N : x_n > b -
+        \varepsilon,\] \[\text{иначе } \forall n \geqslant N : x_n \leqslant b -
         \varepsilon \text{ и тогда } \sup\{ x_N, x_{N+1}, \dots\} \leq
-        b - \varepsilon \Leftrightarrow z_N \leq b - \varepsilon\]
+        b - \varepsilon \Leftrightarrow z_N \leqslant b - \varepsilon\]
     
         \circled{1} + \circled{2} $\Leftrightarrow
         \begin{cases}
@@ -2419,7 +2419,7 @@ $Int A = X \setminus Cl(X \setminus A)$
         $\Leftrightarrow$ т.к. $z_n \searrow$
         $\begin{cases}
             \forall \varepsilon > 0\,\, 
-            \exists N : \forall n \geq N \,\, z_n < b + \varepsilon\\
+            \exists N : \forall n \geqslant N \,\, z_n < b + \varepsilon\\
             \forall \varepsilon > 0 \,\,
             \forall N \,\, z_N > b - \varepsilon\\
         \end{cases}$
@@ -2429,22 +2429,22 @@ $Int A = X \setminus Cl(X \setminus A)$
     
         В обратную сторону, первая строка следует из определения предела,
         вторая строка следует из того, что $(z_n) \searrow$. Более того,
-        $(z_n) \searrow$, $\lim z_n = b \Rightarrow z_n \geq b$
+        $(z_n) \searrow$, $\lim z_n = b \Rightarrow z_n \geqslant b$
     
     \end{proof}
     
     \begin{theorem-non}\end{theorem-non}
-    Если $x_n \leq y_n$, то 
-    $\underline{\lim}\, x_n \leq \underline{\lim}\, y_n$ и  
-    $\overline{\lim}\, x_n \leq \overline{\lim}\, y_n$
+    Если $x_n \leqslant y_n$, то 
+    $\underline{\lim}\, x_n \leqslant \underline{\lim}\, y_n$ и  
+    $\overline{\lim}\, x_n \leqslant \overline{\lim}\, y_n$
     
     \begin{proof} $ $
     
-    $x_n \leq y_n \Rightarrow \inf\{x_n, x_{n + 1}, ...\} \leq
+    $x_n \leqslant y_n \Rightarrow \inf\{x_n, x_{n + 1}, ...\} \leq
     \inf\{y_n, y_{n + 1}, ...\} \Rightarrow$ по пред. переходу 
-    $\underline{\lim}\, x_n \leq \underline{\lim}\, y_n$
+    $\underline{\lim}\, x_n \leqslant \underline{\lim}\, y_n$
     
-    Аналогично для $\overline{\lim}\, x_n \leq \overline{\lim}\, y_n$.
+    Аналогично для $\overline{\lim}\, x_n \leqslant \overline{\lim}\, y_n$.
     \end{proof}
     
     \section{Сходимость рядов. Необходимое условие сходимости рядов. Примеры.}
