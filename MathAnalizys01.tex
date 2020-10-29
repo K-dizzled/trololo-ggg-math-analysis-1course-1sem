@@ -509,7 +509,7 @@ $P_n$ -последовательность утверждений
         \quad \\
         Пусть $A$ - множество натуральных чисел, не содержащее наименьшего элемента.
         Докажем по индукции, что для любого $n \in \mathbb{N}$ мы имеем $\mathbb{N}_n \cap A = \varnothing$ \\
-        $\N_n = \{k \in \N | k \leqslant \N \}$ \\
+        $\N_n = \{k \in \N | k \leqslant n \}$ \\
         Для $n = 1$ утверждение очевидно. \\
         Переход $n \longrightarrow n+1$ \\
         Предположим для $\mathbb{N}_n \cap A = \varnothing$ \\
@@ -519,7 +519,7 @@ $P_n$ -последовательность утверждений
    \item Во всяком конечном непустом множестве натуральных чисел есть наибольший элемент
    \begin{proof}
         \quad \\
-        Из натуральных чисел строим целые. Множество чисел $A \subseteq \Z$ называется огианиченным сверху и имеет наибольший элемент
+        Из натуральных чисел строим целые. Множество чисел $A \subseteq \Z$ называется ограниченным сверху и имеет наибольший элемент
         если $\exists c > a, \forall a \in A, c \in \Z$
     \end{proof}
 \end{enumerate}
@@ -673,6 +673,7 @@ $P_n$ -последовательность утверждений
         \item[] $(x, y) = A$
         \item[] $\rho (A, A') = \abs{x - x'} + \abs{y - y'}$  
     \end{itemize}
+    \newpage
     \item Французская железнодорожная метрика \\
     \begin{center}
         \begin{tikzpicture}
@@ -862,10 +863,10 @@ $B_1^Y(0) = \{x \in [0; \;2) : \abs{x - 0} < 1\} = [0; \; 1)$
             Докажем, что $X \; \setminus \; \overline{B_R}(a)$ - открыто
             \begin{proof}
                 \quad \\
-                $\overline{B_R}(a) = \{x \in X: \rho(x, a) > R\}$ \\
+                $\overline{B_R}(a) = \{x \in X: \rho(x, a) \leqslant R\}$ \\
                 Возьмем $b \in X \; \setminus \; \overline{B_R}(a) \Longrightarrow \rho(b, a) > R$ \\
                 $r := \rho(b, a) - R$ \\
-                Докажем, что $B_r \subset X \; \setminus \; B_R(a) \Longleftrightarrow B_r(b) \cap \overline{B_R}(a) = \varnothing$ \\
+                Докажем, что $B_r(b) \subset X \; \setminus \; B_R(a) \Longleftrightarrow B_r(b) \cap \overline{B_R}(a) = \varnothing$ \\
                 От противного. Пусть есть общая точка $c \in B_r(b) \cap \overline{B_R}(a) \Longrightarrow 
                 \begin{cases}
                     \rho(c, b) < r \\
@@ -891,7 +892,7 @@ $B_1^Y(0) = \{x \in [0; \;2) : \abs{x - 0} < 1\} = [0; \; 1)$
 \end{theorem-non}
 \begin{proof}
     \quad \\
-    $x \in X \setminus Cl A \Longleftrightarrow x \notin Cl A \Longleftrightarrow x \notin F_{\circ}$, где $F_{\circ} \supset A \\
+    $x \in X \setminus Cl A \Longleftrightarrow x \notin Cl A \Longleftrightarrow x \notin F_{\circ}$ - замкнутое, где $F_{\circ} \supset A \\
     \Longleftrightarrow 
     \begin{cases}
         x \in X \setminus F_{\circ} =: G_{\circ} $ - открытое$ \\
@@ -1421,9 +1422,9 @@ $Int A = X \setminus Cl(X \setminus A)$
         \[  \sqrt{(x_n^{(1)} - x_0^{(1)})^2 + \dots + (x_n^{(d)} - x_0^{(d)})^2} \leqslant |x_n^{(1)} - x_0^{(1)}| + \dots + |x_n^{(d)} - x_0^{(d)}| \]
         Итого получаем
         \[ |x_n^{(k)} - x_0^{(k)}| \leqslant ||x_n - x_0|| \leqslant |x_n^{(1)} - x_0^{(1)}| + \dots + |x_n^{(d)} - x_0^{(d)}| \]
-        Докажем $"\Rightarrow"$:
-        \[ \lim x_n = x_0 \Rightarrow ||x_n - x_0|| \to 0 \Rightarrow  |x_n^{(k)} - x_0^{(k)}| \to 0 \Rightarrow \lim x_n^{(k)} = x_0^{(k)} \]
         Докажем $"\Leftarrow"$:
+        \[ \lim x_n = x_0 \Rightarrow ||x_n - x_0|| \to 0 \Rightarrow  |x_n^{(k)} - x_0^{(k)}| \to 0 \Rightarrow \lim x_n^{(k)} = x_0^{(k)} \]
+        Докажем $"\Rightarrow"$:
         \[ \lim x_n^{(k)} = x_0^{(k)} \Rightarrow |x_n^{(k)} - x_0^{(k)}| \to 0 \Rightarrow \sum_{k = 1}^d |x_n^{(k)} - x_0^{(k)}| \to 0 \Rightarrow ||x_n - x_0|| \to 0 \Rightarrow \lim x_n = x_0  \]
     \end{proof}
     
@@ -1634,7 +1635,7 @@ $Int A = X \setminus Cl(X \setminus A)$
     \end{theorem-non}
     \begin{proof} \quad \\
         \begin{enumerate}
-        \item Монотонное возрастание (если $a < 0$, то с номера $n = -a + 1$)
+        \item Монотонное возрастание (если $a < 0$, то с номера $n = [-a] + 1$)
         \begin{equation*}
             \begin{split}
                 \frac{x_n}{x_{n - 1}} &= \frac{(1 + \frac{a}{n})^n}{(1 + \frac{a}{n - 1})^{n - 1}} \\ 
@@ -1643,7 +1644,7 @@ $Int A = X \setminus Cl(X \setminus A)$
                 &= \frac{(n - 1)^n * (n + a)^n}{n^n * (n - 1 + a)^n } * \frac{n - 1 + a}{n - 1} \\
                 &= (\frac{n^2 - n + an - a}{n^2 - n + an})^n * \frac{n - 1 + a}{n - 1} \\ 
                 &= \underbrace{(1 - \frac{a}{n(n - 1 + a)})^n}_{\geqslant 1 - \frac{na}{n(n - 1 + a)} \;by\; Bernoulli's\; inequality} * \frac{n - 1 + a}{n - 1} \\
-                &\geqslant\frac{n - 1}{n - 1 + a} * \frac{n - 1 + a}{a} = 1
+                &\geqslant\frac{n - 1}{n - 1 + a} * \frac{n - 1 + a}{n - 1} = 1
             \end{split}
         \end{equation*}
         \item Ограниченность сверху
@@ -1669,7 +1670,7 @@ $Int A = X \setminus Cl(X \setminus A)$
     \begin{proof}
         $z_n = \underbrace{(1 + \frac{1}{n})}_{\to 1} * \underbrace{(1 + \frac{1}{n})^n}_{\to e} \to e$
         
-        $z_n = \frac{n + 1}{n}^{n+1} = \frac{1}{(\frac{n}{n+1})^{n+1}} = \frac{1}{(1 - \frac{1}{n+1})^{n+1}}$
+        $z_n = (\frac{n + 1}{n})^{n+1} = \frac{1}{(\frac{n}{n+1})^{n+1}} = \frac{1}{(1 - \frac{1}{n+1})^{n+1}}$
         
         Последовательность $(1 - \frac{1}{n+1})^{n+1}$ строго возрастает, следовательно, обратная к ней строго убывает. 
     \end{proof}
@@ -1741,7 +1742,7 @@ $Int A = X \setminus Cl(X \setminus A)$
         $l := \lim \frac{x_{n+1}}{x_n}$. Начиная с некоторого номера $m \;\; \frac{x_{n+1}}{x_n} < \frac{1 + l}{2} =: q < 1$
         
         При $n \geqslant m$ 
-        \[ 0 < x_n < \frac{x_n}{x_{n-1}} * \frac{x_{n-1}}{x_{n-2}} * \frac{x_{n-2}}{x_{n-3}} * \dots * \frac{x_{m+1}}{x_m} * x_m < q^{n-m}x_m = q^n * \frac{x_m}{q^m} \]
+        \[ 0 < x_n = \frac{x_n}{x_{n-1}} * \frac{x_{n-1}}{x_{n-2}} * \frac{x_{n-2}}{x_{n-3}} * \dots * \frac{x_{m+1}}{x_m} * x_m < q^{n-m}x_m = q^n * \frac{x_m}{q^m} \]
         \[ 0 < x_n < q^n * \frac{x_m}{q^m} \to 0 \Rightarrow x_n \to 0  \]
     \end{proof}
     \textbf{Следствие.}
