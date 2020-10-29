@@ -31,6 +31,7 @@
 \usepackage{blindtext}
 \usepackage{todonotes}
 \usepackage{authblk}
+\graphicspath{ {./images/} }
 %%
 
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}%
@@ -202,8 +203,45 @@
 \ \\}
 \date{осень 2020}
 \begin{document}
+
+\clearpage
+%% temporary titles
+% command to provide stretchy vertical space in proportion
+\newcommand\nbvspace[1][3]{\vspace*{\stretch{#1}}}
+% allow some slack to avoid under/overfull boxes
+\newcommand\nbstretchyspace{\spaceskip0.5em plus 0.25em minus 0.25em}
+% To improve spacing on titlepages
+\newcommand{\nbtitlestretch}{\spaceskip0.6em}
+\pagestyle{empty}
+\begin{center}
+\bfseries
+\nbvspace[1]
+\Huge
+{\nbtitlestretch\huge
+КОНСПЕКТ ЛЕКЦИЙ ПО МАТЕМАТИЧЕСКОМУ АНАЛИЗУ}
+
+\nbvspace[1]
+\normalsize
+
+СПбГУ, МКН, СП, 1 курс\\
+ЛЕКТОР: ХРАБРОВ АЛЕКСАНДР ИГОРЕВИЧ
+\nbvspace[1]
+\\
+\Large СОСТАВИТЕЛИ:\\[0.5em]
+\footnotesize АНДРЕЙ \href{https://github.com/K-dizzled}{K-dizzled} КОЗЫРЕВ, НИКИТА  \href{https://github.com/muldrik}{muldrik} МИТЦЕВ \\ МАКСИМ \href{https://github.com/maxmartynov08}{maxmartynov08} МАРТЫНОВ, СЕМЕН \href{https://github.com/SmnTin}{SmnTin} ПАНЕНКОВ
+
+\nbvspace[2]
+
+\includegraphics[width=4.0in]{./images/linal_kills.png}
+\nbvspace[3]
+\normalsize
+
+\large
+ОСЕНЬ 2020
+\nbvspace[1]
+\end{center}
 \fi
-\maketitle
+%\maketitle
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                %
 %                                %
@@ -2515,9 +2553,13 @@ $Int A = X \setminus Cl(X \setminus A)$
 
     \item Если $\sum_{n = 1}^{+\infty} a_n$ сходится, то
     $\sum_{n = 1}^{+\infty} c a_n$ сходится и $\sum_{n = 1}^{+\infty} 
-    c a_n = c \cdot \sum_{n = 1}^{+\infty} a_n$
+    c a_n = c \cdot \sum_{n = 1}^{+\infty} a_n$ 
+    \newpage
+    \includegraphics[scale=0.55]{linal_kills.jpg}
+    \begin{center}
+        
+    \end{center}
 \end{enumerate}
-    
 \ifdefined\niveldos\else
 \end{document} 
 \fi
