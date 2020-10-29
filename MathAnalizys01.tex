@@ -240,6 +240,8 @@
 ОСЕНЬ 2020
 \nbvspace[1]
 \end{center}
+\newpage
+\pagestyle{plain}
 \fi
 %\maketitle
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -984,7 +986,21 @@ $Int A = X \setminus Cl(X \setminus A)$
     \begin{theorem-non}
         $(X, d)$ -метр пространство $Y \subset X$. Тогда:
         \begin{enumerate}
-            \item $A \subset Y$ открыто в $Y \Longleftrightarrow$ найдется открытое множество $G \subset X$, т.ч. $A=G\cap Y$
+            \item $A \subset Y$ открыто в $Y \Longleftrightarrow$ найдется открытое множество $G \subset X$, т.ч. $A=G\cap Y$ \vspace*{0,5cm} \\
+            \begin{tikzpicture}[mydrawstyle/.style={draw=black, very thick}, x=1mm, y=1mm, z=1mm]
+                \draw[mydrawstyle, ->](-2,30)--(80,30);
+                \draw[mydrawstyle] node at (-6,30)[left]{$X$};
+                \draw[mydrawstyle] node at (26,24)[left]{$Y - $};
+                \draw[mydrawstyle] node at (1,38)[left]{$G - $};
+                \draw[mydrawstyle] node at (26,34)[left]{$A - $};
+                \draw[mydrawstyle](0,28)--(0,32) node[below=10]{$-1$};
+                \draw[mydrawstyle](25,28)--(25,32) node[below=10]{$0$};
+                \draw[mydrawstyle](50,28)--(50,32) node[below=10]{$1$};
+                \draw[mydrawstyle](75,28)--(75,32) node[below=10]{$2$};
+                \fill[fill=blue, opacity=0.2](25,33)--(25,35)--(50,35)--(50,33)--(25,33);
+                \fill[fill=red, opacity=0.2](25,23)--(25,25)--(75,25)--(75,23)--(25,23);
+                \fill[fill=green, opacity=0.2](0,37)--(0,39)--(50,39)--(50,37)--(0,37);
+              \end{tikzpicture}
             \begin{proof}
                 $a \in A \Longrightarrow \exists r_a>0 : B_{r_a}^Y(a)$ (т.е. шары в $Y$) $\subset A$. Далее
                 \begin{center}
