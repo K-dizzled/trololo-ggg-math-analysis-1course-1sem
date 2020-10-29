@@ -1131,7 +1131,6 @@ $Int A = X \setminus Cl(X \setminus A)$
     \begin{proof}
         $y_n:=b$, далее из теоремы 1
     \end{proof}
-    \newpage
     \follow \; Если $x_n \geq a \forall n, \lim x_n = b \Longrightarrow a \leq b$
 
     \begin{proof}
@@ -1833,7 +1832,7 @@ $Int A = X \setminus Cl(X \setminus A)$
         Пусть $\widetilde{x_n} := -x_n$.
         \[\frac{x_n - x_{n-1}}{y_n - y_{n - 1}} \rightarrow -\infty
         \Rightarrow \frac{\widetilde{x_n} - \widetilde{x_{n-1}}}
-        {y_n - y_{n - 1}} = -\frac{x_n - x_{n-1}}{y_n - y{n - 1}}
+        {y_n - y_{n - 1}} = -\frac{x_n - x_{n-1}}{y_n - y_{n - 1}}
         \rightarrow +\infty \Rightarrow -\frac{x_n}{y_n} =
         \frac{\widetilde{x_n}}{y_n} \rightarrow +\infty
         \Rightarrow \frac{x_n}{y_n} \rightarrow -\infty\] 
@@ -1845,7 +1844,7 @@ $Int A = X \setminus Cl(X \setminus A)$
     \text{, то } \lim \frac{a_1 + a_2 + ... + a_n}{n} = a\] 
     \begin{proof}
         \[x_n := \sum_{k=1}^n a_k, \quad y_n := n \nearrow +\infty\]
-        \[\lim \frac{x_n - x_{n-1}}{y_n - y_{n-1}} = \lim{a_n}{n - (n - 1)}
+        \[\lim \frac{x_n - x_{n-1}}{y_n - y_{n-1}} = \lim \frac{a_n}{n - (n - 1)}
         = \lim a_n = a \Rightarrow \lim \frac{a_1 + a_2 + ... + a_n}{n} = a\]
     \end{proof}
     
@@ -1857,7 +1856,7 @@ $Int A = X \setminus Cl(X \setminus A)$
         \lim \frac{y_n - y_{n - 1}}{x_n - x_{n - 1}} =
         \lim \frac{n^{m + 1} - (n - 1)^{m + 1}}{n^m} =
         \lim \frac{n^{m+1} - (n^{m+1} + \sum_{k = 1}^{m + 1} 
-        (C_{m+1}^k (-1)^k n^{m+1-k})}{n^m}) = \\
+        (C_{m+1}^k (-1)^k n^{m+1-k}))}{n^m} = \\
         = \lim \sum_{k = 1}^{m + 1} 
         ((-1)^{k+1} \cdot \frac{C_{m+1}^k}{n^{k - 1}}) =
         \lim C_{m + 1}^1 + \lim \sum_{k = 2}^{m + 1} 
@@ -1885,18 +1884,18 @@ $Int A = X \setminus Cl(X \setminus A)$
         \[x_n - x_m = \sum_{k=m+1}^n(x_k - x_{k-1}) =
         \sum_{k=m+1}^n \varepsilon_k (y_k - y_{k-1}) \Rightarrow
         \abs{x_n - x_m} \leq\] \[\leq \sum_{k=m+1}^n -\abs{\varepsilon_k}
-        (y_k - y_{k-1}) < \varepsilon \sum_{k=m+1}^n (y_k - y_{k-1}) =
+        (y_k - y_{k-1}) < \varepsilon \sum_{k=m+1}^n (y_{k-1} - y_k) =
         \varepsilon (y_m - y_n)\]
-        \[(x_n - x_m) < \varepsilon (y_m - y_n)\]
+        \[\abs{x_n - x_m} < \varepsilon (y_m - y_n)\]
         \[\text{Устремим } n \text{ к } +\infty \Rightarrow
-        \abs{x_n - x_m} \rightarrow \abs{-x_m} = x_m, \quad
+        \abs{x_n - x_m} \rightarrow \abs{-x_m} = \abs{x_m}, \quad
         \varepsilon (y_m - y_n) \rightarrow \varepsilon y_m \Rightarrow\]
         \[\Rightarrow \text{по пред. переходу в нер., при }
         m \geq \text{нек. } N \quad \abs{x_m} < \varepsilon y_m
         \Rightarrow \abs{\frac{x_m}{y_m}} < \varepsilon
         \Rightarrow \lim \frac{x_m}{y_m} = 0\]
     
-        \textbf{Случай $l \in \overline{\mathbb{R}}$:}
+        \textbf{Случай $l \in \mathbb{R}$:}
         Так же, как в теореме Штольца № 1
         \[\widetilde{x_n} := x_n - l \cdot y_n, \widetilde{x_n} -
         \widetilde{x_{n-1}} = x_n - x_{n-1} - l \cdot (y_n - y_{n-1})\]
@@ -1915,7 +1914,7 @@ $Int A = X \setminus Cl(X \setminus A)$
         x_{n - 1} - x_n > y_{n - 1} - y_n > 0 \Rightarrow x_n
         \text{ строго убывает} \Rightarrow \lim \frac{y_n - y_{n - 1}}
         {x_n - x_{n - 1}} = 0 \xRightarrow[]{l = 0} \lim \frac{y_n}{x_n} = 0
-        \Rightarrow \] \[\Rightarrow \frac{x_n}{y_n} = +\infty\]
+        \Rightarrow \] \[\Rightarrow \lim\frac{x_n}{y_n} = +\infty\]
     
         \textbf{Случай $l = -\infty$:}
         Так же, как в теореме Штольца № 1
@@ -1923,7 +1922,7 @@ $Int A = X \setminus Cl(X \setminus A)$
         Пусть $\widetilde{x_n} := -x_n$.
         \[\frac{x_n - x_{n-1}}{y_n - y_{n - 1}} \rightarrow -\infty
         \Rightarrow \frac{\widetilde{x_n} - \widetilde{x_{n-1}}}
-        {y_n - y_{n - 1}} = -\frac{x_n - x_{n-1}}{y_n - y{n - 1}}
+        {y_n - y_{n - 1}} = -\frac{x_n - x_{n-1}}{y_n - y_{n - 1}}
         \rightarrow +\infty \Rightarrow -\frac{x_n}{y_n} =
         \frac{\widetilde{x_n}}{y_n} \rightarrow +\infty
         \Rightarrow \frac{x_n}{y_n} \rightarrow -\infty\] 
@@ -1953,7 +1952,7 @@ $Int A = X \setminus Cl(X \setminus A)$
     \supset ... \text{ и } \lim (b_n - a_n) = 0\]
     Тогда существует единственная точка $c$, принадлежащая всем отрезкам
     и $\lim a_n = \lim b_n = c$.
-    \[\text{Т.е. } \bigcap_{n = 1}^{+\infty} [a_n; b_n] = {c}\]
+    \[\text{Т.е. } \bigcap_{n = 1}^{+\infty} [a_n; b_n] = \{c\}\]
     
     \begin{proof}
         По теореме о вложенных отрезках $\bigcap_{n = 1}^{+\infty} [a_n; b_n]
@@ -2023,10 +2022,11 @@ $Int A = X \setminus Cl(X \setminus A)$
         \item Из любой неограниченной последовательности можно выделить
         подпоследовательность, стремящуюся к $+\infty$ или к $-\infty$.
     \end{enumerate}
-    \begin{proof}.
+    \begin{proof} $ $
+
     \begin{enumerate}
         \item Пусть $(x_n)$ возрастает. $(x_n)$ неограничена $\Rightarrow$
-        никакое $u$ не является верхней границей $\Rightarrow \exists m : x_m
+        никакое $u$ не является верхней границей $\Rightarrow \exists m :
         x_m > u \Rightarrow u < x_m \leq x_{m + 1} \leq x_{m + 2} \leq \dots
         \Rightarrow x_n > u$, начиная с некоторого номера $\Rightarrow
         \lim x_n = +\infty$
@@ -2117,7 +2117,8 @@ $Int A = X \setminus Cl(X \setminus A)$
         $\Rightarrow \forall n \geq N \,\, \rho(x_n, x_N) < 1
         \Leftrightarrow x_n \in B_1(x_N)$\\
         $R := \max\{\rho(x_1, x_N), \rho(x_2, x_N), \dots, 
-        \rho(x_{N-1}, x_N)\} \Rightarrow \forall n \,\, x_n \in B_R(x_N)$
+        \rho(x_{N-1}, x_N)\} + 1 \Rightarrow \forall n \,\, x_n \in 
+        B_R(x_N)$
     
         \item Если у фундаментальной последовательности есть сходящаяся
         подпоследовательность, то фундаментальная последовательность
@@ -2125,12 +2126,12 @@ $Int A = X \setminus Cl(X \setminus A)$
     
         \textbf{Доказательство:}\\
         Пусть $\lim x_{n_k} = a$. Зафиксируем $\varepsilon > 0$.\\
-        $\exists K : \forall k \geq K \quad \rho(x_k, a) <
+        $\exists K : \forall k \geq K \quad \rho(x_{n_k}, a) <
         \frac{1}{2} \varepsilon$\\
         $\exists N : \forall n, m \geq N \quad \rho(x_n, x_m) <
         \frac{1}{2} \varepsilon$\\
         Возьмём $N \geq 0$ и подберём такое $k$, что $k \geq N$\\
-        и $n_k \geq N$ (например, $k \geq \max{N, K}$ подходит)\\
+        и $n_k \geq N$ (например, $k \geq \max\{N, K\}$ подходит)\\
         Тогда $\rho(x_n, x_{n_k}) < \frac{1}{2} \varepsilon$
         (т.к. $n_k \geq N$)\\
         И тогда $\rho(x_{n_k}, a) < \frac{1}{2} \varepsilon$
@@ -2282,7 +2283,7 @@ $Int A = X \setminus Cl(X \setminus A)$
             $a = \lim z_n$, $z_n = \sup_{k \geq n} x_k$, $z_n \searrow a$
     
             Будем строить некоторую подпоследовательность $(x_{n_k})$.\\
-            Найдётся $n_k \geq n_{k-1} : x_{n_k} > a - \frac{1}{k}$.
+            Найдётся $n_k > n_{k-1} : x_{n_k} > a - \frac{1}{k}$.
             Пусть не нашлось $\Rightarrow x_n \leq a - \frac{1}{k} \forall
             n \geq n_{k-1} \Rightarrow \sup \{x_{n_{k-1}}, x_{n_{k-1} + 1},
             \dots \} \leq a - \frac{1}{k} \Rightarrow a \leq z_{n_{k - 1}} 
@@ -2476,7 +2477,7 @@ $Int A = X \setminus Cl(X \setminus A)$
         \item Гармонический ряд $1 + \frac{1}{2} + \frac{1}{3} + \dots$
         $\sum_{n = 1}^{+\infty} \frac{1}{n}$
     
-        $H_n := \sum_{k = 1}{n} \frac{1}{k}$ -- гармонические числа.
+        $H_n := \sum_{k = 1}^{n} \frac{1}{k}$ -- гармонические числа.
         $H_n$ монотонно возрастает.
         \[H_{2^n} = 1 + \frac{1}{2} + \underbrace{\left(\frac{1}{3} + 
         \frac{1}{4}\right)}_{> 2 \cdot \frac{1}{4} = \frac{1}{2}} +
